@@ -1,0 +1,61 @@
+/* Tabs Container - Aligning the Design */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f4f4f4; /* Match with the rest of the extension's background */
+  padding: 10px 0;
+  border-radius: 0px; /* Remove the roundness to make it look aligned */
+  position: fixed;
+  top: 0; /* Keep the tabs at the top */
+  left: 0;
+  width: 100%;
+  max-width: 100vw; /* Ensure the tab doesn't overflow the viewport */
+  box-shadow: none; /* Remove the shadow for a more integrated look */
+  z-index: 10;
+  border-bottom: 1px solid #ddd; /* Add a subtle border for separation */
+}
+
+/* Individual Tab Button */
+.tab-button {
+  background-color: #f4f4f4; /* Match background with the main interface */
+  border: none;
+  outline: none;
+  color: #333; /* Change icon color to match overall style */
+  padding: 8px;
+  cursor: pointer;
+  font-size: 24px;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Active Tab - Subtle Style */
+.tab-button.active {
+  background-color: #cdca67; /* Highlighted tab with matching color */
+  color: white;
+  width: 60px; /* Slightly bigger for active state */
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: none; /* Remove shadows for a cleaner look */
+  transform: translateY(-5px); /* Minor lift effect */
+}
+
+/* Hover Effect */
+.tab-button:hover {
+  background-color: #e0dfbf; /* Subtle hover effect to give feedback */
+}
+
+/* Icon Adjustments */
+.tab-button i {
+  color: #333; /* Match the icon color with the tab button */
+  font-size: 24px;
+}
+
+.tab-button.active i {
+  color: white; /* White icon for active tab */
+}

@@ -5,6 +5,14 @@ body {
   padding: 0;
   background-color: #f4f4f4;
 }
+body,
+.main-content {
+  padding-top: 80px; /* Add padding to make room for the tab bar at the top */
+}
+html,
+body {
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
 
 .container {
   padding: 20px;
