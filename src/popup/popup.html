@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles/product-discovery.css" />
     <link rel="stylesheet" href="styles/dressing-room.css" />
     <link rel="stylesheet" href="styles/misc.css" />
+    <link rel="stylesheet" href="styles/wishlist.css" />
   </head>
   <body>
     <div class="container">
@@ -22,6 +23,7 @@
           Product Discovery
         </button>
         <button class="tab-button" id="dressing-room-tab">Dressing Room</button>
+        <button class="tab-button" id="wishlist-tab">Wishlist</button>
         <button class="tab-button" id="home-tab">Home</button>
       </div>
 
@@ -234,6 +236,44 @@
         <!-- Home Tab Content -->
         <div id="home" class="tab-content">
           <p>Welcome to the home tab.</p>
+        </div>
+
+        <!-- Wishlist Tab Content (Add this below other tab contents) -->
+        <div id="wishlist" class="tab-content">
+          <!-- Centralized Wishlist Button -->
+          <button class="centralized-wishlist-btn">
+            Go to Centralized Wishlist
+          </button>
+
+          <!-- Wishlist Content -->
+          <h3>Your Wishlist</h3>
+
+          <!-- Example Static Categories with Items -->
+          <div class="wishlist-category">
+            <h4>T-Shirts</h4>
+            <div class="wishlist-grid">
+              <div class="wishlist-item">
+                <img src="/src/assets/images/stores/hm.jpg" alt="T-Shirt" />
+                <p>Classic T-Shirt - $29.99</p>
+                <p>Date Added: 09/01/2024</p>
+                <button class="try-on-btn">Try On</button>
+                <button class="visit-page-btn">Visit Page</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="wishlist-category">
+            <h4>Jeans</h4>
+            <div class="wishlist-grid">
+              <div class="wishlist-item">
+                <img src="/src/assets/images/stores/hm.jpg" alt="Jeans" />
+                <p>Skinny Jeans - $49.99</p>
+                <p>Date Added: 08/15/2024</p>
+                <button class="try-on-btn">Try On</button>
+                <button class="visit-page-btn">Visit Page</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
