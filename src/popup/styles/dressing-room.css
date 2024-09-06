@@ -16,6 +16,7 @@
   align-items: center;
   flex-direction: column;
   transition: border-color 0.3s;
+  cursor: pointer;
 }
 
 .upload-frame img {
@@ -31,4 +32,169 @@
 
 .upload-frame:hover {
   border-color: #007bff;
+}
+
+/* Model Grid Section */
+.model-grid-section {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Updated grid to center and contain items */
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 30px; /* Increased gap for better spacing */
+  max-width: 700px; /* Increased max width */
+  position: relative;
+  overflow: hidden;
+  padding: 15px 0;
+}
+
+.model-swatch-grid {
+  display: flex;
+  gap: 25px; /* Increased spacing between swatches */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  max-width: 700px;
+  white-space: nowrap;
+  position: relative;
+}
+
+.model-swatch-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Model Swatches */
+.model-swatch {
+  text-align: center;
+  width: 100px; /* Swatch size */
+  height: 100px;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex; /* Flexbox centering */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  overflow: hidden;
+}
+
+.model-swatch:hover {
+  transform: scale(1.15); /* Slight scaling for hover effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-color: #007bff;
+}
+
+/* Updated to ensure images are fully contained and centered */
+.model-swatch img {
+  width: 100%; /* Full width of the swatch */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100%; /* Ensure it doesn't exceed the height */
+  object-fit: cover; /* Ensure the image fits the container without distortion */
+  border-radius: 50%;
+  margin: 0; /* Remove any margins */
+}
+
+/* Scroll Buttons */
+.scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 28px; /* Increased arrow size for better visibility */
+  cursor: pointer;
+  transition: transform 0.3s;
+  z-index: 1;
+}
+
+.scroll-arrow.left-arrow {
+  left: -20px; /* Moved outside the grid slightly for better visibility */
+}
+
+.scroll-arrow.right-arrow {
+  right: -20px; /* Moved outside the grid slightly for better visibility */
+}
+
+.scroll-arrow:hover {
+  transform: scale(1.3);
+  color: #007bff;
+}
+/* Clothing Items Section */
+.clothing-items-section {
+  margin-top: 20px;
+}
+
+.clothing-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* Increased margin for better spacing */
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.clothing-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.clothing-item img {
+  width: 80px;
+  height: auto;
+  margin-right: 15px; /* Slightly increased spacing between image and text */
+  border-radius: 5px; /* Rounded corners for a modern look */
+}
+
+.clothing-item p {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+
+/* Try On History Section */
+.try-on-history-section {
+  margin-top: 30px; /* Increased margin for clearer section separation */
+}
+
+.try-on-history-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns for a balanced grid */
+  gap: 20px; /* Increased gap for better spacing */
+}
+
+.history-item {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.history-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.history-item img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px; /* Same rounded corners as the clothing items */
+}
+
+.history-item p {
+  font-size: 14px;
+  color: #6c757d;
 }
