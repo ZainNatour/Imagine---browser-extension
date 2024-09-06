@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imagine Side Panel</title>
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/search-filter.css" />
+    <link rel="stylesheet" href="styles/store-grid.css" />
+    <link rel="stylesheet" href="styles/product-discovery.css" />
+    <link rel="stylesheet" href="styles/dressing-room.css" />
+    <link rel="stylesheet" href="styles/misc.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Imagine Assistant</h1>
+      <div class="tabs">
+        <button class="tab-button active" id="store-discovery-tab">
+          Store Discovery
+        </button>
+        <button class="tab-button" id="product-discovery-tab">
+          Product Discovery
+        </button>
+        <button class="tab-button" id="dressing-room-tab">Dressing Room</button>
+        <button class="tab-button" id="home-tab">Home</button>
+      </div>
+
+      <div id="tab-content">
+        <!-- Store Discovery Tab Content -->
+        <div id="store-discovery" class="tab-content active">
+          <div class="search-filter-container">
+            <input type="text" id="search-bar" placeholder="Search stores..." />
+            <button id="filter-button">
+              <img src="/src/assets/icons/filter.jpg" alt="Filter" />
+            </button>
+          </div>
+
+          <!-- Filter Section -->
+          <div id="filter-section" class="filter-section" style="display: none">
+            <!-- Filter options will be dynamically inserted here -->
+          </div>
+
+          <!-- Store Grid -->
+          <div id="store-grid" class="store-grid">
+            <!-- Store items will be dynamically loaded here -->
+          </div>
+
+          <button id="load-more">Load More</button>
+        </div>
+
+        <!-- Product Discovery Tab Content -->
+        <div id="product-discovery" class="tab-content">
+          <div class="product-image-section">
+            <img
+              src="/src/assets/images/stores/adidas.jpg"
+              alt="Product Image"
+              class="product-image"
+            />
+            <button class="wishlist-btn">❤️</button>
+          </div>
+
+          <div class="product-info">
+            <h3 class="product-name">Classic T-Shirt</h3>
+            <p class="product-price">$29.99</p>
+            <p class="product-clothing-type">Clothing Type: T-Shirts</p>
+          </div>
+
+          <div class="try-on-button">
+            <button>Try On</button>
+          </div>
+
+          <!-- Product Colors -->
+          <div class="product-colors-section">
+            <h4>Colors</h4>
+            <div class="color-grid">
+              <button class="scroll-arrow left-arrow">←</button>
+              <div class="color-swatch-grid">
+                <div class="color-swatch" style="background-color: #000"></div>
+                <div class="color-swatch" style="background-color: #fff"></div>
+                <div class="color-swatch" style="background-color: #f00"></div>
+                <div class="color-swatch" style="background-color: #0f0"></div>
+              </div>
+              <button class="scroll-arrow right-arrow">→</button>
+            </div>
+          </div>
+
+          <!-- Product Details Section -->
+          <div class="collapsible-section">
+            <div class="collapsible-header">
+              <span>Product Details</span>
+              <span class="arrow">›</span>
+            </div>
+            <div class="collapsible-content">
+              <p>100% Cotton, Available in S/M/L</p>
+            </div>
+          </div>
+
+          <!-- Ratings and Reviews -->
+          <div class="collapsible-section">
+            <div class="collapsible-header">
+              <span>Ratings & Reviews</span>
+              <span class="arrow">›</span>
+            </div>
+            <div class="collapsible-content">
+              <p>4.5 stars, 120 reviews</p>
+              <p><strong>Pros:</strong> Soft fabric</p>
+              <p><strong>Cons:</strong> Limited sizes</p>
+            </div>
+          </div>
+
+          <!-- Similar Products Section -->
+          <div class="similar-products-section">
+            <h4>Similar Products</h4>
+            <div class="similar-products-grid">
+              <div class="similar-product-item">
+                <img
+                  src="/src/assets/images/stores/nike.jpg"
+                  alt="Nike Shoes"
+                />
+                <p>Nike</p>
+              </div>
+              <div class="similar-product-item">
+                <img
+                  src="/src/assets/images/stores/uniqlo.jpg"
+                  alt="Uniqlo Pants"
+                />
+                <p>Uniqlo</p>
+              </div>
+              <div class="similar-product-item">
+                <img src="/src/assets/images/stores/hm.jpg" alt="H&M Dress" />
+                <p>H&M</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dressing Room Tab Content -->
+        <div id="dressing-room" class="tab-content">
+          <!-- Upload Image Section -->
+          <div class="upload-section">
+            <div class="upload-frame">
+              <img src="/src/assets/icons/filter.jpg" alt="Upload Icon" />
+              <p>Upload Your Image</p>
+            </div>
+          </div>
+
+          <!-- Model Grid Section -->
+          <div class="model-grid-section">
+            <h3>Models</h3>
+            <div class="model-grid">
+              <button class="scroll-arrow left-arrow">←</button>
+              <div class="model-swatch-grid">
+                <div class="model-swatch">
+                  <img src="/src/assets/icons/upload.jpg" alt="Upload Icon" />
+                  <p>Upload</p>
+                </div>
+                <div class="model-swatch avatar-swatch">
+                  <img
+                    src="/src/assets/icons/avatar.jpg"
+                    alt="Personalized Avatar"
+                  />
+                  <p>Your Avatar</p>
+                </div>
+                <div class="model-swatch">
+                  <img src="/src/assets/images/stores/hm.jpg" alt="Model 1" />
+                </div>
+                <div class="model-swatch">
+                  <img src="/src/assets/images/stores/hm.jpg" alt="Model 2" />
+                </div>
+                <div class="model-swatch">
+                  <img src="/src/assets/images/stores/hm.jpg" alt="Model 3" />
+                </div>
+                <div class="model-swatch">
+                  <img src="/src/assets/images/stores/hm.jpg" alt="Model 3" />
+                </div>
+                <div class="model-swatch">
+                  <img src="/src/assets/images/stores/hm.jpg" alt="Model 3" />
+                </div>
+                <div class="model-swatch">
+                  <img src="/src/assets/images/stores/hm.jpg" alt="Model 3" />
+                </div>
+                <div class="model-swatch">
+                  <img src="/src/assets/images/stores/hm.jpg" alt="Model 3" />
+                </div>
+              </div>
+              <button class="scroll-arrow right-arrow">→</button>
+            </div>
+          </div>
+
+          <!-- Personalized Avatar Section -->
+          <div class="avatar-section" style="display: none">
+            <h3>Personalized Avatar</h3>
+            <div class="avatar-inputs">
+              <label for="height">Height:</label>
+              <input type="text" id="height" placeholder="e.g., 5'9" />
+              <label for="weight">Weight:</label>
+              <input type="text" id="weight" placeholder="e.g., 160 lbs" />
+              <label for="body-shape">Body Shape:</label>
+              <input type="text" id="body-shape" placeholder="e.g., Athletic" />
+              <label for="skin-tone">Skin Tone:</label>
+              <input type="text" id="skin-tone" placeholder="e.g., Fair" />
+            </div>
+          </div>
+
+          <!-- Clothing Items Section (Moved into Dressing Room) -->
+          <div class="clothing-items-section">
+            <h3>Clothing Items</h3>
+            <div class="clothing-item">
+              <img
+                src="/src/assets/images/stores/hm.jpg"
+                alt="Clothing Item 1"
+              />
+              <p>Classic T-Shirt - $29.99</p>
+            </div>
+            <div class="clothing-item">
+              <img
+                src="/src/assets/images/stores/hm.jpg"
+                alt="Clothing Item 2"
+              />
+              <p>Jeans - $49.99</p>
+            </div>
+          </div>
+
+          <!-- Try On History Section -->
+          <div class="try-on-history-section">
+            <h3>Try On History</h3>
+            <div class="try-on-history-grid">
+              <div class="history-item">
+                <img
+                  src="/src/assets/images/stores/hm.jpg"
+                  alt="Clothing Item 1"
+                />
+                <p>T-Shirt - 10/05/2024</p>
+              </div>
+              <div class="history-item">
+                <img
+                  src="/src/assets/images/stores/hm.jpg"
+                  alt="Clothing Item 2"
+                />
+                <p>Jeans - 09/28/2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Home Tab Content -->
+        <div id="home" class="tab-content">
+          <p>Welcome to the home tab.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+/* misc.css */
+
+/* Product Colors */
+.product-colors-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.color-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-swatch-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.color-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.2);
+}
+
+/* Similar Products */
+.similar-products-section {
+  margin-top: 20px;
+}
+
+.similar-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.similar-product-item {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  transition: transform 0.3s;
+}
+
+.similar-product-item:hover {
+  transform: scale(1.05);
+}
+
+.similar-product-item img {
+  width: 100%;
+  max-width: 80px;
+  height: auto;
+}
+
+.similar-product-item p {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+/* Collapsible Sections */
+.collapsible-section {
+  margin: 20px 0;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.collapsible-content {
+  display: none;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.collapsible-section:hover .arrow {
+  transform: rotate(90deg);
+}
+
+.arrow {
+  transition: transform 0.3s;
+}
+
+/* Model Grid Section */
+.model-grid-section {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 20px;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.model-swatch-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  max-width: 600px;
+  white-space: nowrap;
+  position: relative;
+}
+
+.model-swatch-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.model-swatch {
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.model-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-color: #007bff;
+}
+
+.model-swatch img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.model-swatch p {
+  font-size: 14px;
+  color: #6c757d;
+  margin-top: 5px;
+}
+
+/* Personalized Avatar Section */
+.avatar-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.avatar-inputs {
+  text-align: left;
+}
+
+.avatar-inputs label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.avatar-inputs input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Clothing Items Section */
+.clothing-items-section {
+  margin-top: 20px;
+}
+
+.clothing-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.clothing-item img {
+  width: 80px;
+  height: auto;
+  margin-right: 10px;
+}
+
+/* Try On History Section */
+.try-on-history-section {
+  margin-top: 20px;
+}
+
+.try-on-history-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.history-item {
+  text-align: center;
+}
+
+.history-item img {
+  width: 80px;
+  height: auto;
+}
