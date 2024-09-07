@@ -19,10 +19,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": [
-        "src/assets/data/stores.json",
-        "src/assets/images/stores/*"
-      ],
+      "resources": ["src/assets/data/stores.json", "src/assets/images/*"],
       "matches": ["<all_urls>"]
     }
   ]
