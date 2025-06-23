@@ -5,6 +5,7 @@ import { debounce } from './modules/debounce.js';
 document.addEventListener('DOMContentLoaded', () => {
   initializeApp();
   initializeTabSwitching();
+  initializeCollapsibleSections();
   chrome.runtime.onMessage.addListener((message) => {
     if (message.action === 'selectTab') {
       const button = document.getElementById(message.target);
@@ -136,4 +137,20 @@ async function initializeApp() {
     });
   }
 }
+
+function initializeCollapsibleSections() {
+  const headers = document.querySelectorAll('.collapsible-header');
+  headers.forEach((header) => {
+    header.addEventListener('click', () => {
+      const section = header.closest('.collapsible-section');
+      if (!section) return;
+      const isOpen = section.classList.toggle('open');
+      const arrow = header.querySelector('.arrow');
+      if (arrow) {
+        arrow.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+      }
+    });
+  });
+}
+
 
