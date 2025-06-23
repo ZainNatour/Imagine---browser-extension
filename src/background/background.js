@@ -24,16 +24,15 @@ chrome.tabs.onCreated.addListener((tab) => {
 function checkAndOpenTab() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const url = new URL(tabs[0].url);
-    const isStore = isOnlineStore(url);
-    if (isStore) {
+    if (isOnlineStore(url)) {
       document.getElementById("home-tab").click();
     } else {
       document.getElementById("store-discovery-tab").click();
     }
   });
+}
 
-  function isOnlineStore(url) {
-    const onlineStoreDomains = ["example-store.com", "another-store.com"];
-    return onlineStoreDomains.some((domain) => url.hostname.includes(domain));
-  }
+function isOnlineStore(url) {
+  const onlineStoreDomains = ["example-store.com", "another-store.com"];
+  return onlineStoreDomains.some((domain) => url.hostname.includes(domain));
 }
