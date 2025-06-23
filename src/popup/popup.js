@@ -95,6 +95,16 @@ async function initializeApp() {
       }
     });
 
+    const wishlistBtn = document.querySelector('.wishlist-btn');
+    if (wishlistBtn) {
+      wishlistBtn.addEventListener('click', () => {
+        addToWishlist();
+        if (document.getElementById('wishlist').classList.contains('active')) {
+          renderWishlist();
+        }
+      });
+    }
+
     const avatarSwatch = document.querySelector('.avatar-swatch');
     const avatarSection = document.querySelector('.avatar-section');
     if (avatarSwatch && avatarSection) {
