@@ -5,6 +5,12 @@ import { debounce } from './modules/debounce.js';
 document.addEventListener('DOMContentLoaded', () => {
   initializeApp();
   initializeTabSwitching();
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.action === 'selectTab') {
+      const button = document.getElementById(message.target);
+      if (button) button.click();
+    }
+  });
 });
 
 function initializeTabSwitching() {

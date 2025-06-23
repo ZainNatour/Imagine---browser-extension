@@ -16,20 +16,11 @@ chrome.runtime.onInstalled.addListener(() => {
   }
 });
 
-chrome.tabs.onCreated.addListener((tab) => {
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: checkAndOpenTab,
+chrome.tabs.onCreated.addListener(() => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (!tabs || !tabs.length || !tabs[0].url) return;
+    const url = new URL(tabs[0].url);
+    const target = isOnlineStore(url) ? "home-tab" : "store-discovery-tab";
+    chrome.runtime.sendMessage({ action: "selectTab", target });
   });
 });
-
-function checkAndOpenTab() {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const url = new URL(tabs[0].url);
-    if (isOnlineStore(url)) {
-      document.getElementById("home-tab").click();
-    } else {
-      document.getElementById("store-discovery-tab").click();
-    }
-  });
-}
