@@ -80,6 +80,34 @@ async function initializeApp() {
         avatarSection.style.display = avatarSection.style.display === 'none' ? 'block' : 'none';
       });
     }
+
+    const modelGrid = document.querySelector('.model-swatch-grid');
+    const leftBtn = document.querySelector('.left-btn');
+    const rightBtn = document.querySelector('.right-btn');
+
+    if (modelGrid) {
+      const updateButtons = () => {
+        if (leftBtn) leftBtn.disabled = modelGrid.scrollLeft <= 0;
+        if (rightBtn)
+          rightBtn.disabled =
+            modelGrid.scrollLeft + modelGrid.clientWidth >= modelGrid.scrollWidth;
+      };
+
+      if (leftBtn) {
+        leftBtn.addEventListener('click', () => {
+          modelGrid.scrollBy({ left: -100, behavior: 'smooth' });
+        });
+      }
+
+      if (rightBtn) {
+        rightBtn.addEventListener('click', () => {
+          modelGrid.scrollBy({ left: 100, behavior: 'smooth' });
+        });
+      }
+
+      modelGrid.addEventListener('scroll', updateButtons);
+      updateButtons();
+    }
   }
 
   function renderFilterOptions() {
