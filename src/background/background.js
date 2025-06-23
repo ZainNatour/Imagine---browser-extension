@@ -1,3 +1,5 @@
+import { isOnlineStore } from "./modules/urlUtils.js";
+
 chrome.runtime.onInstalled.addListener(() => {
   if (chrome.sidePanel && chrome.sidePanel.setPanelBehavior) {
     chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
@@ -17,23 +19,17 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.tabs.onCreated.addListener((tab) => {
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: checkAndOpenTab,
+    func: checkAndOpenTab,
   });
 });
 
 function checkAndOpenTab() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const url = new URL(tabs[0].url);
-    const isStore = isOnlineStore(url);
-    if (isStore) {
+    if (isOnlineStore(url)) {
       document.getElementById("home-tab").click();
     } else {
       document.getElementById("store-discovery-tab").click();
     }
   });
-
-  function isOnlineStore(url) {
-    const onlineStoreDomains = ["example-store.com", "another-store.com"];
-    return onlineStoreDomains.some((domain) => url.hostname.includes(domain));
-  }
 }

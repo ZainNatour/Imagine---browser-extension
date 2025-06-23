@@ -5,7 +5,8 @@
   "description": "Enhance your online apparel shopping experience with Imagine.",
   "permissions": ["sidePanel", "storage", "tabs", "activeTab", "scripting"],
   "background": {
-    "service_worker": "src/background/background.js"
+    "service_worker": "src/background/background.js",
+    "type": "module"
   },
   "action": {
     "default_title": "Open side panel"
