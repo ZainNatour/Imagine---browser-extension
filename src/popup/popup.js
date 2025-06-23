@@ -49,7 +49,14 @@ async function initializeApp() {
   const filterButton = document.getElementById('filter-button');
   const filterSection = document.getElementById('filter-section');
 
-  let stores = await loadStores('src/assets/data/stores.json');
+  let stores = [];
+  try {
+    stores = await loadStores('src/assets/data/stores.json');
+  } catch (error) {
+    console.error(error);
+    storeGrid.innerHTML = '<p>Unable to load stores. Please try again later.</p>';
+    return;
+  }
   let filters = { targetDemographic: [], clothingType: [], priceRange: [] };
   let displayedStores = 8;
   let filteredStores = stores;
