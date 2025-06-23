@@ -71,3 +71,22 @@ h1 {
 .active {
   display: block;
 }
+
+/* Theme support */
+body.theme-light {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+body.theme-dark {
+  background-color: #1e1e1e;
+  color: #f4f4f4;
+}
+
+body.theme-dark .tab-button {
+  background-color: #444;
+}
+
+body.theme-dark .tab-button.active {
+  background-color: #222;
+}
