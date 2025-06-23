@@ -1,5 +1,4 @@
 (() => {
-  console.log('Imagine content script loaded');
 
   function highlightProductImages() {
     document.querySelectorAll('img').forEach((img) => {
