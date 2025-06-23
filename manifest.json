@@ -3,6 +3,11 @@
   "name": "Imagine – Online Apparel Shopping Assistant",
   "version": "0.1",
   "description": "Enhance your online apparel shopping experience with Imagine.",
+  "icons": {
+    "16": "src/assets/icons/icon16.png",
+    "48": "src/assets/icons/icon48.png",
+    "128": "src/assets/icons/icon128.png"
+  },
   "permissions": ["sidePanel", "storage", "tabs", "activeTab", "scripting"],
   "background": {
     "service_worker": "src/background/background.js",
