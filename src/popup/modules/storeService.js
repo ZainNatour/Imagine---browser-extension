@@ -1,6 +1,14 @@
 export async function loadStores(dataUrl) {
-  const response = await fetch(chrome.runtime.getURL(dataUrl));
-  return response.json();
+  try {
+    const response = await fetch(chrome.runtime.getURL(dataUrl));
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${dataUrl}: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error loading stores:', error);
+    throw error;
+  }
 }
 
 export function applyFilters(stores, filters, searchTerm = "") {
