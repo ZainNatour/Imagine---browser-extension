@@ -1,4 +1,25 @@
-export function isOnlineStore(url) {
-  const onlineStoreDomains = ["example-store.com", "another-store.com"];
-  return onlineStoreDomains.some((domain) => url.hostname.includes(domain));
+const STORES_DATA_PATH = "src/assets/data/stores.json";
+let cachedDomains = null;
+
+export async function loadStoreDomains() {
+  if (cachedDomains) {
+    return cachedDomains;
+  }
+  try {
+    const response = await fetch(chrome.runtime.getURL(STORES_DATA_PATH));
+    const stores = await response.json();
+    cachedDomains = stores.map((store) =>
+      new URL(store.url).hostname.replace(/^www\./, "")
+    );
+  } catch (error) {
+    console.error("Failed to load store domains", error);
+    cachedDomains = [];
+  }
+  return cachedDomains;
+}
+
+export async function isOnlineStore(url) {
+  const onlineStoreDomains = await loadStoreDomains();
+  const host = url.hostname.replace(/^www\./, "");
+  return onlineStoreDomains.some((domain) => host.includes(domain));
 }
