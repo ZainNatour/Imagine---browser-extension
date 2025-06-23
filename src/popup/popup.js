@@ -3,6 +3,11 @@ import { renderStores, updateLoadMoreButton, generateCheckboxes, getCheckedValue
 import { debounce } from './modules/debounce.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  chrome.storage.sync.get('theme', ({ theme }) => {
+    document.body.classList.remove('theme-dark', 'theme-light');
+    document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+  });
+
   initializeApp();
   initializeTabSwitching();
   chrome.runtime.onMessage.addListener((message) => {
