@@ -7,7 +7,11 @@ export async function loadStores(dataUrl) {
     return await response.json();
   } catch (error) {
     console.error('Error loading stores:', error);
-    throw error;
+    if (error instanceof TypeError) {
+      // Network or fetch failure, return an empty array so the UI can handle it
+      return [];
+    }
+    throw new Error(`Failed to load stores: ${error.message}`);
   }
 }
 
