@@ -5,7 +5,7 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.action.onClicked.addListener(() => {
       chrome.action.setPopup({ popup: "src/popup/popup.html" });
       chrome.windows.create({
-        url: "popup.html",
+        url: "src/popup/popup.html",
         type: "popup",
         width: 400,
         height: 600,
