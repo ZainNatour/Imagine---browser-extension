@@ -1,14 +1,24 @@
 export function renderStores(container, stores, displayed) {
-  container.innerHTML = "";
+  container.textContent = "";
   const visible = stores.slice(0, displayed);
   visible.forEach((store) => {
     const item = document.createElement("div");
     item.className = "store-item";
-    const imageUrl = chrome.runtime.getURL(store.image);
-    item.innerHTML = `<img src="${imageUrl}" alt="${store.name}" />\n        <p>${store.name}</p>`;
+
+    const img = document.createElement("img");
+    img.src = chrome.runtime.getURL(store.image);
+    img.alt = store.name;
+
+    const name = document.createElement("p");
+    name.textContent = store.name;
+
+    item.appendChild(img);
+    item.appendChild(name);
+
     item.addEventListener("click", () => {
       chrome.tabs.create({ url: store.url });
     });
+
     container.appendChild(item);
   });
 }
