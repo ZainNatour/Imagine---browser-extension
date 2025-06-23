@@ -59,3 +59,9 @@
 .tab-button.active i {
   color: white; /* White icon for active tab */
 }
+
+/* Settings (gear) button should align with other tabs */
+#options-button {
+  width: 50px;
+  height: 50px;
+}

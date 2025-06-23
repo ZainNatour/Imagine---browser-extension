@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeTabSwitching() {
-  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabButtons = document.querySelectorAll('.tab-button:not(#options-button)');
+  const optionsButton = document.getElementById('options-button');
   const tabContents = document.querySelectorAll('.tab-content');
 
   const switchTab = (clickedTab) => {
@@ -29,6 +30,14 @@ function initializeTabSwitching() {
   tabButtons.forEach((button) => {
     button.addEventListener('click', () => switchTab(button));
   });
+
+  if (optionsButton) {
+    optionsButton.addEventListener('click', () => {
+      if (chrome.runtime && chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+      }
+    });
+  }
 
   document.getElementById('store-discovery-tab').click();
 }
