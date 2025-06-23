@@ -18,6 +18,13 @@
     "page": "src/options/options.html",
     "open_in_tab": true
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "web_accessible_resources": [
     {
       "resources": ["src/assets/data/stores.json", "src/assets/images/*"],
