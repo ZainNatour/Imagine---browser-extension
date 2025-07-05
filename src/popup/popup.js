@@ -484,8 +484,10 @@ function renderProductInfo(info) {
   const typeEl = document.querySelector('.product-clothing-type');
   if (typeEl && info.clothingType) typeEl.textContent = info.clothingType;
 
-  const colorGrid = document.querySelector('.color-grid');
-  if (colorGrid && Array.isArray(info.colors)) {
+  const colorSection = document.querySelector('.product-colors-section');
+  const colorGrid = colorSection?.querySelector('.color-grid');
+  if (colorGrid && Array.isArray(info.colors) && info.colors.length > 0) {
+    colorSection.style.display = '';
     colorGrid.innerHTML = '';
     info.colors.forEach((c) => {
       const swatch = document.createElement('div');
@@ -493,6 +495,8 @@ function renderProductInfo(info) {
       swatch.style.backgroundColor = c;
       colorGrid.appendChild(swatch);
     });
+  } else if (colorSection) {
+    colorSection.style.display = 'none';
   }
 
   const sections = document.querySelectorAll('.collapsible-section .collapsible-content');
