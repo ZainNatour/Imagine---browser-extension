@@ -1,6 +1,7 @@
 import { loadStores, applyFilters } from './modules/storeService.js';
 import { renderStores, updateLoadMoreButton, generateCheckboxes, getCheckedValues } from './modules/ui.js';
 import { debounce } from './modules/debounce.js';
+import { addToWishlist, renderWishlist } from './modules/wishlist.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('theme', ({ theme }) => {
@@ -31,6 +32,10 @@ function initializeTabSwitching() {
     clickedTab.classList.add('active');
     const targetContentId = clickedTab.id.replace('-tab', '');
     document.getElementById(targetContentId).classList.add('active');
+    if (targetContentId === 'wishlist') {
+      const grid = document.getElementById('wishlist-grid');
+      renderWishlist(grid);
+    }
   };
 
   tabButtons.forEach((button) => {
@@ -98,9 +103,16 @@ async function initializeApp() {
     const wishlistBtn = document.querySelector('.wishlist-btn');
     if (wishlistBtn) {
       wishlistBtn.addEventListener('click', () => {
-        addToWishlist();
+        const item = {
+          name: document.querySelector('.product-name')?.textContent || '',
+          price: document.querySelector('.product-price')?.textContent || '',
+          clothingType: document.querySelector('.product-clothing-type')?.textContent || '',
+          imageSrc: document.querySelector('.product-image')?.getAttribute('src') || ''
+        };
+        addToWishlist(item);
         if (document.getElementById('wishlist').classList.contains('active')) {
-          renderWishlist();
+          const grid = document.getElementById('wishlist-grid');
+          renderWishlist(grid);
         }
       });
     }
