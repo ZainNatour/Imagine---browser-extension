@@ -45,20 +45,29 @@
     return colors;
   }
 
-  function collectSimilar() {
-    const container = document.querySelector(
-      '.similar-products, .related-products, [class*="similar"], [class*="related"]'
+  function collectRecommended() {
+    const containers = document.querySelectorAll(
+      '.recommended-products, .similar-products, .related-products, [class*="recommended"], [class*="similar"], [class*="related"]'
     );
     const items = [];
-    if (container) {
-      container.querySelectorAll('a img').forEach((img) => {
-        const link = img.closest('a');
-        if (img.src) {
-          items.push({ link: link ? link.href : '', image: img.src });
-        }
+    containers.forEach((container) => {
+      container.querySelectorAll('a').forEach((a) => {
+        const img = a.querySelector('img');
+        if (!img || !img.src) return;
+        const name = img.getAttribute('alt') || a.textContent.trim();
+        items.push({ url: a.href || '', image: img.src, name });
       });
-    }
-    return items;
+    });
+    const unique = [];
+    const seen = new Set();
+    items.forEach((item) => {
+      const key = `${item.url}|${item.image}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        unique.push(item);
+      }
+    });
+    return unique;
   }
 
   function collectRatingValue() {
@@ -102,7 +111,7 @@
         document.querySelector('meta[property="og:image"]')?.content ||
         document.querySelector('img')?.src ||
         '',
-      similar: collectSimilar(),
+      recommended: collectRecommended(),
     };
   }
 

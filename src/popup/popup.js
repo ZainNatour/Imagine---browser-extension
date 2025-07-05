@@ -531,17 +531,26 @@ function renderProductInfo(info) {
 
   const grid = document.querySelector('.similar-products-grid');
   const section = grid?.closest('.similar-products-section');
-  if (grid && Array.isArray(info.similar) && info.similar.length) {
+  if (grid && Array.isArray(info.recommended) && info.recommended.length) {
     grid.innerHTML = '';
-    info.similar.forEach((item) => {
+    info.recommended.forEach((item) => {
       const div = document.createElement('div');
       div.className = 'similar-product-item';
+
       const link = document.createElement('a');
-      if (item.link) link.href = item.link;
+      if (item.url) link.href = item.url;
+
       const img = document.createElement('img');
       img.src = item.image;
       link.appendChild(img);
       div.appendChild(link);
+
+      if (item.name) {
+        const p = document.createElement('p');
+        p.textContent = item.name;
+        div.appendChild(p);
+      }
+
       grid.appendChild(div);
     });
     if (section) section.style.display = '';
