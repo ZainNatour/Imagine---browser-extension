@@ -10,13 +10,13 @@
   width: 70%;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #filter-button {
   margin-left: 10px;
-  background-color: #007bff;
+  background-color: var(--color-primary);
   border: none;
   padding: 10px;
   border-radius: 4px;
@@ -30,5 +30,5 @@
 }
 
 #filter-button:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
 }

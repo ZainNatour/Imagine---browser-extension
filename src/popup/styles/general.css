@@ -1,9 +1,38 @@
 /* general.css */
+:root {
+  --color-bg: #f4f4f4;
+  --color-text: #333;
+  --color-primary: #007bff;
+  --color-primary-hover: #0056b3;
+  --color-secondary: #6c757d;
+  --color-border: #ddd;
+  --color-card: #ffffff;
+  --color-muted: #6c757d;
+  --color-success: #28a745;
+  --color-error: #dc3545;
+  --color-accent: #cdca67;
+  --color-accent-hover: #e0dfbf;
+}
+
+body.theme-dark {
+  --color-bg: #1e1e1e;
+  --color-text: #f4f4f4;
+  --color-primary: #4a90e2;
+  --color-primary-hover: #357ae8;
+  --color-secondary: #6c757d;
+  --color-border: #444;
+  --color-card: #2c2c2c;
+  --color-muted: #aaaaaa;
+  --color-accent: #756f00;
+  --color-accent-hover: #5e5800;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 body,
 .main-content {
@@ -20,7 +49,7 @@ body {
 }
 
 h1 {
-  color: #333;
+  color: var(--color-text);
   font-weight: bold;
   font-size: 24px;
 }
@@ -31,17 +60,5 @@ h1 {
 
 .tab-content.active {
   display: block;
-}
-
-
-/* Theme support */
-body.theme-light {
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-body.theme-dark {
-  background-color: #1e1e1e;
-  color: #f4f4f4;
 }
 

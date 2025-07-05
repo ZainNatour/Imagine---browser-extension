@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (theme) {
       themeSelect.value = theme;
     }
+    document.body.classList.remove('theme-dark', 'theme-light');
+    document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
   });
 
   document
@@ -28,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
           showMessage('Failed to save settings. Please try again.', true);
         } else {
           showMessage('Settings saved!', false);
+          document.body.classList.remove('theme-dark', 'theme-light');
+          document.body.classList.add(
+            theme === 'dark' ? 'theme-dark' : 'theme-light'
+          );
         }
       });
     });
