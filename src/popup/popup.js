@@ -10,6 +10,7 @@ import {
   getSelectedPhotoId,
   setSelectedPhotoId,
 } from './modules/photoStorage.js';
+import { requestTryOn } from './modules/tryOnService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('theme', ({ theme }) => {
@@ -34,6 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (message.action === 'selectTab') {
       const button = document.getElementById(message.target);
       if (button) button.click();
+    }
+    if (message.action === 'contextTryOn') {
+      const tabButton = document.getElementById('dressing-room-tab');
+      if (tabButton) tabButton.click();
+      if (message.srcUrl) showPhotoDialog(message.srcUrl);
     }
   });
 });
@@ -366,6 +372,56 @@ function renderPhotoGallery(container, photos, selectedId) {
 
     container.appendChild(item);
   });
+}
+
+async function showPhotoDialog(clothingUrl) {
+  const photos = await getPhotos();
+  if (!photos.length) {
+    alert('Please upload a photo in the Dressing Room first.');
+    return;
+  }
+
+  const overlay = document.createElement('div');
+  overlay.className = 'photo-dialog-overlay';
+
+  const dialog = document.createElement('div');
+  dialog.className = 'photo-dialog';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = 'Cancel';
+  closeBtn.addEventListener('click', () => overlay.remove());
+  dialog.appendChild(closeBtn);
+
+  photos.forEach((p) => {
+    const option = document.createElement('div');
+    option.className = 'photo-option';
+
+    const img = document.createElement('img');
+    img.src = p.dataUrl;
+    option.appendChild(img);
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Try On';
+    btn.addEventListener('click', async () => {
+      overlay.remove();
+      try {
+        const url = await requestTryOn(p.id, clothingUrl);
+        if (chrome.tabs) {
+          chrome.tabs.create({ url });
+        } else {
+          window.open(url, '_blank');
+        }
+      } catch (e) {
+        alert(e.message);
+      }
+    });
+    option.appendChild(btn);
+
+    dialog.appendChild(option);
+  });
+
+  overlay.appendChild(dialog);
+  document.body.appendChild(overlay);
 }
 
 

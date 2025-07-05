@@ -228,3 +228,35 @@
   background-color: var(--color-error);
   color: var(--color-card);
 }
+
+/* Overlay dialog for selecting photo when trying on from context menu */
+.photo-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.photo-dialog {
+  background: var(--color-card);
+  padding: 20px;
+  border-radius: 8px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.photo-option {
+  display: inline-block;
+  margin: 5px;
+  text-align: center;
+}
+
+.photo-option img {
+  max-width: 100px;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 4px;
+}

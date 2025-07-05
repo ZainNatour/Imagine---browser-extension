@@ -22,7 +22,24 @@ chrome.runtime.onStartup.addListener(createContextMenus);
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === 'imagine-try-on') {
-    chrome.runtime.sendMessage({ action: 'contextTryOn', srcUrl: info.srcUrl });
+    const notifyPanel = () =>
+      chrome.runtime.sendMessage({ action: 'contextTryOn', srcUrl: info.srcUrl });
+
+    if (chrome.sidePanel && chrome.sidePanel.open) {
+      // Open the extension side panel if supported
+      chrome.sidePanel.open({ windowId: tab?.windowId }, notifyPanel);
+    } else {
+      // Fallback: open the popup window
+      chrome.windows.create(
+        {
+          url: chrome.runtime.getURL('src/popup/popup.html'),
+          type: 'popup',
+          width: 400,
+          height: 600,
+        },
+        notifyPanel,
+      );
+    }
   } else if (info.menuItemId === 'imagine-add-wishlist') {
     const pageUrl = info.pageUrl || (tab && tab.url) || '';
     addToWishlist({
