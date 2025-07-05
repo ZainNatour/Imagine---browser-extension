@@ -18,6 +18,13 @@ export async function addToWishlist(item) {
   await saveWishlist(list);
 }
 
+export async function removeFromWishlist(dateAdded) {
+  const list = await getWishlist();
+  const filtered = list.filter((item) => item.dateAdded !== dateAdded);
+  await saveWishlist(filtered);
+  return filtered;
+}
+
 export async function renderWishlist(container) {
   const items = await getWishlist();
   if (!container) return;
@@ -53,6 +60,15 @@ export async function renderWishlist(container) {
       });
       div.appendChild(visitBtn);
     }
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-btn';
+    removeBtn.textContent = 'Remove';
+    removeBtn.addEventListener('click', async () => {
+      await removeFromWishlist(item.dateAdded);
+      renderWishlist(container);
+    });
+    div.appendChild(removeBtn);
 
     container.appendChild(div);
   });
