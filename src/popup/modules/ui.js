@@ -33,17 +33,17 @@ export function generateCheckboxes(name, options, selected) {
       (opt) => `
         <label>
           <input type="checkbox" name="${name}" value="${opt}" ${
-        selected.includes(opt) ? "checked" : ""
-      }>
+  selected.includes(opt) ? 'checked' : ''
+}>
           ${opt}
         </label>
-      `
+      `,
     )
-    .join("");
+    .join('');
 }
 
 export function getCheckedValues(name) {
-  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(
-    (input) => input.value
-  );
+  return Array.from(
+    document.querySelectorAll(`input[name="${name}"]:checked`),
+  ).map((input) => input.value);
 }

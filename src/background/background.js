@@ -1,5 +1,32 @@
 import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
 
+function createContextMenus() {
+  if (!chrome.contextMenus) return;
+  chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.create({
+      id: 'imagine-try-on',
+      title: 'Try on with Imagine',
+      contexts: ['image'],
+    });
+    chrome.contextMenus.create({
+      id: 'imagine-add-wishlist',
+      title: 'Add to Imagine Wishlist',
+      contexts: ['image'],
+    });
+  });
+}
+
+createContextMenus();
+chrome.runtime.onStartup.addListener(createContextMenus);
+
+chrome.contextMenus.onClicked.addListener((info) => {
+  if (info.menuItemId === 'imagine-try-on') {
+    chrome.runtime.sendMessage({ action: 'contextTryOn', srcUrl: info.srcUrl });
+  } else if (info.menuItemId === 'imagine-add-wishlist') {
+    chrome.runtime.sendMessage({ action: 'contextAddWishlist', srcUrl: info.srcUrl });
+  }
+});
+
 // Warm up the domain cache when the service worker starts
 loadStoreDomains();
 
@@ -17,6 +44,8 @@ chrome.runtime.onInstalled.addListener(() => {
       });
     });
   }
+
+  createContextMenus();
 });
 
 chrome.tabs.onCreated.addListener((tab) => {

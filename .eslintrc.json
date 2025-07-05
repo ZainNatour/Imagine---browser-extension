@@ -8,6 +8,10 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "globals": {
+    "chrome": "readonly",
+    "Buffer": "readonly"
+  },
   "rules": {
     "indent": ["error", 2],
     "semi": ["error", "always"]

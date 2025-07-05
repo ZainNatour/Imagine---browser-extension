@@ -204,24 +204,25 @@ function renderFilterOptions(elements, state) {
   const { filterSection, storeGrid, loadMoreButton, searchBar } = elements;
   const { stores } = state;
 
+  /* eslint-disable indent */
   filterSection.innerHTML = `
     <h3>Target Demographic</h3>
     ${generateCheckboxes(
       'targetDemographic',
       [...new Set(stores.flatMap((s) => s.targetDemographic))],
-      state.filters.targetDemographic
+      state.filters.targetDemographic,
     )}
     <h3>Clothing Type</h3>
     ${generateCheckboxes(
       'clothingType',
       [...new Set(stores.map((s) => s.clothingType))],
-      state.filters.clothingType
+      state.filters.clothingType,
     )}
     <h3>Price Range</h3>
     ${generateCheckboxes(
       'priceRange',
       [...new Set(stores.map((s) => s.priceRange))],
-      state.filters.priceRange
+      state.filters.priceRange,
     )}
     <div class="filter-buttons">
       <button id="apply-filters">Apply</button>
@@ -229,6 +230,7 @@ function renderFilterOptions(elements, state) {
       <button id="close-filters">Exit</button>
     </div>
   `;
+  /* eslint-enable indent */
 
   document.getElementById('apply-filters').addEventListener('click', () => {
     state.filters = {
