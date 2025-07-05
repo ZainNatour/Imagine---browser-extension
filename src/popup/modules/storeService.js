@@ -1,4 +1,6 @@
-export async function loadStores(dataUrl) {
+import { STORES_DATA_PATH } from "../../shared/constants.js";
+
+export async function loadStores(dataUrl = STORES_DATA_PATH) {
   try {
     const response = await fetch(chrome.runtime.getURL(dataUrl));
     if (!response.ok) {
