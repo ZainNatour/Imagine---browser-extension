@@ -21,6 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
   });
 
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'sync' && changes.theme) {
+      const theme = changes.theme.newValue;
+      if (themeSelect) themeSelect.value = theme;
+      document.body.classList.remove('theme-dark', 'theme-light');
+      document.body.classList.add(
+        theme === 'dark' ? 'theme-dark' : 'theme-light'
+      );
+    }
+  });
+
   document
     .getElementById('save-settings')
     .addEventListener('click', () => {
