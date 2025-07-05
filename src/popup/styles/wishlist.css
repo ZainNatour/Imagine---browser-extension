@@ -104,3 +104,14 @@
   background-color: var(--color-success); /* reuse primary success */
   transform: scale(1.05);
 }
+
+.wishlist-item .remove-btn {
+  background-color: var(--color-error);
+  color: var(--color-card);
+  margin-left: 10px;
+}
+
+.wishlist-item .remove-btn:hover {
+  background-color: var(--color-error);
+  transform: scale(1.05);
+}
