@@ -1,40 +1,10 @@
-export async function addPhoto(file) {
-  const toDataUrl = async (f) => {
-    if (typeof f === 'string') return f;
-    if (f.arrayBuffer) {
-      const buffer = Buffer.from(await f.arrayBuffer());
-      const mime = f.type || 'application/octet-stream';
-      return `data:${mime};base64,${buffer.toString('base64')}`;
-    }
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(reader.error);
-      reader.readAsDataURL(f);
-    });
-  };
+// photoStore.js
+// Unified helpers for managing photos (file uploads or data-URLs)
+// in chrome.storage.local.  Includes selection helpers.
 
-  const dataUrl = await toDataUrl(file);
-  const photo = { id: Date.now(), dataUrl };
-  return new Promise((resolve, reject) => {
-    chrome.storage.local.get({ photos: [] }, (result) => {
-      if (chrome.runtime.lastError) {
-        reject(chrome.runtime.lastError);
-      } else {
-        const photos = result.photos;
-        photos.push(photo);
-        chrome.storage.local.set({ photos }, () => {
-          if (chrome.runtime.lastError) {
-            reject(chrome.runtime.lastError);
-          } else {
-            resolve(photo);
-          }
-        });
-      }
-    });
-  });
-}
-
+//
+// ─── LOW-LEVEL STORAGE HELPERS ────────────────────────────────────────────────
+//
 export function getPhotos() {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get({ photos: [] }, (result) => {
@@ -47,21 +17,81 @@ export function getPhotos() {
   });
 }
 
-export function deletePhoto(id) {
+export function savePhotos(photos) {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.get({ photos: [] }, (result) => {
+    chrome.storage.local.set({ photos }, () => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
-        return;
+      } else {
+        resolve();
       }
-      const filtered = result.photos.filter((p) => p.id !== id);
-      chrome.storage.local.set({ photos: filtered }, () => {
-        if (chrome.runtime.lastError) {
-          reject(chrome.runtime.lastError);
-        } else {
-          resolve(filtered);
-        }
-      });
+    });
+  });
+}
+
+//
+// ─── UTILITY: ENSURE WE HAVE A DATA-URL ───────────────────────────────────────
+//
+async function toDataUrl(input) {
+  // Already a data-URL string?  Nothing to do.
+  if (typeof input === 'string') return input;
+
+  // File or Blob → data-URL
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);      // data:… base64
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(input);
+  });
+}
+
+//
+// ─── HIGH-LEVEL CRUD OPERATIONS ──────────────────────────────────────────────
+//
+export async function addPhoto(fileOrDataUrl) {
+  const dataUrl = await toDataUrl(fileOrDataUrl);
+  const photo = { id: Date.now().toString(), dataUrl };
+
+  const photos = await getPhotos();
+  photos.push(photo);
+  await savePhotos(photos);
+
+  return photo; // { id, dataUrl }
+}
+
+export async function removePhoto(id) {
+  const photos = await getPhotos();
+  const updated = photos.filter((p) => p.id !== id);
+  await savePhotos(updated);
+  return updated; // remaining photos
+}
+
+// Optional alias for callers that used the old name
+export const deletePhoto = removePhoto;
+
+//
+// ─── SELECTED PHOTO HELPERS ──────────────────────────────────────────────────
+//
+export function getSelectedPhotoId() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get('selectedPhotoId', (result) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+      } else {
+        resolve(result.selectedPhotoId ?? null);
+      }
+    });
+  });
+}
+
+export function setSelectedPhotoId(id) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.set({ selectedPhotoId: id }, () => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+      } else {
+        resolve();
+      }
     });
   });
 }

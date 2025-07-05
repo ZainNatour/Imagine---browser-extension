@@ -1,9 +1,15 @@
 <div id="dressing-room" class="tab-content">
   <div class="upload-section">
-    <div class="upload-frame">
+    <div class="upload-frame" id="upload-trigger">
       <img src="/src/assets/icons/filter.jpg" alt="Upload Icon" />
       <p>Upload Your Image</p>
     </div>
+    <input type="file" id="photo-input" accept="image/*" style="display: none" />
+  </div>
+
+  <div class="photo-gallery-section">
+    <h3>Your Photos</h3>
+    <div id="photo-gallery" class="photo-gallery"></div>
   </div>
 
   <div class="model-grid-section">
