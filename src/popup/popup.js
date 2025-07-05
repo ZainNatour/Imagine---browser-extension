@@ -3,6 +3,13 @@ import { STORES_DATA_PATH } from '../shared/constants.js';
 import { renderStores, updateLoadMoreButton, generateCheckboxes, getCheckedValues } from './modules/ui.js';
 import { debounce } from './modules/debounce.js';
 import { addToWishlist, renderWishlist } from './modules/wishlist.js';
+import {
+  getPhotos,
+  addPhoto,
+  removePhoto,
+  getSelectedPhotoId,
+  setSelectedPhotoId,
+} from './modules/photoStorage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('theme', ({ theme }) => {
@@ -46,6 +53,9 @@ function initializeTabSwitching() {
     if (targetContentId === 'wishlist') {
       const grid = document.getElementById('wishlist-grid');
       renderWishlist(grid);
+    }
+    if (targetContentId === 'dressing-room') {
+      loadAndRenderPhotos();
     }
   };
 
@@ -99,6 +109,7 @@ function setupEventListeners(elements, state) {
   setupAvatarToggle();
   setupModelGridControls();
   setupCentralizedWishlistNavigation();
+  setupPhotoUpload();
 }
 
 function setupSearchListener({ searchBar, loadMoreButton, storeGrid }, state) {
@@ -279,6 +290,77 @@ function setupCentralizedWishlistNavigation() {
     } else {
       window.open(url, '_blank');
     }
+  });
+}
+
+async function loadAndRenderPhotos() {
+  const container = document.getElementById('photo-gallery');
+  if (!container) return;
+  try {
+    const photos = await getPhotos();
+    const selectedId = await getSelectedPhotoId();
+    renderPhotoGallery(container, photos, selectedId);
+  } catch (error) {
+    console.error('Failed to load photos:', error);
+  }
+}
+
+function setupPhotoUpload() {
+  const input = document.getElementById('photo-input');
+  const trigger = document.getElementById('upload-trigger');
+  if (!input || !trigger) return;
+
+  trigger.addEventListener('click', () => input.click());
+
+  input.addEventListener('change', () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        await addPhoto(reader.result);
+        await loadAndRenderPhotos();
+      } catch (e) {
+        console.error('Failed to add photo:', e);
+      } finally {
+        input.value = '';
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderPhotoGallery(container, photos, selectedId) {
+  container.innerHTML = '';
+  photos.forEach((p) => {
+    const item = document.createElement('div');
+    item.className = 'photo-item';
+    if (p.id === selectedId) item.classList.add('selected');
+
+    const img = document.createElement('img');
+    img.src = p.dataUrl;
+    item.appendChild(img);
+
+    const selectBtn = document.createElement('button');
+    selectBtn.textContent = p.id === selectedId ? 'Selected' : 'Select';
+    selectBtn.className = 'select-btn';
+    selectBtn.disabled = p.id === selectedId;
+    selectBtn.addEventListener('click', async () => {
+      await setSelectedPhotoId(p.id);
+      await loadAndRenderPhotos();
+    });
+    item.appendChild(selectBtn);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.className = 'remove-btn';
+    removeBtn.addEventListener('click', async () => {
+      await removePhoto(p.id);
+      await loadAndRenderPhotos();
+    });
+    item.appendChild(removeBtn);
+
+    container.appendChild(item);
   });
 }
 
