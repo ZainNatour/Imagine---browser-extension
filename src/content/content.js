@@ -20,4 +20,72 @@
   } else {
     highlightProductImages();
   }
+
+  function textFromSelectors(selectors) {
+    for (const sel of selectors) {
+      const el = document.querySelector(sel);
+      if (el) {
+        const txt = el.textContent?.trim();
+        if (txt) return txt;
+      }
+    }
+    return '';
+  }
+
+  function collectColors() {
+    const elements = document.querySelectorAll(
+      '[itemprop="color"], [class*="color"] option, select[name*="color"] option, [data-color]'
+    );
+    const colors = [];
+    elements.forEach((el) => {
+      const val =
+        el.getAttribute('data-color') || el.textContent?.trim() || el.style.backgroundColor;
+      if (val && !colors.includes(val)) colors.push(val);
+    });
+    return colors;
+  }
+
+  function collectSimilar() {
+    const container = document.querySelector(
+      '.similar-products, .related-products, [class*="similar"], [class*="related"]'
+    );
+    const items = [];
+    if (container) {
+      container.querySelectorAll('a img').forEach((img) => {
+        const link = img.closest('a');
+        if (img.src) {
+          items.push({ link: link ? link.href : '', image: img.src });
+        }
+      });
+    }
+    return items;
+  }
+
+  function extractProductInfo() {
+    return {
+      name: textFromSelectors(['[itemprop="name"]', 'h1', 'meta[property="og:title"]']),
+      price: textFromSelectors(['[itemprop="price"]', '.price', '[class*="price"]']),
+      colors: collectColors(),
+      details: textFromSelectors([
+        '[itemprop="description"]',
+        '.product-description',
+        '[id*="description"]',
+      ]),
+      rating: textFromSelectors(['[itemprop="ratingValue"]', '.rating']),
+      reviews: textFromSelectors(['[itemprop="reviewCount"]', '.review-count', '[class*="review"]']),
+      clothingType: textFromSelectors(['[itemprop="category"]']),
+      image:
+        document.querySelector('[itemprop="image"]')?.src ||
+        document.querySelector('meta[property="og:image"]')?.content ||
+        document.querySelector('img')?.src ||
+        '',
+      similar: collectSimilar(),
+    };
+  }
+
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'getProductInfo') {
+      sendResponse(extractProductInfo());
+    }
+  });
 })();

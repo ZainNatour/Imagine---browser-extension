@@ -69,6 +69,9 @@ function initializeTabSwitching() {
     if (targetContentId === 'dressing-room') {
       loadAndRenderPhotos();
     }
+    if (targetContentId === 'product-discovery') {
+      loadProductInfo();
+    }
   };
 
   tabButtons.forEach((button) => {
@@ -449,6 +452,82 @@ async function showPhotoDialog(clothingUrl) {
 
   overlay.appendChild(dialog);
   document.body.appendChild(overlay);
+}
+
+function requestProductInfo() {
+  return new Promise((resolve) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (!tabs || !tabs[0]) return resolve(null);
+      chrome.tabs.sendMessage(tabs[0].id, { action: 'getProductInfo' }, (res) => {
+        resolve(res);
+      });
+    });
+  });
+}
+
+async function loadProductInfo() {
+  try {
+    const info = await requestProductInfo();
+    if (info) renderProductInfo(info);
+  } catch (e) {
+    console.error('Failed to load product info', e);
+  }
+}
+
+function renderProductInfo(info) {
+  const imageEl = document.querySelector('.product-image');
+  if (imageEl && info.image) imageEl.src = info.image;
+  const nameEl = document.querySelector('.product-name');
+  if (nameEl && info.name) nameEl.textContent = info.name;
+  const priceEl = document.querySelector('.product-price');
+  if (priceEl && info.price) priceEl.textContent = info.price;
+  const typeEl = document.querySelector('.product-clothing-type');
+  if (typeEl && info.clothingType) typeEl.textContent = info.clothingType;
+
+  const colorGrid = document.querySelector('.color-grid');
+  if (colorGrid && Array.isArray(info.colors)) {
+    colorGrid.innerHTML = '';
+    info.colors.forEach((c) => {
+      const swatch = document.createElement('div');
+      swatch.className = 'color-swatch';
+      swatch.style.backgroundColor = c;
+      colorGrid.appendChild(swatch);
+    });
+  }
+
+  const sections = document.querySelectorAll('.collapsible-section .collapsible-content');
+  if (sections[0] && info.details) {
+    sections[0].textContent = info.details;
+  }
+  if (sections[1]) {
+    sections[1].innerHTML = '';
+    if (info.rating) {
+      const p = document.createElement('p');
+      p.textContent = info.rating;
+      sections[1].appendChild(p);
+    }
+    if (info.reviews) {
+      const p = document.createElement('p');
+      p.textContent = info.reviews;
+      sections[1].appendChild(p);
+    }
+  }
+
+  const grid = document.querySelector('.similar-products-grid');
+  if (grid && Array.isArray(info.similar)) {
+    grid.innerHTML = '';
+    info.similar.forEach((item) => {
+      const div = document.createElement('div');
+      div.className = 'similar-product-item';
+      const link = document.createElement('a');
+      if (item.link) link.href = item.link;
+      const img = document.createElement('img');
+      img.src = item.image;
+      link.appendChild(img);
+      div.appendChild(link);
+      grid.appendChild(div);
+    });
+  }
 }
 
 
