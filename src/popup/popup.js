@@ -2,7 +2,12 @@ import { loadStores, applyFilters } from './modules/storeService.js';
 import { STORES_DATA_PATH } from '../shared/constants.js';
 import { renderStores, updateLoadMoreButton, generateCheckboxes, getCheckedValues } from './modules/ui.js';
 import { debounce } from './modules/debounce.js';
-import { addToWishlist, renderWishlist } from './modules/wishlist.js';
+import {
+  addToWishlist,
+  renderWishlist,
+  isInWishlist,
+  removeFromWishlist,
+} from './modules/wishlist.js';
 import {
   getPhotos,
   addPhoto,
@@ -31,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeApp();
   initializeTabSwitching();
   initializeCollapsibleSections();
+  initWishlistState();
   chrome.runtime.onMessage.addListener((message) => {
     if (message.action === 'selectTab') {
       const button = document.getElementById(message.target);
@@ -163,24 +169,45 @@ function setupFilterToggle(elements, state) {
   });
 }
 
-function setupWishlistListener() {
+async function setupWishlistListener() {
   const wishlistBtn = document.querySelector('.wishlist-btn');
   if (!wishlistBtn) return;
-  wishlistBtn.addEventListener('click', () => {
+
+  const url = window.location.href;
+  if (await isInWishlist(url)) {
+    wishlistBtn.classList.add('active');
+  }
+
+  wishlistBtn.addEventListener('click', async () => {
     const item = {
       name: document.querySelector('.product-name')?.textContent || '',
       price: document.querySelector('.product-price')?.textContent || '',
       clothingType: document.querySelector('.product-clothing-type')?.textContent || '',
       imageSrc: document.querySelector('.product-image')?.getAttribute('src') || '',
-      url: window.location.href,
+      url,
       storeName: window.location.hostname.replace(/^www\./, ''),
     };
-    addToWishlist(item);
+
+    if (await isInWishlist(item.url)) {
+      await removeFromWishlist(item.url);
+      wishlistBtn.classList.remove('active');
+    } else {
+      await addToWishlist(item);
+      wishlistBtn.classList.add('active');
+    }
+
     if (document.getElementById('wishlist').classList.contains('active')) {
       const grid = document.getElementById('wishlist-grid');
       renderWishlist(grid);
     }
   });
+}
+
+async function initWishlistState() {
+  const btn = document.querySelector('.wishlist-btn');
+  if (btn && (await isInWishlist(window.location.href))) {
+    btn.classList.add('active');
+  }
 }
 
 function setupAvatarToggle() {
