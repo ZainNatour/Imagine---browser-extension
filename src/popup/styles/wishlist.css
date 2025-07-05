@@ -4,8 +4,8 @@
   width: 100%; /* Take full width */
   margin: 20px 0; /* Add spacing above and below the button */
   padding: 12px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-card);
   font-size: 16px; /* Larger text */
   border: none;
   border-radius: 8px;
@@ -15,7 +15,7 @@
 }
 
 .centralized-wishlist-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
   transform: scale(1.05);
 }
 
@@ -26,10 +26,10 @@
 
 .wishlist-category h4 {
   margin-bottom: 20px;
-  color: #333;
+  color: var(--color-text);
   font-size: 20px; /* Larger section titles */
   font-weight: bold;
-  border-bottom: 2px solid #ddd; /* Underline the section titles */
+  border-bottom: 2px solid var(--color-border); /* Underline the section titles */
   padding-bottom: 10px;
 }
 
@@ -46,7 +46,7 @@
 
 /* Individual Wishlist Item */
 .wishlist-item {
-  background-color: white;
+  background-color: var(--color-card);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -68,7 +68,7 @@
 
 .wishlist-item p {
   font-size: 15px; /* Slightly larger text */
-  color: #555;
+  color: var(--color-muted);
   margin: 6px 0;
   font-weight: bold;
 }
@@ -85,22 +85,22 @@
 }
 
 .wishlist-item .try-on-btn {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-card);
 }
 
 .wishlist-item .try-on-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
   transform: scale(1.05);
 }
 
 .wishlist-item .visit-page-btn {
-  background-color: #28a745;
-  color: white;
+  background-color: var(--color-success);
+  color: var(--color-card);
   margin-left: 10px;
 }
 
 .wishlist-item .visit-page-btn:hover {
-  background-color: #218838;
+  background-color: var(--color-success); /* reuse primary success */
   transform: scale(1.05);
 }

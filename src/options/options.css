@@ -1,6 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   margin: 0;
   padding: 20px;
 }
@@ -8,7 +9,7 @@ body {
 .options-container {
   max-width: 400px;
   margin: auto;
-  background-color: white;
+  background-color: var(--color-card);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -31,15 +32,15 @@ select {
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-card);
   border: none;
   cursor: pointer;
   border-radius: 4px;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
 }
 
 .status-message {
@@ -48,9 +49,9 @@ button:hover {
 }
 
 .status-message.success {
-  color: #28a745;
+  color: var(--color-success);
 }
 
 .status-message.error {
-  color: #dc3545;
+  color: var(--color-error);
 }
