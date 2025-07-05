@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Imagine Side Panel</title>
+    <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/search-filter.css" />
     <link rel="stylesheet" href="styles/store-grid.css" />
@@ -46,7 +47,7 @@
         <div id="store-discovery" class="tab-content active">
           <div class="search-filter-container">
             <input type="text" id="search-bar" placeholder="Search stores..." />
-            <button id="filter-button">
+            <button id="filter-button" class="btn btn-primary btn-rounded">
               <img src="/src/assets/icons/filter.jpg" alt="Filter" />
             </button>
           </div>
@@ -61,7 +62,7 @@
             <!-- Store items will be dynamically loaded here -->
           </div>
 
-          <button id="load-more">Load More</button>
+          <button id="load-more" class="btn btn-primary btn-rounded">Load More</button>
         </div>
 
         <!-- Product Discovery Tab Content -->
@@ -73,7 +74,7 @@
               alt="Product Image"
               class="product-image"
             />
-            <button class="wishlist-btn">
+            <button class="wishlist-btn btn btn-rounded">
               <i class="fas fa-heart"></i>
             </button>
           </div>
@@ -87,7 +88,7 @@
 
           <!-- Try On Button (Centered) -->
           <div class="try-on-button">
-            <button>Add to dressing room</button>
+            <button class="btn btn-primary btn-rounded">Add to dressing room</button>
           </div>
 
           <!-- Product Colors Section (Larger Swatches) -->
@@ -166,7 +167,7 @@
 
           <!-- Model Grid Section -->
           <div class="model-section">
-            <button class="scroll-btn left-btn">
+            <button class="scroll-btn left-btn btn btn-primary btn-rounded">
               <i class="fas fa-chevron-left"></i>
               <!-- Left arrow icon -->
             </button>
@@ -227,7 +228,7 @@
               <!-- Add more models as needed -->
             </div>
 
-            <button class="scroll-btn right-btn">
+            <button class="scroll-btn right-btn btn btn-primary btn-rounded">
               <i class="fas fa-chevron-right"></i>
               <!-- Right arrow icon -->
             </button>
@@ -296,7 +297,7 @@
 
         <!-- Wishlist Tab Content -->
         <div id="wishlist" class="tab-content">
-          <button class="centralized-wishlist-btn">Go to Centralized Wishlist</button>
+          <button class="centralized-wishlist-btn btn btn-primary btn-rounded">Go to Centralized Wishlist</button>
           <h3>Your Wishlist</h3>
           <div id="wishlist-grid" class="wishlist-grid"></div>
         </div>
