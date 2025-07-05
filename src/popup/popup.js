@@ -166,6 +166,8 @@ function setupWishlistListener() {
       price: document.querySelector('.product-price')?.textContent || '',
       clothingType: document.querySelector('.product-clothing-type')?.textContent || '',
       imageSrc: document.querySelector('.product-image')?.getAttribute('src') || '',
+      url: window.location.href,
+      storeName: window.location.hostname.replace(/^www\./, ''),
     };
     addToWishlist(item);
     if (document.getElementById('wishlist').classList.contains('active')) {

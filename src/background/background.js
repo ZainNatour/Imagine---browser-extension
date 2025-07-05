@@ -1,4 +1,5 @@
 import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
+import { addToWishlist } from "../popup/modules/wishlist.js";
 
 function createContextMenus() {
   if (!chrome.contextMenus) return;
@@ -19,11 +20,19 @@ function createContextMenus() {
 createContextMenus();
 chrome.runtime.onStartup.addListener(createContextMenus);
 
-chrome.contextMenus.onClicked.addListener((info) => {
+chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === 'imagine-try-on') {
     chrome.runtime.sendMessage({ action: 'contextTryOn', srcUrl: info.srcUrl });
   } else if (info.menuItemId === 'imagine-add-wishlist') {
-    chrome.runtime.sendMessage({ action: 'contextAddWishlist', srcUrl: info.srcUrl });
+    const pageUrl = info.pageUrl || (tab && tab.url) || '';
+    addToWishlist({
+      name: '',
+      price: '',
+      clothingType: '',
+      imageSrc: info.srcUrl,
+      url: pageUrl,
+      storeName: pageUrl ? new URL(pageUrl).hostname.replace(/^www\./, '') : '',
+    });
   }
 });
 
