@@ -21,5 +21,7 @@ export async function loadStoreDomains() {
 export async function isOnlineStore(url) {
   const onlineStoreDomains = await loadStoreDomains();
   const host = url.hostname.replace(/^www\./, "");
-  return onlineStoreDomains.some((domain) => host.includes(domain));
+  return onlineStoreDomains.some(
+    (domain) => host === domain || host.endsWith('.' + domain)
+  );
 }
