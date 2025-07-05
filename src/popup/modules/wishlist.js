@@ -53,7 +53,9 @@ export async function renderWishlist(container) {
       const div = document.createElement('div');
       div.className = 'wishlist-item';
       const img = document.createElement('img');
-      img.src = chrome.runtime.getURL(item.imageSrc);
+      img.src = /^https?:\/\//.test(item.imageSrc)
+        ? item.imageSrc
+        : chrome.runtime.getURL(item.imageSrc);
       img.alt = item.name;
       div.appendChild(img);
 
