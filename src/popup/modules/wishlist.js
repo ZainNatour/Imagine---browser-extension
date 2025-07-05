@@ -28,17 +28,24 @@ export async function saveWishlist(items) {
 export async function addToWishlist(item) {
   try {
     const list = await getWishlist();
-    list.push({ ...item, dateAdded: new Date().toISOString() });
-    await saveWishlist(list);
+    const exists = list.some(
+      (it) => it.url === item.url || it.imageSrc === item.imageSrc,
+    );
+    if (!exists) {
+      list.push({ ...item, dateAdded: new Date().toISOString() });
+      await saveWishlist(list);
+    }
   } catch (error) {
     console.error('Failed to add item to wishlist:', error);
   }
 }
 
-export async function removeFromWishlist(dateAdded) {
+export async function removeFromWishlist(identifier) {
   try {
     const list = await getWishlist();
-    const filtered = list.filter((item) => item.dateAdded !== dateAdded);
+    const filtered = list.filter(
+      (item) => item.dateAdded !== identifier && item.url !== identifier,
+    );
     await saveWishlist(filtered);
     return filtered;
   } catch (error) {
@@ -129,4 +136,24 @@ export async function renderWishlist(container) {
     console.error('Failed to render wishlist:', error);
     if (container) container.innerHTML = '<p>Error loading wishlist.</p>';
   }
+}
+
+export async function isInWishlist(url) {
+  try {
+    const list = await getWishlist();
+    return list.some((item) => item.url === url);
+  } catch (error) {
+    console.error('Failed to check wishlist:', error);
+    return false;
+  }
+}
+
+export async function toggleWishlist(item) {
+  const present = await isInWishlist(item.url || item.imageSrc);
+  if (present) {
+    await removeFromWishlist(item.url || item.dateAdded);
+    return false;
+  }
+  await addToWishlist(item);
+  return true;
 }
