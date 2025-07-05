@@ -88,6 +88,7 @@ function setupEventListeners(elements, state) {
   setupWishlistListener();
   setupAvatarToggle();
   setupModelGridControls();
+  setupCentralizedWishlistNavigation();
 }
 
 function setupSearchListener({ searchBar, loadMoreButton, storeGrid }, state) {
@@ -255,6 +256,19 @@ function initializeCollapsibleSections() {
         arrow.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
       }
     });
+  });
+}
+
+function setupCentralizedWishlistNavigation() {
+  const btn = document.querySelector('.centralized-wishlist-btn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const url = chrome.runtime.getURL('src/popup/centralized-wishlist.html');
+    if (chrome.tabs) {
+      chrome.tabs.create({ url });
+    } else {
+      window.open(url, '_blank');
+    }
   });
 }
 

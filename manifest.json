@@ -35,7 +35,8 @@
       "resources": [
         "src/assets/data/stores.json",
         "src/assets/images/*",
-        "src/background/modules/urlUtils.js"
+        "src/background/modules/urlUtils.js",
+        "src/popup/centralized-wishlist.html"
       ],
       "matches": ["<all_urls>"]
     }
