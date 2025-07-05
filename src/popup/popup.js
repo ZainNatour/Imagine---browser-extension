@@ -499,26 +499,39 @@ function renderProductInfo(info) {
     colorSection.style.display = 'none';
   }
 
-  const sections = document.querySelectorAll('.collapsible-section .collapsible-content');
+  const sections = document.querySelectorAll(
+    '.collapsible-section .collapsible-content'
+  );
   if (sections[0] && info.details) {
     sections[0].textContent = info.details;
+    sections[0].parentElement.style.display = '';
+  } else if (sections[0]) {
+    sections[0].parentElement.style.display = 'none';
   }
+
   if (sections[1]) {
-    sections[1].innerHTML = '';
-    if (info.rating) {
+    const container = sections[1];
+    container.innerHTML = '';
+    if (info.ratingValue) {
       const p = document.createElement('p');
-      p.textContent = info.rating;
-      sections[1].appendChild(p);
+      p.textContent = `Rating: ${info.ratingValue}`;
+      container.appendChild(p);
     }
-    if (info.reviews) {
-      const p = document.createElement('p');
-      p.textContent = info.reviews;
-      sections[1].appendChild(p);
+    if (Array.isArray(info.reviewSnippets) && info.reviewSnippets.length) {
+      info.reviewSnippets.forEach((s) => {
+        const p = document.createElement('p');
+        p.textContent = s;
+        container.appendChild(p);
+      });
     }
+    container.parentElement.style.display = container.childElementCount
+      ? ''
+      : 'none';
   }
 
   const grid = document.querySelector('.similar-products-grid');
-  if (grid && Array.isArray(info.similar)) {
+  const section = grid?.closest('.similar-products-section');
+  if (grid && Array.isArray(info.similar) && info.similar.length) {
     grid.innerHTML = '';
     info.similar.forEach((item) => {
       const div = document.createElement('div');
@@ -531,6 +544,9 @@ function renderProductInfo(info) {
       div.appendChild(link);
       grid.appendChild(div);
     });
+    if (section) section.style.display = '';
+  } else if (section) {
+    section.style.display = 'none';
   }
 }
 
