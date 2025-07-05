@@ -36,6 +36,12 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Active state for wishlist button */
+.wishlist-btn.active {
+  background-color: var(--color-error);
+  color: var(--color-card);
+}
+
 /* Product Info Section */
 .product-info {
   text-align: center;
