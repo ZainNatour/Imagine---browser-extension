@@ -120,84 +120,30 @@
 
         <!-- Dressing Room Tab Content -->
         <div id="dressing-room" class="tab-content">
-          <!-- Upload Image Section -->
           <div class="upload-section">
-            <div class="upload-frame">
+            <div class="upload-frame" id="upload-trigger">
               <img src="/src/assets/icons/filter.jpg" alt="Upload Icon" />
               <p>Upload Your Image</p>
             </div>
+            <input type="file" id="photo-input" accept="image/*" style="display: none" />
           </div>
-
-          <!-- Model Grid Section -->
-          <div class="model-section">
-            <button class="scroll-btn left-btn btn btn-primary btn-rounded">
-              <i class="fas fa-chevron-left"></i>
-              <!-- Left arrow icon -->
-            </button>
-
-            <!-- Model Swatch Grid -->
-            <div class="model-swatch-grid">
-              <div class="model-swatch">
-                <img src="/src/assets/icons/upload.jpg" alt="Upload Icon" />
+        
+          <div class="photo-gallery-section">
+            <h3>Your Photos</h3>
+            <div id="photo-gallery" class="photo-gallery"></div>
+          </div>
+        
+          <div class="model-grid-section">
+            <h3>Models</h3>
+            <div class="model-grid">
+              <button class="scroll-arrow left-arrow btn btn-primary btn-rounded">←</button>
+              <div class="model-swatch-grid">
+                <!-- Model swatches will be dynamically loaded here -->
               </div>
-              <div class="model-swatch avatar-swatch">
-                <img
-                  src="/src/assets/icons/avatar.jpg"
-                  alt="Personalized Avatar"
-                />
-              </div>
-              <div class="model-swatch">
-                <img
-                  src="/src/assets/images/models/clothing1.jpg"
-                  alt="Model 1"
-                />
-              </div>
-              <div class="model-swatch">
-                <img
-                  src="/src/assets/images/models/clothing3.jpg"
-                  alt="Model 2"
-                />
-              </div>
-              <div class="model-swatch">
-                <img
-                  src="/src/assets/images/models/clothing4.jpg"
-                  alt="Model 3"
-                />
-              </div>
-              <div class="model-swatch">
-                <img
-                  src="/src/assets/images/models/clothing2.jpg"
-                  alt="Model 4"
-                />
-              </div>
-              <div class="model-swatch">
-                <img
-                  src="/src/assets/images/models/clothing5.jpg"
-                  alt="Model 5"
-                />
-              </div>
-              <div class="model-swatch">
-                <img
-                  src="/src/assets/images/models/clothing2.jpg"
-                  alt="Model 6"
-                />
-              </div>
-              <div class="model-swatch">
-                <img
-                  src="/src/assets/images/models/clothing1.jpg"
-                  alt="Model 7"
-                />
-              </div>
-              <!-- Add more models as needed -->
+              <button class="scroll-arrow right-arrow btn btn-primary btn-rounded">→</button>
             </div>
-
-            <button class="scroll-btn right-btn btn btn-primary btn-rounded">
-              <i class="fas fa-chevron-right"></i>
-              <!-- Right arrow icon -->
-            </button>
           </div>
-
-          <!-- Personalized Avatar Section -->
+        
           <div class="avatar-section" style="display: none">
             <h3>Personalized Avatar</h3>
             <div class="avatar-inputs">
@@ -211,48 +157,7 @@
               <input type="text" id="skin-tone" placeholder="e.g., Fair" />
             </div>
           </div>
-
-          <!-- Clothing Items Section -->
-          <div class="clothing-items-section">
-            <h3>Clothing Items</h3>
-            <div class="clothing-item">
-              <img
-                src="/src/assets/images/clothing/clothing14.jpg"
-                alt="Clothing Item 1"
-              />
-              <p>Classic T-Shirt - $29.99</p>
-            </div>
-            <div class="clothing-item">
-              <img
-                src="/src/assets/images/clothing/clothing15.jpg"
-                alt="Clothing Item 2"
-              />
-              <p>Jeans - $49.99</p>
-            </div>
-          </div>
-
-          <!-- Try On History Section -->
-          <div class="try-on-history-section">
-            <h3>Try On History</h3>
-            <div class="try-on-history-grid">
-              <div class="history-item">
-                <img
-                  src="/src/assets/images/models/clothing1.jpg"
-                  alt="Clothing Item 1"
-                />
-                <p>T-Shirt - 10/05/2024</p>
-              </div>
-              <div class="history-item">
-                <img
-                  src="/src/assets/images/models/clothing4.jpg"
-                  alt="Clothing Item 2"
-                />
-                <p>Jeans - 09/28/2024</p>
-              </div>
-            </div>
-          </div>
         </div>
-
         <!-- Home Tab Content -->
         <div id="home" class="tab-content">
           <p>Welcome to the home tab.</p>
