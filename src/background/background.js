@@ -19,13 +19,22 @@ chrome.runtime.onInstalled.addListener(() => {
   }
 });
 
-chrome.tabs.onCreated.addListener(() => {
-  chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
-    if (!tabs || !tabs.length || !tabs[0].url) return;
-    const url = new URL(tabs[0].url);
+chrome.tabs.onCreated.addListener((tab) => {
+  const handleTabUrl = async (urlString) => {
+    const url = new URL(urlString);
     const target = (await isOnlineStore(url))
       ? "home-tab"
       : "store-discovery-tab";
     chrome.runtime.sendMessage({ action: "selectTab", target });
-  });
+  };
+
+  if (tab && tab.url) {
+    handleTabUrl(tab.url);
+  } else {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs && tabs.length && tabs[0].url) {
+        handleTabUrl(tabs[0].url);
+      }
+    });
+  }
 });
