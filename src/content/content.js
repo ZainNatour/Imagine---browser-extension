@@ -1,4 +1,11 @@
-(() => {
+(async () => {
+  const { isOnlineStore } = await import(
+    chrome.runtime.getURL('src/background/modules/urlUtils.js')
+  );
+  const currentUrl = new URL(window.location.href);
+  if (!(await isOnlineStore(currentUrl))) {
+    return;
+  }
 
   function highlightProductImages() {
     document.querySelectorAll('img').forEach((img) => {
