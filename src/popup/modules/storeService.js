@@ -24,15 +24,25 @@ export function applyFilters(stores, filters, searchTerm = "") {
       term === "" ||
       store.name.toLowerCase().includes(term) ||
       store.clothingType.toLowerCase().includes(term);
+
+    const storeDemographics = store.targetDemographic.map((d) => d.toLowerCase());
+    const filterDemographics = filters.targetDemographic.map((d) => d.toLowerCase());
     const matchesDemographic =
-      filters.targetDemographic.length === 0 ||
-      filters.targetDemographic.some((demo) => store.targetDemographic.includes(demo));
+      filterDemographics.length === 0 ||
+      filterDemographics.some((demo) => storeDemographics.includes(demo));
+
+    const storeClothingType = store.clothingType.toLowerCase();
+    const filterClothingTypes = filters.clothingType.map((t) => t.toLowerCase());
     const matchesClothing =
-      filters.clothingType.length === 0 ||
-      filters.clothingType.includes(store.clothingType);
+      filterClothingTypes.length === 0 ||
+      filterClothingTypes.includes(storeClothingType);
+
+    const storePriceRange = store.priceRange.toLowerCase();
+    const filterPriceRanges = filters.priceRange.map((p) => p.toLowerCase());
     const matchesPrice =
-      filters.priceRange.length === 0 ||
-      filters.priceRange.includes(store.priceRange);
+      filterPriceRanges.length === 0 ||
+      filterPriceRanges.includes(storePriceRange);
+
     return matchesSearch && matchesDemographic && matchesClothing && matchesPrice;
   });
 }
