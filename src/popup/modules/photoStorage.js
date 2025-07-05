@@ -2,10 +2,42 @@
 // Unified helpers for managing photos (file uploads or data-URLs)
 // in chrome.storage.local.  Includes selection helpers.
 
+// Helper to map an asset path to a usable URL in both browser and test
+// environments. chrome.runtime.getURL is used when available.
+function assetUrl(path) {
+  return typeof chrome !== 'undefined' && chrome.runtime?.getURL
+    ? chrome.runtime.getURL(path)
+    : path;
+}
+
+// Built-in model photos bundled with the extension. These behave like
+// uploaded photos but cannot be removed. Keep IDs stable so any stored
+// selection referencing them remains valid.
+export const DEFAULT_MODELS = [
+  { id: 'model-1', dataUrl: assetUrl('src/assets/images/models/clothing1.jpg') },
+  { id: 'model-2', dataUrl: assetUrl('src/assets/images/models/clothing2.jpg') },
+  { id: 'model-3', dataUrl: assetUrl('src/assets/images/models/clothing3.jpg') },
+];
+
+const DEFAULT_MODEL_IDS = new Set(DEFAULT_MODELS.map((m) => m.id));
+
+
 //
 // ─── LOW-LEVEL STORAGE HELPERS ────────────────────────────────────────────────
 //
 export function getPhotos() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get({ photos: [] }, (result) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+      } else {
+        resolve([...DEFAULT_MODELS, ...result.photos]);
+      }
+    });
+  });
+}
+
+function getUserPhotos() {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get({ photos: [] }, (result) => {
       if (chrome.runtime.lastError) {
@@ -64,7 +96,7 @@ export async function addPhoto(fileOrDataUrl) {
   const dataUrl = await toDataUrl(fileOrDataUrl);
   const photo = { id: Date.now().toString(), dataUrl };
 
-  const photos = await getPhotos();
+  const photos = await getUserPhotos();
   photos.push(photo);
   await savePhotos(photos);
 
@@ -72,7 +104,10 @@ export async function addPhoto(fileOrDataUrl) {
 }
 
 export async function removePhoto(id) {
-  const photos = await getPhotos();
+  if (DEFAULT_MODEL_IDS.has(id)) {
+    return getPhotos();
+  }
+  const photos = await getUserPhotos();
   const updated = photos.filter((p) => p.id !== id);
   await savePhotos(updated);
   return updated; // remaining photos

@@ -23,19 +23,24 @@ global.chrome = {
   },
 };
 
-import { addPhoto, getPhotos, deletePhoto } from '../src/popup/modules/photoStorage.js';
+import {
+  addPhoto,
+  getPhotos,
+  deletePhoto,
+  DEFAULT_MODELS,
+} from '../src/popup/modules/photoStorage.js';
 
 async function runTests() {
   const blob = new Blob(['hello'], { type: 'text/plain' });
   const added = await addPhoto(blob);
   assert.ok(added.id, 'photo has id');
   const list = await getPhotos();
-  assert.equal(list.length, 1, 'photo added');
-  assert.equal(list[0].id, added.id, 'id matches');
+  assert.equal(list.length, DEFAULT_MODELS.length + 1, 'photo added');
+  assert.equal(list[DEFAULT_MODELS.length].id, added.id, 'id matches');
 
   await deletePhoto(added.id);
   const afterDelete = await getPhotos();
-  assert.equal(afterDelete.length, 0, 'photo deleted');
+  assert.equal(afterDelete.length, DEFAULT_MODELS.length, 'photo deleted');
   console.log('All tests passed');
 }
 
