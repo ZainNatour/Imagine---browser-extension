@@ -61,6 +61,29 @@
     return items;
   }
 
+  function collectRatingValue() {
+    const el =
+      document.querySelector('[itemprop="ratingValue"]') ||
+      document.querySelector('.rating');
+    if (!el) return '';
+    return (
+      el.getAttribute('content') || el.textContent?.match(/[\d.]+/)?.[0] || ''
+    );
+  }
+
+  function collectReviewSnippets() {
+    const snippets = [];
+    document
+      .querySelectorAll(
+        '[itemprop="review"] .review-text, .review-snippet, .review'
+      )
+      .forEach((el) => {
+        const txt = el.textContent?.trim();
+        if (txt) snippets.push(txt);
+      });
+    return snippets.slice(0, 3);
+  }
+
   function extractProductInfo() {
     return {
       name: textFromSelectors(['[itemprop="name"]', 'h1', 'meta[property="og:title"]']),
@@ -71,8 +94,8 @@
         '.product-description',
         '[id*="description"]',
       ]),
-      rating: textFromSelectors(['[itemprop="ratingValue"]', '.rating']),
-      reviews: textFromSelectors(['[itemprop="reviewCount"]', '.review-count', '[class*="review"]']),
+      ratingValue: collectRatingValue(),
+      reviewSnippets: collectReviewSnippets(),
       clothingType: textFromSelectors(['[itemprop="category"]']),
       image:
         document.querySelector('[itemprop="image"]')?.src ||
