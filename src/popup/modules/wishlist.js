@@ -3,7 +3,7 @@ import { getSelectedPhotoId } from './photoStorage.js';
 
 export async function getWishlist() {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.get({ wishlist: [] }, (result) => {
+    chrome.storage.sync.get({ wishlist: [] }, (result) => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
@@ -15,7 +15,7 @@ export async function getWishlist() {
 
 export async function saveWishlist(items) {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.set({ wishlist: items }, () => {
+    chrome.storage.sync.set({ wishlist: items }, () => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
@@ -63,8 +63,20 @@ export async function renderWishlist(container) {
       div.appendChild(img);
 
       const nameP = document.createElement('p');
-      nameP.textContent = `${item.name} - ${item.price}`;
+      nameP.textContent = item.name;
       div.appendChild(nameP);
+
+      if (item.storeName) {
+        const storeP = document.createElement('p');
+        storeP.textContent = item.storeName;
+        div.appendChild(storeP);
+      }
+
+      if (item.price) {
+        const priceP = document.createElement('p');
+        priceP.textContent = item.price;
+        div.appendChild(priceP);
+      }
 
       const dateP = document.createElement('p');
       dateP.textContent = `Date Added: ${new Date(item.dateAdded).toLocaleDateString()}`;
