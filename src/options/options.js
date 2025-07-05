@@ -1,5 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   const themeSelect = document.getElementById('theme');
+  const statusMessage = document.getElementById('status-message');
+
+  const showMessage = (message, isError = false) => {
+    if (!statusMessage) return;
+    statusMessage.textContent = message;
+    statusMessage.classList.toggle('error', isError);
+    statusMessage.classList.toggle('success', !isError);
+    setTimeout(() => {
+      statusMessage.textContent = '';
+      statusMessage.classList.remove('error', 'success');
+    }, 3000);
+  };
+
   chrome.storage.sync.get('theme', ({ theme }) => {
     if (theme) {
       themeSelect.value = theme;
@@ -12,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const theme = themeSelect.value;
       chrome.storage.sync.set({ theme: theme }, () => {
         if (chrome.runtime.lastError) {
-          alert('Failed to save settings. Please try again.');
+          showMessage('Failed to save settings. Please try again.', true);
         } else {
-          alert('Settings saved!');
+          showMessage('Settings saved!', false);
         }
       });
     });
