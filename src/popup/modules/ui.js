@@ -3,7 +3,7 @@ export function renderStores(container, stores, displayed) {
   const visible = stores.slice(0, displayed);
   visible.forEach((store) => {
     const item = document.createElement("div");
-    item.className = "store-item";
+    item.className = "store-item card";
 
     const img = document.createElement("img");
     img.src = chrome.runtime.getURL(store.image);

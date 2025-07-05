@@ -54,7 +54,7 @@ export async function renderWishlist(container) {
     container.innerHTML = '';
     items.forEach((item) => {
       const div = document.createElement('div');
-      div.className = 'wishlist-item';
+      div.className = 'wishlist-item card';
       const img = document.createElement('img');
       img.src = /^https?:\/\//.test(item.imageSrc)
         ? item.imageSrc
@@ -83,7 +83,7 @@ export async function renderWishlist(container) {
       div.appendChild(dateP);
 
       const tryBtn = document.createElement('button');
-      tryBtn.className = 'try-on-btn';
+      tryBtn.className = 'try-on-btn btn btn-primary btn-rounded';
       tryBtn.textContent = 'Try On';
       tryBtn.addEventListener('click', async () => {
         try {
@@ -106,7 +106,7 @@ export async function renderWishlist(container) {
 
       if (item.url) {
         const visitBtn = document.createElement('button');
-        visitBtn.className = 'visit-page-btn';
+        visitBtn.className = 'visit-page-btn btn btn-success btn-rounded';
         visitBtn.textContent = 'Visit Page';
         visitBtn.addEventListener('click', () => {
           chrome.tabs.create({ url: item.url });
@@ -115,7 +115,7 @@ export async function renderWishlist(container) {
       }
 
       const removeBtn = document.createElement('button');
-      removeBtn.className = 'remove-btn';
+      removeBtn.className = 'remove-btn btn btn-error btn-rounded';
       removeBtn.textContent = 'Remove';
       removeBtn.addEventListener('click', async () => {
         await removeFromWishlist(item.dateAdded);

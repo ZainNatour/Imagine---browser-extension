@@ -6,15 +6,18 @@
   margin-top: 20px;
 }
 
+@media (max-width: 500px) {
+  .store-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .store-item {
-  background-color: var(--color-card);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
   overflow: hidden;
   text-align: center;
-  padding: 10px;
+  padding: var(--spacing-sm);
   cursor: pointer;
-  transition: box-shadow 0.3s, transform 0.2s;
 }
 
 .store-item:hover {
@@ -30,16 +33,9 @@
 }
 
 #load-more {
-  padding: 10px 20px;
-  background-color: var(--color-primary);
-  color: var(--color-card);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 20px;
+  margin-top: var(--spacing-md);
 }
 
 #load-more:hover {
-  background-color: var(--color-primary-hover);
   transform: scale(1.05);
 }
