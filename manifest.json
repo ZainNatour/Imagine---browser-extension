@@ -8,7 +8,13 @@
     "48": "src/assets/icons/icon48.png",
     "128": "src/assets/icons/icon128.png"
   },
-  "permissions": ["sidePanel", "storage", "tabs", "activeTab", "scripting"],
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
   "background": {
     "service_worker": "src/background/background.js",
     "type": "module"
@@ -25,8 +31,12 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["src/content/content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
@@ -36,9 +46,12 @@
         "src/assets/data/stores.json",
         "src/assets/images/*",
         "src/background/modules/urlUtils.js",
-        "src/popup/centralized-wishlist.html"
+        "src/popup/centralized-wishlist.html",
+        "src/popup/centralized-wishlist.js"
       ],
-      "matches": ["<all_urls>"]
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ]
 }
