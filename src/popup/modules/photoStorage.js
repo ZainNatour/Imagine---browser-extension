@@ -37,12 +37,24 @@ async function toDataUrl(input) {
   if (typeof input === 'string') return input;
 
   // File or Blob → data-URL
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);      // data:… base64
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(input);
-  });
+  if (typeof FileReader !== 'undefined') {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result); // data:… base64
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(input);
+    });
+  }
+
+  // Node environments lack FileReader - fallback using arrayBuffer
+  if (input.arrayBuffer) {
+    const buffer = await input.arrayBuffer();
+    const mime = input.type || 'application/octet-stream';
+    const base64 = Buffer.from(buffer).toString('base64');
+    return `data:${mime};base64,${base64}`;
+  }
+
+  throw new Error('Unable to convert input to data URL');
 }
 
 //
