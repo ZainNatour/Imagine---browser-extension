@@ -1,4 +1,4 @@
-const STORES_DATA_PATH = "src/assets/data/stores.json";
+import { STORES_DATA_PATH } from "../../shared/constants.js";
 let cachedDomains = null;
 
 export async function loadStoreDomains() {

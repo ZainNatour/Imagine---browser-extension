@@ -1,4 +1,5 @@
 import { loadStores, applyFilters } from './modules/storeService.js';
+import { STORES_DATA_PATH } from '../shared/constants.js';
 import { renderStores, updateLoadMoreButton, generateCheckboxes, getCheckedValues } from './modules/ui.js';
 import { debounce } from './modules/debounce.js';
 import { addToWishlist, renderWishlist } from './modules/wishlist.js';
@@ -62,7 +63,7 @@ async function initializeApp() {
 
   let stores = [];
   try {
-    stores = await loadStores('src/assets/data/stores.json');
+    stores = await loadStores(STORES_DATA_PATH);
   } catch (error) {
     console.error(error);
     storeGrid.innerHTML = '<p>Unable to load stores. Please try again later.</p>';
