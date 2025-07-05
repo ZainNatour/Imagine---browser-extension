@@ -1,3 +1,6 @@
+import { requestTryOn } from './tryOnService.js';
+import { getSelectedPhotoId } from './photoStorage.js';
+
 export async function getWishlist() {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get({ wishlist: [] }, (result) => {
@@ -70,6 +73,23 @@ export async function renderWishlist(container) {
       const tryBtn = document.createElement('button');
       tryBtn.className = 'try-on-btn';
       tryBtn.textContent = 'Try On';
+      tryBtn.addEventListener('click', async () => {
+        try {
+          const photoId = await getSelectedPhotoId();
+          if (!photoId) {
+            alert('Please select a photo in the Dressing Room first.');
+            return;
+          }
+          const url = await requestTryOn(photoId, item.imageSrc);
+          if (chrome.tabs) {
+            chrome.tabs.create({ url });
+          } else {
+            window.open(url, '_blank');
+          }
+        } catch (err) {
+          alert(err.message);
+        }
+      });
       div.appendChild(tryBtn);
 
       if (item.url) {
