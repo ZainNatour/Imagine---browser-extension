@@ -32,7 +32,11 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["src/assets/data/stores.json", "src/assets/images/*"],
+      "resources": [
+        "src/assets/data/stores.json",
+        "src/assets/images/*",
+        "src/background/modules/urlUtils.js"
+      ],
       "matches": ["<all_urls>"]
     }
   ]
