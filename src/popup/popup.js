@@ -14,8 +14,11 @@ import {
   removePhoto,
   getSelectedPhotoId,
   setSelectedPhotoId,
+  DEFAULT_MODELS,
 } from './modules/photoStorage.js';
 import { requestTryOn } from './modules/tryOnService.js';
+
+const DEFAULT_MODEL_IDS = new Set(DEFAULT_MODELS.map((m) => m.id));
 
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('theme', ({ theme }) => {
@@ -335,11 +338,13 @@ function setupCentralizedWishlistNavigation() {
 
 async function loadAndRenderPhotos() {
   const container = document.getElementById('photo-gallery');
+  const modelGrid = document.querySelector('.model-swatch-grid');
   if (!container) return;
   try {
     const photos = await getPhotos();
     const selectedId = await getSelectedPhotoId();
     renderPhotoGallery(container, photos, selectedId);
+    if (modelGrid) renderModelGrid(modelGrid, photos, selectedId);
   } catch (error) {
     console.error('Failed to load photos:', error);
   }
@@ -398,9 +403,26 @@ function renderPhotoGallery(container, photos, selectedId) {
       await removePhoto(p.id);
       await loadAndRenderPhotos();
     });
-    item.appendChild(removeBtn);
+    if (!DEFAULT_MODEL_IDS.has(p.id)) item.appendChild(removeBtn);
 
     container.appendChild(item);
+  });
+}
+
+function renderModelGrid(container, photos, selectedId) {
+  container.innerHTML = '';
+  photos.forEach((p) => {
+    const swatch = document.createElement('div');
+    swatch.className = 'model-swatch';
+    if (p.id === selectedId) swatch.classList.add('selected');
+    const img = document.createElement('img');
+    img.src = p.dataUrl;
+    swatch.appendChild(img);
+    swatch.addEventListener('click', async () => {
+      await setSelectedPhotoId(p.id);
+      await loadAndRenderPhotos();
+    });
+    container.appendChild(swatch);
   });
 }
 

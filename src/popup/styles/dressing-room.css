@@ -80,6 +80,10 @@
   border-color: var(--color-primary);
 }
 
+.model-swatch.selected {
+  border-color: var(--color-primary);
+}
+
 /* Scroll Buttons */
 .scroll-btn {
   background-color: var(--color-primary);
