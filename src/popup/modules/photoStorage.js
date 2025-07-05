@@ -1,4 +1,11 @@
-export async function getPhotos() {
+// photoStore.js
+// Unified helpers for managing photos (file uploads or data-URLs)
+// in chrome.storage.local.  Includes selection helpers.
+
+//
+// ─── LOW-LEVEL STORAGE HELPERS ────────────────────────────────────────────────
+//
+export function getPhotos() {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get({ photos: [] }, (result) => {
       if (chrome.runtime.lastError) {
@@ -10,7 +17,7 @@ export async function getPhotos() {
   });
 }
 
-export async function savePhotos(photos) {
+export function savePhotos(photos) {
   return new Promise((resolve, reject) => {
     chrome.storage.local.set({ photos }, () => {
       if (chrome.runtime.lastError) {
@@ -22,34 +29,62 @@ export async function savePhotos(photos) {
   });
 }
 
-export async function addPhoto(dataUrl) {
+//
+// ─── UTILITY: ENSURE WE HAVE A DATA-URL ───────────────────────────────────────
+//
+async function toDataUrl(input) {
+  // Already a data-URL string?  Nothing to do.
+  if (typeof input === 'string') return input;
+
+  // File or Blob → data-URL
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);      // data:… base64
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(input);
+  });
+}
+
+//
+// ─── HIGH-LEVEL CRUD OPERATIONS ──────────────────────────────────────────────
+//
+export async function addPhoto(fileOrDataUrl) {
+  const dataUrl = await toDataUrl(fileOrDataUrl);
+  const photo = { id: Date.now().toString(), dataUrl };
+
   const photos = await getPhotos();
-  const id = Date.now().toString();
-  photos.push({ id, dataUrl });
+  photos.push(photo);
   await savePhotos(photos);
-  return id;
+
+  return photo; // { id, dataUrl }
 }
 
 export async function removePhoto(id) {
   const photos = await getPhotos();
   const updated = photos.filter((p) => p.id !== id);
   await savePhotos(updated);
-  return updated;
+  return updated; // remaining photos
 }
 
-export async function getSelectedPhotoId() {
+// Optional alias for callers that used the old name
+export const deletePhoto = removePhoto;
+
+//
+// ─── SELECTED PHOTO HELPERS ──────────────────────────────────────────────────
+//
+export function getSelectedPhotoId() {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get('selectedPhotoId', (result) => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
-        resolve(result.selectedPhotoId || null);
+        resolve(result.selectedPhotoId ?? null);
       }
     });
   });
 }
 
-export async function setSelectedPhotoId(id) {
+export function setSelectedPhotoId(id) {
   return new Promise((resolve, reject) => {
     chrome.storage.local.set({ selectedPhotoId: id }, () => {
       if (chrome.runtime.lastError) {
