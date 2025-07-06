@@ -14,11 +14,29 @@
       });
     }
 
+    async function detectProduct() {
+      const { getProduct } = await import(
+        chrome.runtime.getURL('src/content/getProduct.js')
+      );
+      const { product, similars } = await getProduct();
+      if (product) {
+        chrome.runtime.sendMessage({
+          type: 'productDetected',
+          product,
+          similars,
+        });
+      }
+    }
+
     if (onStore) {
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', highlightProductImages);
+        document.addEventListener('DOMContentLoaded', () => {
+          highlightProductImages();
+          detectProduct();
+        });
       } else {
         highlightProductImages();
+        detectProduct();
       }
     }
 
