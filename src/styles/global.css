@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #2563eb;
+  --color-secondary: #4b5563;
+  --radius-xl: 1.5rem;
+}
+
+body.theme-dark {
+  --color-primary: #60a5fa;
+  --color-secondary: #d1d5db;
+}
+
+html, body {
+  border-radius: var(--radius-xl);
+}
+
+.tab-content {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.tab-content.active {
+  opacity: 1;
+}
