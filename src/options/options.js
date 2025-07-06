@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const themeSelect = document.getElementById('theme');
+  const apiInput = document.getElementById('api-endpoint');
   const statusMessage = document.getElementById('status-message');
 
   const showMessage = (message, isError = false) => {
@@ -13,22 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   };
 
-  chrome.storage.sync.get('theme', ({ theme }) => {
+  chrome.storage.sync.get(['theme', 'apiEndpoint'], ({ theme, apiEndpoint }) => {
     if (theme) {
       themeSelect.value = theme;
+    }
+    if (apiInput && apiEndpoint) {
+      apiInput.value = apiEndpoint;
     }
     document.body.classList.remove('theme-dark', 'theme-light');
     document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === 'sync' && changes.theme) {
-      const theme = changes.theme.newValue;
-      if (themeSelect) themeSelect.value = theme;
-      document.body.classList.remove('theme-dark', 'theme-light');
-      document.body.classList.add(
-        theme === 'dark' ? 'theme-dark' : 'theme-light'
-      );
+    if (area === 'sync') {
+      if (changes.theme) {
+        const theme = changes.theme.newValue;
+        if (themeSelect) themeSelect.value = theme;
+        document.body.classList.remove('theme-dark', 'theme-light');
+        document.body.classList.add(
+          theme === 'dark' ? 'theme-dark' : 'theme-light'
+        );
+      }
+      if (changes.apiEndpoint && apiInput) {
+        apiInput.value = changes.apiEndpoint.newValue;
+      }
     }
   });
 
@@ -36,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .getElementById('save-settings')
     .addEventListener('click', () => {
       const theme = themeSelect.value;
-      chrome.storage.sync.set({ theme: theme }, () => {
+      const apiEndpoint = apiInput ? apiInput.value.trim() : '';
+      chrome.storage.sync.set({ theme: theme, apiEndpoint }, () => {
         if (chrome.runtime.lastError) {
           showMessage('Failed to save settings. Please try again.', true);
         } else {
