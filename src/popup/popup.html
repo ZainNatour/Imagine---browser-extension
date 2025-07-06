@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles/dressing-room.css" />
     <link rel="stylesheet" href="styles/misc.css" />
     <link rel="stylesheet" href="styles/wishlist.css" />
+    <link rel="stylesheet" href="styles/home.css" />
     <link rel="stylesheet" href="styles/tabs.css" />
     <link
       rel="stylesheet"
@@ -165,7 +166,41 @@
         </div>
         <!-- Home Tab Content -->
         <div id="home" class="tab-content">
-          <p>Welcome to the home tab.</p>
+          <div class="home-intro">
+            <p>
+              Imagine helps you discover fashion stores, extract product details
+              and try outfits virtually. Use the tabs above to explore each
+              feature.
+            </p>
+          </div>
+          <div class="home-features">
+            <div class="feature-item">
+              <i class="fas fa-store"></i>
+              <span>Browse curated stores</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-box-open"></i>
+              <span>View product information</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-tshirt"></i>
+              <span>Try items in the dressing room</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-heart"></i>
+              <span>Save favourites to your wishlist</span>
+            </div>
+          </div>
+          <div class="home-actions">
+            <button id="open-options" class="btn btn-primary btn-rounded">
+              Options
+            </button>
+            <button
+              class="centralized-wishlist-btn btn btn-secondary btn-rounded"
+            >
+              Wishlist
+            </button>
+          </div>
         </div>
 
         <!-- Wishlist Tab Content -->

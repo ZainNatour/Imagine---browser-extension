@@ -89,7 +89,12 @@ function initializeTabSwitching() {
     });
   }
 
-  document.getElementById('store-discovery-tab').click();
+  chrome.storage.local.get('homeSeen', ({ homeSeen }) => {
+    const defaultId = homeSeen ? 'store-discovery-tab' : 'home-tab';
+    const btn = document.getElementById(defaultId);
+    if (btn) btn.click();
+    if (!homeSeen) chrome.storage.local.set({ homeSeen: true });
+  });
 }
 
 async function initializeApp() {
@@ -127,6 +132,7 @@ function setupEventListeners(elements, state) {
   setupAvatarToggle();
   setupModelGridControls();
   setupCentralizedWishlistNavigation();
+  setupHomeNavigation();
   setupPhotoUpload();
 }
 
@@ -334,6 +340,17 @@ function setupCentralizedWishlistNavigation() {
       window.open(url, '_blank');
     }
   });
+}
+
+function setupHomeNavigation() {
+  const optionsBtn = document.getElementById('open-options');
+  if (optionsBtn) {
+    optionsBtn.addEventListener('click', () => {
+      if (chrome.runtime && chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+      }
+    });
+  }
 }
 
 async function loadAndRenderPhotos() {
