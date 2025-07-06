@@ -23,7 +23,14 @@ chrome.runtime.onStartup.addListener(createContextMenus);
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === 'imagine-try-on') {
     const notifyPanel = () =>
-      chrome.runtime.sendMessage({ action: 'contextTryOn', srcUrl: info.srcUrl });
+      chrome.runtime.sendMessage(
+        { action: 'contextTryOn', srcUrl: info.srcUrl },
+        () => {
+          if (chrome.runtime.lastError) {
+            // Ignore errors when no listener is available
+          }
+        },
+      );
 
     if (chrome.sidePanel && chrome.sidePanel.open) {
       // Open the extension side panel if supported
@@ -80,7 +87,11 @@ chrome.tabs.onCreated.addListener((tab) => {
     const target = (await isOnlineStore(url))
       ? "home-tab"
       : "store-discovery-tab";
-    chrome.runtime.sendMessage({ action: "selectTab", target });
+    chrome.runtime.sendMessage({ action: "selectTab", target }, () => {
+      if (chrome.runtime.lastError) {
+        // Ignore errors when no listener is available
+      }
+    });
   };
 
   if (tab && tab.url) {
