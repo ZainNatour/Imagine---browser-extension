@@ -4,7 +4,7 @@ A Chrome extension for the Imagine service.
 
 ## Development
 
-Install dependencies and run linting:
+Install dependencies (Node.js v18 or later is required) and run linting:
 
 ```bash
 npm install
