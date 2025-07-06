@@ -33,7 +33,17 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "*://www.zara.com/*",
+        "*://www.hm.com/*",
+        "*://www.uniqlo.com/*",
+        "*://www.nike.com/*",
+        "*://www.adidas.com/*",
+        "*://www.gucci.com/*",
+        "*://www.levi.com/*",
+        "*://www.gap.com/*",
+        "*://www.louisvuitton.com/*",
+        "*://www.underarmour.com/*",
+        "*://www.amazon.com/*"
       ],
       "js": [
         "src/content/content.js"
