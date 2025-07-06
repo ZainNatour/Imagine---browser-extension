@@ -94,26 +94,86 @@
       return snippets.slice(0, 3);
     }
 
+    function parseJsonLdProduct() {
+      const scripts = document.querySelectorAll(
+        'script[type="application/ld+json"]'
+      );
+      for (const s of scripts) {
+        try {
+          const data = JSON.parse(s.textContent);
+          const items = Array.isArray(data) ? data : [data];
+          for (const item of items) {
+            if (
+              item['@type'] === 'Product' ||
+              (Array.isArray(item['@type']) && item['@type'].includes('Product'))
+            )
+              return item;
+            if (item['@graph']) {
+              const graphItems = Array.isArray(item['@graph'])
+                ? item['@graph']
+                : [item['@graph']];
+              for (const g of graphItems) {
+                if (
+                  g['@type'] === 'Product' ||
+                  (Array.isArray(g['@type']) && g['@type'].includes('Product'))
+                )
+                  return g;
+              }
+            }
+          }
+        } catch {
+          // ignore JSON parse errors
+        }
+      }
+      return null;
+    }
+
     function extractProductInfo() {
-      return {
-        name: textFromSelectors(['[itemprop="name"]', 'h1', 'meta[property="og:title"]']),
-        price: textFromSelectors(['[itemprop="price"]', '.price', '[class*="price"]']),
+      const json = parseJsonLdProduct() || {};
+      const info = {
+        name:
+          json.name ||
+          textFromSelectors([
+            '[itemprop="name"]',
+            'h1',
+            'meta[property="og:title"]',
+          ]),
+        price:
+          (json.offers && json.offers.price) ||
+          textFromSelectors([
+            '[itemprop="price"]',
+            '.price',
+            '[class*="price"]',
+          ]),
         colors: collectColors(),
-        details: textFromSelectors([
-          '[itemprop="description"]',
-          '.product-description',
-          '[id*="description"]',
-        ]),
-        ratingValue: collectRatingValue(),
-        reviewSnippets: collectReviewSnippets(),
-        clothingType: textFromSelectors(['[itemprop="category"]']),
+        details:
+          json.description ||
+          textFromSelectors([
+            '[itemprop="description"]',
+            '.product-description',
+            '[id*="description"]',
+          ]),
+        ratingValue:
+          (json.aggregateRating && json.aggregateRating.ratingValue) ||
+          collectRatingValue(),
+        reviewSnippets:
+          (Array.isArray(json.review)
+            ? json.review
+              .map((r) => r.reviewBody || r.description || r.name)
+              .filter(Boolean)
+              .slice(0, 3)
+            : collectReviewSnippets()),
+        clothingType:
+          json.category || textFromSelectors(['[itemprop="category"]']),
         image:
-        document.querySelector('[itemprop="image"]')?.src ||
-        document.querySelector('meta[property="og:image"]')?.content ||
-        document.querySelector('img')?.src ||
-        '',
+          (Array.isArray(json.image) ? json.image[0] : json.image) ||
+          document.querySelector('[itemprop="image"]')?.src ||
+          document.querySelector('meta[property="og:image"]')?.content ||
+          document.querySelector('img')?.src ||
+          '',
         recommended: collectRecommended(),
       };
+      return info;
     }
 
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
