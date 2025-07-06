@@ -478,9 +478,9 @@ async function showPhotoDialog(clothingUrl) {
 
 function requestProductInfo() {
   return new Promise((resolve) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (!tabs || !tabs[0]) return resolve(null);
-      chrome.tabs.sendMessage(tabs[0].id, { action: 'getProductInfo' }, (res) => {
+    chrome.storage.local.get('lastActiveTabId', ({ lastActiveTabId }) => {
+      if (!lastActiveTabId) return resolve(null);
+      chrome.tabs.sendMessage(lastActiveTabId, { action: 'getProductInfo' }, (res) => {
         resolve(res);
       });
     });
@@ -490,13 +490,21 @@ function requestProductInfo() {
 async function loadProductInfo() {
   try {
     const info = await requestProductInfo();
-    if (info) renderProductInfo(info);
+    const placeholder = document.querySelector('.product-placeholder');
+    if (info) {
+      if (placeholder) placeholder.style.display = 'none';
+      renderProductInfo(info);
+    } else if (placeholder) {
+      placeholder.style.display = 'block';
+    }
   } catch (e) {
     console.error('Failed to load product info', e);
   }
 }
 
 function renderProductInfo(info) {
+  const placeholder = document.querySelector('.product-placeholder');
+  if (placeholder) placeholder.style.display = 'none';
   const imageEl = document.querySelector('.product-image');
   if (imageEl && info.image) imageEl.src = info.image;
   const nameEl = document.querySelector('.product-name');

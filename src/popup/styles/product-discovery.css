@@ -3,16 +3,18 @@
   position: relative;
   margin-bottom: 10px; /* Reduced margin for tighter layout */
   text-align: center;
+  min-height: 260px;
 }
 
 .product-image {
-  width: 100%;
-  max-width: 260px; /* Increased max-width slightly */
-  height: auto;
+  width: 260px;
+  height: 260px;
   display: block;
   margin: 0 auto;
+  object-fit: contain;
   border-radius: 10px; /* Slight rounding */
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  background-color: var(--color-border);
 }
 
 /* Wishlist Button Overlay */
@@ -191,4 +193,10 @@
 .similar-product-item:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-placeholder {
+  text-align: center;
+  color: var(--color-muted);
+  margin-top: var(--spacing-md);
 }
