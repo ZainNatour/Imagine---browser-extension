@@ -23,7 +23,7 @@ export const FilterGroup: React.FC<Props> = ({ title, options, selected, onChang
             <input type="text" placeholder="Search" className="mb-2 w-full border px-2 py-1" value={query} onChange={(e) => setQuery(e.target.value)} />
           )}
           <List height={120} itemCount={filtered.length} itemSize={24} width="100%">
-            {({ index, style }) => {
+            {({ index, style }: { index: number; style: React.CSSProperties }) => {
               const option = filtered[index];
               const checked = selected.includes(option);
               return (

@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { TextEncoder, TextDecoder } from 'util';
-import { getProduct } from '../src/content/getProduct.ts';
+import { getProduct } from '../src/content/getProduct';
 
 (global as any).TextEncoder = TextEncoder;
 (global as any).TextDecoder = TextDecoder;

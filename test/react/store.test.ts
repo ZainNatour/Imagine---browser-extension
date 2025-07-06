@@ -1,5 +1,6 @@
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { useFilterStore } from '../../src/react-filters/store';
 
 test('set and clear filters', () => {

@@ -12,6 +12,6 @@ export const useFilterStore = create<FilterState>((set) => ({
   targetDemographic: [],
   clothingType: [],
   priceRange: [],
-  setFilter: (name, values) => set({ [name]: values } as Pick<FilterState, keyof FilterState>),
+  setFilter: (name, values) => set({ [name]: values } as unknown as Pick<FilterState, keyof FilterState>),
   clearAll: () => set({ targetDemographic: [], clothingType: [], priceRange: [] }),
 }));
