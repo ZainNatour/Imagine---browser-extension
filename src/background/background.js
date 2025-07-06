@@ -1,5 +1,6 @@
 import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
 import { addToWishlist } from "../popup/modules/wishlist.js";
+import { registerProductListener } from "./onProductDetected.js";
 
 let lastActiveTabId = null;
 
@@ -128,3 +129,6 @@ chrome.tabs.onCreated.addListener((tab) => {
     });
   }
 });
+
+registerProductListener();
+
