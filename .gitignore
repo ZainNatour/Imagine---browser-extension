@@ -12,6 +12,9 @@ yarn-error.log*
 dist/
 build/
 
+# Test coverage output
+coverage/
+
 # OS metadata
 .DS_Store
 Thumbs.db
