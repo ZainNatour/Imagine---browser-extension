@@ -31,8 +31,14 @@
   border-color: var(--color-primary);
 }
 
-/* Model Section */
-.model-section {
+/* Section Wrappers */
+.model-grid-section,
+.photo-gallery-section {
+  margin-top: 20px;
+}
+
+/* Model Grid Container */
+.model-grid {
   position: relative;
   display: flex;
   justify-content: center;

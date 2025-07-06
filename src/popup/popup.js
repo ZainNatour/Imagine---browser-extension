@@ -384,6 +384,7 @@ function renderPhotoGallery(container, photos, selectedId) {
 
     const img = document.createElement('img');
     img.src = p.dataUrl;
+    img.alt = 'User photo';
     item.appendChild(img);
 
     const selectBtn = document.createElement('button');
@@ -417,6 +418,7 @@ function renderModelGrid(container, photos, selectedId) {
     if (p.id === selectedId) swatch.classList.add('selected');
     const img = document.createElement('img');
     img.src = p.dataUrl;
+    img.alt = 'Model photo';
     swatch.appendChild(img);
     swatch.addEventListener('click', async () => {
       await setSelectedPhotoId(p.id);
@@ -450,6 +452,7 @@ async function showPhotoDialog(clothingUrl) {
 
     const img = document.createElement('img');
     img.src = p.dataUrl;
+    img.alt = 'User photo';
     option.appendChild(img);
 
     const btn = document.createElement('button');
