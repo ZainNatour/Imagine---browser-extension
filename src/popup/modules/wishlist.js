@@ -14,15 +14,26 @@ export async function getWishlist() {
 }
 
 export async function saveWishlist(items) {
-  return new Promise((resolve, reject) => {
-    chrome.storage.sync.set({ wishlist: items }, () => {
-      if (chrome.runtime.lastError) {
-        reject(chrome.runtime.lastError);
-      } else {
-        resolve();
-      }
+  try {
+    await new Promise((resolve, reject) => {
+      chrome.storage.sync.set({ wishlist: items }, () => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        } else {
+          resolve();
+        }
+      });
     });
-  });
+  } catch (err) {
+    if (/quota/i.test(err?.message || '')) {
+      if (typeof alert !== 'undefined') {
+        alert(
+          'Wishlist storage limit reached. Remove some items before adding more.',
+        );
+      }
+    }
+    throw err;
+  }
 }
 
 export async function addToWishlist(item) {
