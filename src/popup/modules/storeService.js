@@ -1,12 +1,22 @@
 import { STORES_DATA_PATH } from "../../shared/constants.js";
 
+let cachedStores;
+
+export function clearStoreCache() {
+  cachedStores = undefined;
+}
+
 export async function loadStores(dataUrl = STORES_DATA_PATH) {
+  if (cachedStores) {
+    return cachedStores;
+  }
   try {
     const response = await fetch(chrome.runtime.getURL(dataUrl));
     if (!response.ok) {
       throw new Error(`Failed to fetch ${dataUrl}: ${response.status}`);
     }
-    return await response.json();
+    cachedStores = await response.json();
+    return cachedStores;
   } catch (error) {
     console.error('Error loading stores:', error);
     if (error instanceof TypeError) {
