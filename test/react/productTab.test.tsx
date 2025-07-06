@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { ProductTab } from '../../src/popup/ProductTab';
 import { CarouselItem } from '../../src/components/SimilarProductsCarousel';
 

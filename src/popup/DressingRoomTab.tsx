@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { fabric } from 'fabric';
+import { Canvas, Image } from 'fabric';
 
 export interface DressingItem {
   id: string;
@@ -69,11 +69,11 @@ export const DressingRoomTab: React.FC = () => {
   }, [items]);
 
   useEffect(() => {
-    const canvas = new fabric.Canvas('preview-canvas');
+    const canvas = new Canvas('preview-canvas');
     canvas.setWidth(300);
     canvas.setHeight(400);
     items.forEach((item) => {
-      fabric.Image.fromURL(item.image, (img) => {
+      Image.fromURL(item.image).then((img) => {
         canvas.add(img);
       });
     });
@@ -94,7 +94,8 @@ export const DressingRoomTab: React.FC = () => {
     };
     const handlePointerMove = (e: PointerEvent) => {
       if (e.pointerType === 'touch' && e.isPrimary === false) {
-        const touches = (e.target as HTMLElement).ownerDocument?.getElementsByTagName('canvas')[0].touches;
+        const el = (e.target as HTMLElement).ownerDocument?.getElementsByTagName('canvas')[0] as any;
+        const touches = el?.touches as any;
         if (touches && touches.length === 2) {
           const [t1, t2] = touches;
           const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);

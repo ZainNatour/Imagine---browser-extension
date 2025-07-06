@@ -1,20 +1,19 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { DressingRoomTab, DressingItem } from '../../src/popup/DressingRoomTab';
 
 jest.mock('fabric', () => ({
-  fabric: {
-    Canvas: jest.fn().mockImplementation(() => ({
-      setWidth: jest.fn(),
-      setHeight: jest.fn(),
-      add: jest.fn(),
-      getZoom: jest.fn(() => 1),
-      setZoom: jest.fn(),
-      getElement: () => document.createElement('canvas'),
-      requestRenderAll: jest.fn(),
-      dispose: jest.fn()
-    })),
-    Image: { fromURL: (_: string, cb: Function) => cb({}) }
-  }
+  Canvas: jest.fn().mockImplementation(() => ({
+    setWidth: jest.fn(),
+    setHeight: jest.fn(),
+    add: jest.fn(),
+    getZoom: jest.fn(() => 1),
+    setZoom: jest.fn(),
+    getElement: () => document.createElement('canvas'),
+    requestRenderAll: jest.fn(),
+    dispose: jest.fn()
+  })),
+  Image: { fromURL: () => Promise.resolve({}) }
 }));
 
 (global as any).chrome = {
@@ -31,7 +30,7 @@ const items: DressingItem[] = [
   { id: '2', image: '/b.jpg', variants: ['Blue'], qty: 2 }
 ];
 
-jest.spyOn(chrome.storage.local, 'get').mockImplementation((_key, cb) => cb({ dressingRoom: items }));
+jest.spyOn(chrome.storage.local, 'get').mockImplementation((_: any, cb?: any) => { if (cb) cb({ dressingRoom: items }); });
 jest.spyOn(chrome.storage.local, 'set').mockImplementation(() => {});
 
 test('renders items and removes one', () => {
