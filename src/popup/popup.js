@@ -481,10 +481,18 @@ async function showPhotoDialog(clothingUrl) {
 
 function requestProductInfo() {
   return new Promise((resolve) => {
-    chrome.storage.local.get('lastActiveTabId', ({ lastActiveTabId }) => {
-      if (!lastActiveTabId) return resolve(null);
-      chrome.tabs.sendMessage(lastActiveTabId, { action: 'getProductInfo' }, (res) => {
-        resolve(res);
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+      if (chrome.runtime.lastError || !tabs || !tabs.length) {
+        resolve(null);
+        return;
+      }
+      const tabId = tabs[0].id;
+      chrome.tabs.sendMessage(tabId, { action: 'getProductInfo' }, (res) => {
+        if (chrome.runtime.lastError) {
+          resolve(null);
+        } else {
+          resolve(res);
+        }
       });
     });
   });
