@@ -1,6 +1,6 @@
 import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
 import { addToWishlist } from "../popup/modules/wishlist.js";
-import { registerProductListener } from "./onProductDetected.js";
+import { registerProductListener } from "./onProductDetected.ts";
 
 let lastActiveTabId = null;
 
