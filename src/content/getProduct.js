@@ -1,34 +1,6 @@
-import { selectors } from '../utils/selectors.ts';
+import { selectors } from '../utils/selectors.js';
 
-export interface Product {
-  id: string;
-  title: string;
-  priceCurrent: string;
-  priceOld?: string;
-  currency?: string;
-  mainImage: string;
-  imageGallery: string[];
-  rating?: string;
-  reviewsCount?: string;
-  brand?: string;
-  seller?: string;
-  variants: string[];
-  breadcrumbs: string[];
-  availability?: string;
-  shippingCost?: string;
-}
-
-export interface SimilarProduct {
-  id: string;
-  title: string;
-  price: string;
-  thumbnail: string;
-}
-
-/**
- * Return text content from the first matching selector.
- */
-function text(sel: string[]): string {
+function text(sel) {
   for (const s of sel) {
     const el = document.querySelector(s);
     if (el) {
@@ -40,12 +12,9 @@ function text(sel: string[]): string {
   return '';
 }
 
-/**
- * Scrape Product data using schema.org Product JSON-LD.
- */
-function fromJsonLd(): Product | null {
+function fromJsonLd() {
   const scripts = Array.from(
-    document.querySelectorAll('script[type="application/ld+json"]')
+    document.querySelectorAll('script[type="application/ld+json"]'),
   );
   for (const s of scripts) {
     try {
@@ -56,9 +25,7 @@ function fromJsonLd(): Product | null {
           item['@type'] === 'Product' ||
           (Array.isArray(item['@type']) && item['@type'].includes('Product'))
         ) {
-          const img = Array.isArray(item.image)
-            ? item.image[0]
-            : item.image;
+          const img = Array.isArray(item.image) ? item.image[0] : item.image;
           return {
             id: item.sku || '',
             title: item.name || '',
@@ -85,31 +52,25 @@ function fromJsonLd(): Product | null {
   return null;
 }
 
-/**
- * Scrape Product data from Open Graph tags.
- */
-function fromOpenGraph(): Partial<Product> {
-  const get = (p: string) =>
+function fromOpenGraph() {
+  const get = (p) =>
     document.querySelector(`meta[property='${p}']`)?.getAttribute('content') || '';
   return {
     title: get('og:title'),
     mainImage: get('og:image'),
     priceCurrent: get('product:price:amount'),
     currency: get('product:price:currency'),
-  } as Partial<Product>;
+  };
 }
 
-/**
- * Fallback scraping using host specific selectors.
- */
-function fromSelectors(): Partial<Product> {
+function fromSelectors() {
   const host = window.location.hostname.replace(/^www\./, '');
   const conf = selectors[host];
   if (!conf) return {};
-  const gallery: string[] = [];
+  const gallery = [];
   if (conf.gallery) {
     document.querySelectorAll(conf.gallery).forEach((img) => {
-      const src = (img as HTMLImageElement).src;
+      const src = img.src;
       if (src) gallery.push(src);
     });
   }
@@ -117,18 +78,13 @@ function fromSelectors(): Partial<Product> {
     title: conf.title ? text([conf.title]) : '',
     priceCurrent: conf.price ? text([conf.price]) : '',
     priceOld: conf.priceOld ? text([conf.priceOld]) : '',
-    mainImage: conf.mainImage
-      ? (document.querySelector(conf.mainImage) as HTMLImageElement)?.src || ''
-      : '',
+    mainImage: conf.mainImage ? document.querySelector(conf.mainImage)?.src || '' : '',
     imageGallery: gallery,
-  } as Partial<Product>;
+  };
 }
 
-/**
- * Attempt to read dedicated JSON blobs on the page.
- */
-function fromJsonBlob(): Product | null {
-  const state: any = (window as any).__PRELOADED_STATE__ || (window as any).__INITIAL_STATE__;
+function fromJsonBlob() {
+  const state = window.__PRELOADED_STATE__ || window.__INITIAL_STATE__;
   if (state && state.product) {
     const p = state.product;
     return {
@@ -180,12 +136,9 @@ function fromJsonBlob(): Product | null {
   return null;
 }
 
-/**
- * Merge multiple partial product sources into one Product object.
- */
-function merge(base: Partial<Product> | null, ...rest: Array<Partial<Product>>): Product | null {
+function merge(base, ...rest) {
   if (!base) return null;
-  const result: any = { ...base };
+  const result = { ...base };
   for (const obj of rest) {
     for (const [k, v] of Object.entries(obj)) {
       if (!result[k] && v) result[k] = v;
@@ -195,17 +148,14 @@ function merge(base: Partial<Product> | null, ...rest: Array<Partial<Product>>):
   if (!result.variants) result.variants = [];
   if (!result.breadcrumbs) result.breadcrumbs = [];
   if (!result.id && result.title) result.id = result.title;
-  return result as Product;
+  return result;
 }
 
-/**
- * Find similar products on the page.
- */
-function findSimilars(): SimilarProduct[] {
+function findSimilars() {
   const host = window.location.hostname.replace(/^www\./, '');
-  const res: SimilarProduct[] = [];
+  const res = [];
   const conf = selectors[host];
-  let nodes: NodeListOf<Element> = [] as any;
+  let nodes = [];
   if (conf?.similar) nodes = document.querySelectorAll(conf.similar);
   if (!nodes.length) {
     nodes = document.querySelectorAll('[class*="related"], [class*="similar"], [class*="recommend"]');
@@ -224,8 +174,8 @@ function findSimilars(): SimilarProduct[] {
       thumbnail: img.src || '',
     });
   });
-  const unique: SimilarProduct[] = [];
-  const seen = new Set<string>();
+  const unique = [];
+  const seen = new Set();
   for (const p of res) {
     const key = p.thumbnail + p.id;
     if (!seen.has(key)) {
@@ -237,9 +187,6 @@ function findSimilars(): SimilarProduct[] {
   return unique;
 }
 
-/**
- * Scrape product and similar products from the page.
- */
 export async function getProduct() {
   const base =
     fromJsonBlob() ||
@@ -250,12 +197,7 @@ export async function getProduct() {
     ? merge(base, fromJsonLd() || {}, fromOpenGraph(), fromSelectors())
     : null;
   const similars = findSimilars();
-  if (
-    product &&
-    !product.title &&
-    !product.priceCurrent &&
-    !product.mainImage
-  ) {
+  if (product && !product.title && !product.priceCurrent && !product.mainImage) {
     return { product: null, similars };
   }
   return { product, similars };
