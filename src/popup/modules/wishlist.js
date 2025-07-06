@@ -54,18 +54,50 @@ export async function removeFromWishlist(identifier) {
   }
 }
 
-export async function renderWishlist(container) {
+export function filterWishlist(items, term = '') {
+  const t = term.toLowerCase();
+  return items.filter(
+    (i) =>
+      i.name.toLowerCase().includes(t) ||
+      (i.storeName && i.storeName.toLowerCase().includes(t)),
+  );
+}
+
+function parsePrice(p) {
+  const num = parseFloat(p?.replace(/[^0-9.]+/g, ''));
+  return Number.isNaN(num) ? Infinity : num;
+}
+
+export function sortWishlist(items, sort = 'date-desc') {
+  const sorted = [...items];
+  sorted.sort((a, b) => {
+    switch (sort) {
+    case 'price-asc':
+      return parsePrice(a.price) - parsePrice(b.price);
+    case 'price-desc':
+      return parsePrice(b.price) - parsePrice(a.price);
+    case 'date-asc':
+      return new Date(a.dateAdded) - new Date(b.dateAdded);
+    case 'date-desc':
+    default:
+      return new Date(b.dateAdded) - new Date(a.dateAdded);
+    }
+  });
+  return sorted;
+}
+
+export async function renderWishlist(container, items = null) {
   try {
-    let items = await getWishlist();
+    if (!items) {
+      items = await getWishlist();
+    }
     if (!container) return;
     container.innerHTML = '';
     if (!items.length) {
       container.textContent = 'Your wishlist is empty.';
       return;
     }
-    items = items.sort(
-      (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded),
-    );
+    items = sortWishlist(items);
     items.forEach((item) => {
       const div = document.createElement('div');
       div.className = 'wishlist-item card';
@@ -74,6 +106,7 @@ export async function renderWishlist(container) {
         ? item.imageSrc
         : chrome.runtime.getURL(item.imageSrc);
       img.alt = item.name;
+      img.loading = 'lazy';
       div.appendChild(img);
 
       const nameP = document.createElement('p');
@@ -82,7 +115,18 @@ export async function renderWishlist(container) {
 
       if (item.storeName) {
         const storeP = document.createElement('p');
-        storeP.textContent = item.storeName;
+        if (item.url) {
+          const fav = document.createElement('img');
+          fav.className = 'store-favicon';
+          fav.alt = '';
+          try {
+            fav.src = `https://www.google.com/s2/favicons?domain=${new URL(item.url).hostname}`;
+          } catch {
+            /* ignore */
+          }
+          storeP.appendChild(fav);
+        }
+        storeP.appendChild(document.createTextNode(item.storeName));
         div.appendChild(storeP);
       }
 
@@ -130,7 +174,7 @@ export async function renderWishlist(container) {
 
       const removeBtn = document.createElement('button');
       removeBtn.className = 'remove-btn btn btn-error btn-rounded';
-      removeBtn.textContent = 'Remove';
+      removeBtn.innerHTML = '<i class="fas fa-trash"></i>';
       removeBtn.addEventListener('click', async () => {
         await removeFromWishlist(item.dateAdded);
         renderWishlist(container);

@@ -28,12 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === 'sync' && changes.theme) {
-      const theme = changes.theme.newValue;
-      document.body.classList.remove('theme-dark', 'theme-light');
-      document.body.classList.add(
-        theme === 'dark' ? 'theme-dark' : 'theme-light'
-      );
+    if (area === 'sync') {
+      if (changes.theme) {
+        const theme = changes.theme.newValue;
+        document.body.classList.remove('theme-dark', 'theme-light');
+        document.body.classList.add(
+          theme === 'dark' ? 'theme-dark' : 'theme-light'
+        );
+      }
+      if (changes.wishlist) {
+        const grid = document.getElementById('wishlist-grid');
+        if (grid) renderWishlist(grid);
+      }
     }
   });
 
@@ -349,9 +355,11 @@ function setupClearWishlistButton() {
   const btn = document.getElementById('clear-wishlist-btn');
   if (!btn) return;
   btn.addEventListener('click', async () => {
-    await saveWishlist([]);
-    const grid = document.getElementById('wishlist-grid');
-    renderWishlist(grid);
+    if (confirm('Clear all wishlist items?')) {
+      await saveWishlist([]);
+      const grid = document.getElementById('wishlist-grid');
+      renderWishlist(grid);
+    }
   });
 }
 

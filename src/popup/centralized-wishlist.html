@@ -7,11 +7,25 @@
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/wishlist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
   </head>
   <body class="theme-light">
     <div class="container">
       <h1>Centralized Wishlist</h1>
       <p class="instructions">Use the buttons below each item to visit the original product page.</p>
+      <div class="wishlist-controls">
+        <input id="wishlist-search" type="text" placeholder="Search wishlist..." />
+        <select id="wishlist-sort">
+          <option value="date-desc">Newest</option>
+          <option value="date-asc">Oldest</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
+        <button id="clear-wishlist-btn" class="clear-wishlist-btn btn btn-error btn-rounded">Clear All</button>
+      </div>
       <div id="wishlist-grid" class="wishlist-grid"></div>
     </div>
     <script type="module" src="centralized-wishlist.js"></script>
