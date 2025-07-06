@@ -4,9 +4,7 @@
       chrome.runtime.getURL('src/background/modules/urlUtils.js')
     );
     const currentUrl = new URL(window.location.href);
-    if (!(await isOnlineStore(currentUrl))) {
-      return;
-    }
+    const onStore = await isOnlineStore(currentUrl);
 
     function highlightProductImages() {
       document.querySelectorAll('img').forEach((img) => {
@@ -16,10 +14,12 @@
       });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', highlightProductImages);
-    } else {
-      highlightProductImages();
+    if (onStore) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', highlightProductImages);
+      } else {
+        highlightProductImages();
+      }
     }
 
     function textFromSelectors(selectors) {

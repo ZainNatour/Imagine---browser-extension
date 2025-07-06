@@ -1,6 +1,30 @@
 import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
 import { addToWishlist } from "../popup/modules/wishlist.js";
 
+let lastActiveTabId = null;
+
+chrome.tabs.onActivated.addListener(({ tabId }) => {
+  chrome.tabs.get(tabId, (tab) => {
+    if (chrome.runtime.lastError || !tab) return;
+    if (!tab.url.startsWith('chrome-extension://')) {
+      lastActiveTabId = tabId;
+      chrome.storage.local.set({ lastActiveTabId });
+    }
+  });
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (
+    changeInfo.status === 'complete' &&
+    tab.active &&
+    tab.url &&
+    !tab.url.startsWith('chrome-extension://')
+  ) {
+    lastActiveTabId = tabId;
+    chrome.storage.local.set({ lastActiveTabId });
+  }
+});
+
 function createContextMenus() {
   if (!chrome.contextMenus) return;
   chrome.contextMenus.removeAll(() => {
