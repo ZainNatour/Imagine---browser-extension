@@ -56,9 +56,16 @@ export async function removeFromWishlist(identifier) {
 
 export async function renderWishlist(container) {
   try {
-    const items = await getWishlist();
+    let items = await getWishlist();
     if (!container) return;
     container.innerHTML = '';
+    if (!items.length) {
+      container.textContent = 'Your wishlist is empty.';
+      return;
+    }
+    items = items.sort(
+      (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded),
+    );
     items.forEach((item) => {
       const div = document.createElement('div');
       div.className = 'wishlist-item card';

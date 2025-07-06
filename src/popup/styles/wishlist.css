@@ -19,6 +19,26 @@
   transform: scale(1.05);
 }
 
+/* Clear Wishlist Button */
+.clear-wishlist-btn {
+  display: block;
+  width: 100%;
+  margin: 10px 0 20px;
+  padding: 10px;
+  background-color: var(--color-error);
+  color: var(--color-card);
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.clear-wishlist-btn:hover {
+  background-color: var(--color-error);
+  transform: scale(1.05);
+}
+
 /* Wishlist Category */
 .wishlist-category {
   margin-top: 40px;

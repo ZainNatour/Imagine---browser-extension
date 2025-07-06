@@ -7,6 +7,7 @@ import {
   renderWishlist,
   isInWishlist,
   removeFromWishlist,
+  saveWishlist,
 } from './modules/wishlist.js';
 import {
   getPhotos,
@@ -132,6 +133,7 @@ function setupEventListeners(elements, state) {
   setupAvatarToggle();
   setupModelGridControls();
   setupCentralizedWishlistNavigation();
+  setupClearWishlistButton();
   setupHomeNavigation();
   setupPhotoUpload();
   setupTryOnButton();
@@ -340,6 +342,16 @@ function setupCentralizedWishlistNavigation() {
     } else {
       window.open(url, '_blank');
     }
+  });
+}
+
+function setupClearWishlistButton() {
+  const btn = document.getElementById('clear-wishlist-btn');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    await saveWishlist([]);
+    const grid = document.getElementById('wishlist-grid');
+    renderWishlist(grid);
   });
 }
 
