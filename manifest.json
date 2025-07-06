@@ -47,6 +47,7 @@
         "src/assets/data/stores.json",
         "src/assets/images/*",
         "src/background/modules/urlUtils.js",
+        "src/content/getProduct.js",
         "src/popup/centralized-wishlist.html",
         "src/popup/centralized-wishlist.js"
       ],
