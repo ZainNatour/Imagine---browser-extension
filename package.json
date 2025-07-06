@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node test/urlUtils.test.mjs && node test/photoStorage.test.mjs && node test/wishlist.test.mjs",
+    "test": "node test/urlUtils.test.mjs && node test/photoStorage.test.mjs && node test/wishlist.test.mjs && node test/storeService.test.mjs",
     "lint": "eslint src test"
   },
   "keywords": [],
