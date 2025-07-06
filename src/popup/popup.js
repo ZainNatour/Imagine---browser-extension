@@ -134,6 +134,7 @@ function setupEventListeners(elements, state) {
   setupCentralizedWishlistNavigation();
   setupHomeNavigation();
   setupPhotoUpload();
+  setupTryOnButton();
 }
 
 function setupSearchListener({ searchBar, loadMoreButton, storeGrid }, state) {
@@ -389,6 +390,19 @@ function setupPhotoUpload() {
       }
     };
     reader.readAsDataURL(file);
+  });
+}
+
+function setupTryOnButton() {
+  const container = document.querySelector('.try-on-button');
+  const btn = container?.querySelector('button');
+  if (!btn) return;
+  btn.textContent = 'Open Try-On';
+  btn.title = 'Open the virtual try-on dialog';
+  btn.addEventListener('click', () => {
+    const img = document.querySelector('.product-image');
+    const url = img?.src;
+    if (url) showPhotoDialog(url);
   });
 }
 
