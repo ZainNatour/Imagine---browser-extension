@@ -16,7 +16,7 @@
 
     async function detectProduct() {
       const { getProduct } = await import(
-        chrome.runtime.getURL('src/content/getProduct.ts')
+        chrome.runtime.getURL('src/content/getProduct.js')
       );
       const { product, similars } = await getProduct();
       if (product) {
