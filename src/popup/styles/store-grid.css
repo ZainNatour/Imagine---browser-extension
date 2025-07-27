@@ -20,6 +20,11 @@
   cursor: pointer;
 }
 
+.store-item:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .store-item:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transform: scale(1.05);

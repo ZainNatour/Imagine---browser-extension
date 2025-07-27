@@ -326,13 +326,20 @@ function renderFilterOptions(elements, state) {
 function initializeCollapsibleSections() {
   const headers = document.querySelectorAll('.collapsible-header');
   headers.forEach((header) => {
-    header.addEventListener('click', () => {
+    const toggle = () => {
       const section = header.closest('.collapsible-section');
       if (!section) return;
       const isOpen = section.classList.toggle('open');
       const arrow = header.querySelector('.arrow');
       if (arrow) {
         arrow.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+      }
+    };
+    header.addEventListener('click', toggle);
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
       }
     });
   });
@@ -393,7 +400,14 @@ function setupPhotoUpload() {
   const trigger = document.getElementById('upload-trigger');
   if (!input || !trigger) return;
 
-  trigger.addEventListener('click', () => input.click());
+  const openPicker = () => input.click();
+  trigger.addEventListener('click', openPicker);
+  trigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openPicker();
+    }
+  });
 
   input.addEventListener('change', () => {
     const file = input.files && input.files[0];
@@ -466,14 +480,24 @@ function renderModelGrid(container, photos, selectedId) {
   photos.forEach((p) => {
     const swatch = document.createElement('div');
     swatch.className = 'model-swatch';
+    swatch.tabIndex = 0;
+    swatch.setAttribute('role', 'button');
+    swatch.setAttribute('aria-label', 'Select model');
     if (p.id === selectedId) swatch.classList.add('selected');
     const img = document.createElement('img');
     img.src = p.dataUrl;
     img.alt = 'Model photo';
     swatch.appendChild(img);
-    swatch.addEventListener('click', async () => {
+    const selectModel = async () => {
       await setSelectedPhotoId(p.id);
       await loadAndRenderPhotos();
+    };
+    swatch.addEventListener('click', selectModel);
+    swatch.addEventListener('keydown', async (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        await selectModel();
+      }
     });
     container.appendChild(swatch);
   });

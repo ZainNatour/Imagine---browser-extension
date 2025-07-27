@@ -132,6 +132,11 @@
   color: var(--color-text);
 }
 
+.collapsible-header:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .collapsible-header .arrow {
   transition: transform 0.2s;
 }

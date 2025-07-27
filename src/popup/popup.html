@@ -59,8 +59,17 @@
         <!-- Store Discovery Tab Content -->
         <div id="store-discovery" class="tab-content active">
           <div class="search-filter-container">
-            <input type="text" id="search-bar" placeholder="Search stores..." />
-            <button id="filter-button" class="btn btn-primary btn-rounded">
+            <input
+              type="text"
+              id="search-bar"
+              placeholder="Search stores..."
+              aria-label="Search stores"
+            />
+            <button
+              id="filter-button"
+              class="btn btn-primary btn-rounded"
+              aria-label="Filter stores"
+            >
               <img src="/src/assets/icons/filter.jpg" alt="Filter" />
             </button>
           </div>
@@ -83,7 +92,7 @@
           <!-- Product Image Section with Wishlist Button Overlay -->
           <div class="product-image-section">
             <img alt="Product Image" class="product-image" />
-            <button class="wishlist-btn btn btn-rounded">
+            <button class="wishlist-btn btn btn-rounded" aria-label="Toggle wishlist">
               <i class="fas fa-heart"></i>
             </button>
           </div>
@@ -109,7 +118,7 @@
 
           <!-- Product Details Section -->
           <div class="collapsible-section" style="display: none">
-            <div class="collapsible-header">
+            <div class="collapsible-header" role="button" tabindex="0">
               <span>Product Details</span>
               <span class="arrow">›</span>
             </div>
@@ -118,7 +127,7 @@
 
           <!-- Ratings and Reviews -->
           <div class="collapsible-section" style="display: none">
-            <div class="collapsible-header">
+            <div class="collapsible-header" role="button" tabindex="0">
               <span>Ratings & Reviews</span>
               <span class="arrow">›</span>
             </div>
@@ -135,7 +144,13 @@
         <!-- Dressing Room Tab Content -->
         <div id="dressing-room" class="tab-content">
           <div class="upload-section">
-            <div class="upload-frame" id="upload-trigger">
+            <div
+              class="upload-frame"
+              id="upload-trigger"
+              role="button"
+              tabindex="0"
+              aria-label="Upload image"
+            >
               <img src="/src/assets/icons/filter.jpg" alt="Upload Icon" />
               <p>Upload Your Image</p>
             </div>
@@ -150,13 +165,19 @@
           <div class="model-grid-section">
             <h3>Models</h3>
             <div class="model-grid">
-              <button class="scroll-btn left-btn btn btn-primary btn-rounded">
+              <button
+                class="scroll-btn left-btn btn btn-primary btn-rounded"
+                aria-label="Scroll left"
+              >
                 <i class="fas fa-chevron-left"></i>
               </button>
               <div class="model-swatch-grid">
                 <!-- Model swatches will be dynamically loaded here -->
               </div>
-              <button class="scroll-btn right-btn btn btn-primary btn-rounded">
+              <button
+                class="scroll-btn right-btn btn btn-primary btn-rounded"
+                aria-label="Scroll right"
+              >
                 <i class="fas fa-chevron-right"></i>
               </button>
             </div>

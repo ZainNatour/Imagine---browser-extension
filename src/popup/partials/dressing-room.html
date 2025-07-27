@@ -1,6 +1,12 @@
 <div id="dressing-room" class="tab-content">
   <div class="upload-section">
-    <div class="upload-frame" id="upload-trigger">
+    <div
+      class="upload-frame"
+      id="upload-trigger"
+      role="button"
+      tabindex="0"
+      aria-label="Upload image"
+    >
       <img src="/src/assets/icons/filter.jpg" alt="Upload Icon" />
       <p>Upload Your Image</p>
     </div>
@@ -15,13 +21,13 @@
   <div class="model-grid-section">
     <h3>Models</h3>
     <div class="model-grid">
-      <button class="scroll-btn left-btn btn btn-primary btn-rounded">
+      <button class="scroll-btn left-btn btn btn-primary btn-rounded" aria-label="Scroll left">
         <i class="fas fa-chevron-left"></i>
       </button>
       <div class="model-swatch-grid">
         <!-- Model swatches will be dynamically loaded here -->
       </div>
-      <button class="scroll-btn right-btn btn btn-primary btn-rounded">
+      <button class="scroll-btn right-btn btn btn-primary btn-rounded" aria-label="Scroll right">
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
