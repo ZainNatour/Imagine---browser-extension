@@ -16,17 +16,24 @@ function setup(html: string, url: string) {
   global.document = dom.window.document as any;
 }
 
-test.skip('scrape Amazon sample', async () => {
-  const html = readFileSync(__dirname + '/html/amazon.html', 'utf-8');
-  setup(html, 'https://www.amazon.com/dp/test');
-  const { product, similars } = await getProduct();
-  expect(product).not.toBeNull();
-  expect(similars.length).toBeGreaterThanOrEqual(4);
-});
+const cases = [
+  ['amazon', 'https://www.amazon.com/dp/test'],
+  ['asos', 'https://www.asos.com/product/1'],
+  ['zara', 'https://www.zara.com/product/1'],
+  ['hm', 'https://www.hm.com/product/1'],
+  ['uniqlo', 'https://www.uniqlo.com/product/1'],
+  ['nike', 'https://www.nike.com/product/1'],
+  ['adidas', 'https://www.adidas.com/product/1'],
+  ['gucci', 'https://www.gucci.com/product/1'],
+  ['levi', 'https://www.levi.com/product/1'],
+  ['gap', 'https://www.gap.com/product/1'],
+  ['louisvuitton', 'https://www.louisvuitton.com/product/1'],
+  ['underarmour', 'https://www.underarmour.com/product/1'],
+];
 
-test.skip('scrape ASOS sample', async () => {
-  const html = readFileSync(__dirname + '/html/asos.html', 'utf-8');
-  setup(html, 'https://www.asos.com/product/1');
+test.skip.each(cases)('scrape %s sample', async (name, url) => {
+  const html = readFileSync(`${__dirname}/html/${name}.html`, 'utf-8');
+  setup(html, url);
   const { product, similars } = await getProduct();
   expect(product).not.toBeNull();
   expect(similars.length).toBeGreaterThanOrEqual(4);
