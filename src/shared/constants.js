@@ -5,4 +5,6 @@ export const STORES_DATA_PATH = 'src/assets/data/stores.json';
 // requestTryOn function.
 // Default HTTPS endpoint for the try on API. The value can be overridden in the
 // extension's Options page via the `apiEndpoint` setting.
-export const TRY_ON_API_URL = 'https://localhost:3000/api/try-on';
+// Default production API endpoint. Leave blank to disable network calls by
+// default. Users can provide a value in the extension's Options page.
+export const TRY_ON_API_URL = '';

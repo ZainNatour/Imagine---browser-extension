@@ -1,3 +1,5 @@
+import { TRY_ON_API_URL } from '../shared/constants.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const themeSelect = document.getElementById('theme');
   const apiInput = document.getElementById('api-endpoint');
@@ -18,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (theme) {
       themeSelect.value = theme;
     }
-    if (apiInput && apiEndpoint) {
-      apiInput.value = apiEndpoint;
+    if (apiInput) {
+      apiInput.value = apiEndpoint || TRY_ON_API_URL || '';
     }
     document.body.classList.remove('theme-dark', 'theme-light');
     document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
