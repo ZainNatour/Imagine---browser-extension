@@ -17,8 +17,13 @@
       <h1>Centralized Wishlist</h1>
       <p class="instructions">Use the buttons below each item to visit the original product page.</p>
       <div class="wishlist-controls">
-        <input id="wishlist-search" type="text" placeholder="Search wishlist..." />
-        <select id="wishlist-sort">
+        <input
+          id="wishlist-search"
+          type="text"
+          placeholder="Search wishlist..."
+          aria-label="Search wishlist"
+        />
+        <select id="wishlist-sort" aria-label="Sort wishlist">
           <option value="date-desc">Newest</option>
           <option value="date-asc">Oldest</option>
           <option value="price-asc">Price: Low to High</option>

@@ -4,6 +4,8 @@ export function renderStores(container, stores, displayed) {
   visible.forEach((store) => {
     const item = document.createElement("div");
     item.className = "store-item card";
+    item.tabIndex = 0;
+    item.setAttribute("role", "link");
 
     const img = document.createElement("img");
     img.src = chrome.runtime.getURL(store.image);
@@ -11,12 +13,18 @@ export function renderStores(container, stores, displayed) {
 
     const name = document.createElement("p");
     name.textContent = store.name;
+    item.setAttribute("aria-label", store.name);
 
     item.appendChild(img);
     item.appendChild(name);
 
-    item.addEventListener("click", () => {
-      chrome.tabs.create({ url: store.url });
+    const openStore = () => chrome.tabs.create({ url: store.url });
+    item.addEventListener("click", openStore);
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openStore();
+      }
     });
 
     container.appendChild(item);

@@ -17,6 +17,11 @@
   cursor: pointer;
 }
 
+.upload-frame:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .upload-frame img {
   max-width: 50%;
   margin-bottom: 10px;
@@ -72,6 +77,11 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s;
+}
+
+.model-swatch:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .model-swatch img {

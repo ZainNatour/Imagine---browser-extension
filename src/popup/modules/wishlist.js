@@ -186,6 +186,7 @@ export async function renderWishlist(container, items = null) {
       const removeBtn = document.createElement('button');
       removeBtn.className = 'remove-btn btn btn-error btn-rounded';
       removeBtn.innerHTML = '<i class="fas fa-trash"></i>';
+      removeBtn.setAttribute('aria-label', 'Remove from wishlist');
       removeBtn.addEventListener('click', async () => {
         await removeFromWishlist(item.dateAdded);
         renderWishlist(container);
