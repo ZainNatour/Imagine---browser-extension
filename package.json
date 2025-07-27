@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node test/urlUtils.test.mjs && node test/photoStorage.test.mjs && node test/wishlist.test.mjs && node test/storeService.test.mjs && npx jest",
-    "lint": "eslint src test"
+    "lint": "eslint src test",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
