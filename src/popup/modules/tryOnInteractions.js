@@ -1,5 +1,4 @@
 import { requestTryOn } from './tryOnService.js';
-import { loadAndRenderPhotos } from './photoGallery.js';
 
 export function initTryOnUi() {
   setupTryOnButton();
