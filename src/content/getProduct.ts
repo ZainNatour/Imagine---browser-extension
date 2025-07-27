@@ -1,4 +1,4 @@
-import { selectors } from '../utils/selectors.ts';
+import { selectors } from '../utils/selectors.js';
 
 export interface Product {
   id: string;
