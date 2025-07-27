@@ -29,9 +29,11 @@ const cases = [
   ['gap', 'https://www.gap.com/product/1'],
   ['louisvuitton', 'https://www.louisvuitton.com/product/1'],
   ['underarmour', 'https://www.underarmour.com/product/1'],
+  ['prada', 'https://www.prada.com/product/1'],
+  ['versace', 'https://www.versace.com/product/1'],
 ];
 
-test.skip.each(cases)('scrape %s sample', async (name, url) => {
+test.each(cases)('scrape %s sample', async (name, url) => {
   const html = readFileSync(`${__dirname}/html/${name}.html`, 'utf-8');
   setup(html, url);
   const { product, similars } = await getProduct();
@@ -39,7 +41,7 @@ test.skip.each(cases)('scrape %s sample', async (name, url) => {
   expect(similars.length).toBeGreaterThanOrEqual(4);
 });
 
-test.skip('returns null when no product', async () => {
+test('returns null when no product', async () => {
   setup('<html></html>', 'https://example.com');
   const { product } = await getProduct();
   expect(product).toBeNull();
