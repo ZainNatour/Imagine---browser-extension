@@ -24,3 +24,10 @@ Tailwind. See `src/react-filters/README.md` for usage details.
 The virtual try-on API is not yet integrated. Calls to `requestTryOn` currently
 return a static placeholder image. Once the backend is available, this module
 can be updated to communicate with the service.
+
+### Configuring the API endpoint
+
+If you deploy your own try-on service, open the extension's **Options** page and
+enter its URL in the **Try On API Endpoint** field. The extension will use this
+value for all future requests. Leaving the field blank disables network calls
+unless a URL is provided programmatically.
