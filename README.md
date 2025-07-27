@@ -13,6 +13,30 @@ npm run lint
 
 The lint script checks the `src` and `test` directories using ESLint.
 
+## Building and Packaging
+
+Compile the TypeScript sources before packaging the extension:
+
+```bash
+npm run build
+```
+
+This writes the compiled JavaScript next to the `.ts`/`.tsx` files under `src/`.
+
+To create a production zip that can be uploaded to the Chrome Web Store:
+
+1. Run `npm run build`.
+2. Copy `manifest.json` and the `src` directory into a clean folder (for example `dist/`).
+3. Remove the TypeScript source files from that folder:
+   ```bash
+   find dist -name '*.ts' -o -name '*.tsx' -delete
+   ```
+4. From inside the `dist` directory, create the archive:
+   ```bash
+   zip -r ../imagine-extension.zip .
+   ```
+5. Upload `imagine-extension.zip` to the Chrome Web Store.
+
 ## React Filter Components
 
 The `src/react-filters` directory contains a modern React implementation of the
