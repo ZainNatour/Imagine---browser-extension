@@ -1,5 +1,19 @@
 import { selectors } from '../utils/selectors.js';
 
+/**
+ * Lookup selector configuration for a hostname or its parent domains.
+ */
+function getSelectorsForHost(hostname: string) {
+  const clean = hostname.replace(/^www\./, '');
+  const parts = clean.split('.');
+  for (let i = 0; i <= parts.length - 2; i++) {
+    const domain = parts.slice(i).join('.');
+    const conf = selectors[domain];
+    if (conf) return conf;
+  }
+  return undefined;
+}
+
 export interface Product {
   id: string;
   title: string;
@@ -103,8 +117,7 @@ function fromOpenGraph(): Partial<Product> {
  * Fallback scraping using host specific selectors.
  */
 function fromSelectors(): Partial<Product> {
-  const host = window.location.hostname.replace(/^www\./, '');
-  const conf = selectors[host];
+  const conf = getSelectorsForHost(window.location.hostname);
   if (!conf) return {};
   const gallery: string[] = [];
   if (conf.gallery) {
@@ -202,9 +215,8 @@ function merge(base: Partial<Product> | null, ...rest: Array<Partial<Product>>):
  * Find similar products on the page.
  */
 function findSimilars(): SimilarProduct[] {
-  const host = window.location.hostname.replace(/^www\./, '');
   const res: SimilarProduct[] = [];
-  const conf = selectors[host];
+  const conf = getSelectorsForHost(window.location.hostname);
   let nodes: NodeListOf<Element> = [] as any;
   if (conf?.similar) nodes = document.querySelectorAll(conf.similar);
   if (!nodes.length) {
