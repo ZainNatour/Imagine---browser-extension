@@ -25,3 +25,7 @@ html, body {
 .tab-content.active {
   opacity: 1;
 }
+
+.imagine-highlight {
+  outline: 2px solid #ff6600;
+}
