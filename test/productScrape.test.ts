@@ -20,6 +20,7 @@ const cases = [
   ['amazon', 'https://www.amazon.com/dp/test'],
   ['asos', 'https://www.asos.com/product/1'],
   ['zara', 'https://www.zara.com/product/1'],
+  ['zara', 'https://shop.zara.com/product/1'],
   ['hm', 'https://www.hm.com/product/1'],
   ['uniqlo', 'https://www.uniqlo.com/product/1'],
   ['nike', 'https://www.nike.com/product/1'],
