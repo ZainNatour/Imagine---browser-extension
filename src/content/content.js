@@ -7,11 +7,14 @@
     const onStore = await isOnlineStore(currentUrl);
 
     function highlightProductImages() {
+      const highlighted = [];
       document.querySelectorAll('img').forEach((img) => {
         if (img.naturalWidth > 100 && img.naturalHeight > 100) {
-          img.style.outline = '2px solid #ff6600';
+          img.classList.add('imagine-highlight');
+          highlighted.push(img);
         }
       });
+      return highlighted;
     }
 
     async function detectProduct() {
@@ -29,14 +32,16 @@
     }
 
     if (onStore) {
+      const processPage = async () => {
+        const highlighted = highlightProductImages();
+        await detectProduct();
+        highlighted.forEach((img) => img.classList.remove('imagine-highlight'));
+      };
+
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-          highlightProductImages();
-          detectProduct();
-        });
+        document.addEventListener('DOMContentLoaded', processPage);
       } else {
-        highlightProductImages();
-        detectProduct();
+        await processPage();
       }
     }
 
