@@ -1,5 +1,6 @@
 import { requestTryOn } from './tryOnService.js';
 import { getSelectedPhotoId } from './photoStorage.js';
+import { showMessage } from './notification.js';
 
 export async function getWishlist() {
   return new Promise((resolve, reject) => {
@@ -26,11 +27,9 @@ export async function saveWishlist(items) {
     });
   } catch (err) {
     if (/quota/i.test(err?.message || '')) {
-      if (typeof alert !== 'undefined') {
-        alert(
-          'Wishlist storage limit reached. Remove some items before adding more.',
-        );
-      }
+      showMessage(
+        'Wishlist storage limit reached. Remove some items before adding more.',
+      );
     }
     throw err;
   }
@@ -158,7 +157,7 @@ export async function renderWishlist(container, items = null) {
         try {
           const photoId = await getSelectedPhotoId();
           if (!photoId) {
-            alert('Please select a photo in the Dressing Room first.');
+            showMessage('Please select a photo in the Dressing Room first.');
             return;
           }
           const url = await requestTryOn(photoId, item.imageSrc);
@@ -168,7 +167,7 @@ export async function renderWishlist(container, items = null) {
             window.open(url, '_blank');
           }
         } catch (err) {
-          alert(err.message);
+          showMessage(err.message);
         }
       });
       div.appendChild(tryBtn);
