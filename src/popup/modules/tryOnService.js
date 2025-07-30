@@ -20,6 +20,14 @@ async function getStoredApiUrl() {
 export async function requestTryOn(photoId, clothingUrl, options = {}) {
   const storedUrl = await getStoredApiUrl();
   const apiUrl = options.apiUrl || storedUrl || TRY_ON_API_URL;
+  const placeholder = chrome.runtime.getURL(
+    'src/assets/images/models/clothing1.jpg'
+  );
+
+  if (!apiUrl) {
+    return placeholder;
+  }
+
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -33,6 +41,6 @@ export async function requestTryOn(photoId, clothingUrl, options = {}) {
     return data.imageUrl;
   } catch (err) {
     console.warn('Try On API request failed, using placeholder image.', err);
-    return chrome.runtime.getURL('src/assets/images/models/clothing1.jpg');
+    return placeholder;
   }
 }
