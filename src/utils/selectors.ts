@@ -96,4 +96,18 @@ export const selectors: Record<string, HostSelectors> = {
     gallery: '.gallery img',
     similar: '.similar a',
   },
+  'prada.com': {
+    title: '.title',
+    price: '.price',
+    mainImage: '.main img',
+    gallery: '.gallery img',
+    similar: '.similar a',
+  },
+  'versace.com': {
+    title: '.title',
+    price: '.price',
+    mainImage: '.main img',
+    gallery: '.gallery img',
+    similar: '.similar a',
+  },
 };

@@ -43,7 +43,9 @@
         "*://www.gap.com/*",
         "*://www.louisvuitton.com/*",
         "*://www.underarmour.com/*",
-        "*://www.amazon.com/*"
+        "*://www.amazon.com/*",
+        "*://www.prada.com/*",
+        "*://www.versace.com/*"
       ],
       "js": [
         "src/content/content.js"

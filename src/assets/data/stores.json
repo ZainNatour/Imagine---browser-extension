@@ -86,5 +86,21 @@
     "targetDemographic": ["Men", "Women", "Kids"],
     "priceRange": "Mid",
     "url": "https://www.amazon.com/s?k=trending+fashion"
+  },
+  {
+    "name": "Prada",
+    "image": "src/assets/images/stores/prada.jpg",
+    "clothingType": "Accessories",
+    "targetDemographic": ["Women", "Men"],
+    "priceRange": "Luxury",
+    "url": "https://www.prada.com"
+  },
+  {
+    "name": "Versace",
+    "image": "src/assets/images/stores/versace.jpg",
+    "clothingType": "Dresses",
+    "targetDemographic": ["Women"],
+    "priceRange": "Luxury",
+    "url": "https://www.versace.com"
   }
 ]
