@@ -3,13 +3,16 @@ import react from '@vitejs/plugin-react';
 import { imagetools } from 'vite-imagetools';
 import { crx } from '@crxjs/vite-plugin';
 import { execSync } from 'node:child_process';
+
 import manifest from './manifest.json' assert { type: 'json' };
+
 
 export default defineConfig({
   plugins: [
     react(),
     imagetools(),
     crx({ manifest })
+
   ],
   build: {
     target: 'chrome117',
@@ -25,3 +28,4 @@ execSync(
   'node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
   { stdio: 'inherit' }
 );
+
