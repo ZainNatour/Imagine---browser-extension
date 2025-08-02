@@ -19,3 +19,7 @@ coverage/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+/.yarn
+*.gz
+.yarn/install-state.gz
