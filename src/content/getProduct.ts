@@ -141,6 +141,7 @@ function fromSelectors(): Partial<Product> {
  * Attempt to read dedicated JSON blobs on the page.
  */
 function fromJsonBlob(): Product | null {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const state: any = (window as any).__PRELOADED_STATE__ || (window as any).__INITIAL_STATE__;
   if (state && state.product) {
     const p = state.product;
@@ -198,6 +199,7 @@ function fromJsonBlob(): Product | null {
  */
 function merge(base: Partial<Product> | null, ...rest: Array<Partial<Product>>): Product | null {
   if (!base) return null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result: any = { ...base };
   for (const obj of rest) {
     for (const [k, v] of Object.entries(obj)) {
@@ -217,6 +219,7 @@ function merge(base: Partial<Product> | null, ...rest: Array<Partial<Product>>):
 function findSimilars(): SimilarProduct[] {
   const res: SimilarProduct[] = [];
   const conf = getSelectorsForHost(window.location.hostname);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let nodes: NodeListOf<Element> = [] as any;
   if (conf?.similar) nodes = document.querySelectorAll(conf.similar);
   if (!nodes.length) {

@@ -96,7 +96,6 @@ function setupFilterToggle(elements, state) {
 function renderFilterOptions(elements, state) {
   const { filterSection, storeGrid, loadMoreButton, searchBar } = elements;
   const { stores } = state;
-  /* eslint-disable indent */
   filterSection.innerHTML = `
     <h3>Target Demographic</h3>
     ${generateCheckboxes('targetDemographic', [...new Set(stores.flatMap((s) => s.targetDemographic))], state.filters.targetDemographic)}
@@ -110,7 +109,6 @@ function renderFilterOptions(elements, state) {
       <button id="close-filters">Exit</button>
     </div>
   `;
-  /* eslint-enable indent */
 
   document.getElementById('apply-filters').addEventListener('click', () => {
     state.filters = {
