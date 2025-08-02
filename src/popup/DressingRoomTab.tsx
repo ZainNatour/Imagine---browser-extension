@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Canvas, Image } from 'fabric';
@@ -94,10 +94,13 @@ export const DressingRoomTab: React.FC = () => {
     };
     const handlePointerMove = (e: PointerEvent) => {
       if (e.pointerType === 'touch' && e.isPrimary === false) {
-        const el = (e.target as HTMLElement).ownerDocument?.getElementsByTagName('canvas')[0] as any;
-        const touches = el?.touches as any;
-        if (touches && touches.length === 2) {
-          const [t1, t2] = touches;
+        const _el = (e.target as HTMLElement).ownerDocument?.getElementsByTagName('canvas')[0] as
+          | HTMLCanvasElement
+          | undefined;
+        const _touches = (_el as unknown as { touches?: TouchList })?.touches;
+        if (_touches && _touches.length === 2) {
+          const t1 = _touches[0];
+          const t2 = _touches[1];
           const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
           if (!startDist) startDist = dist;
           const zoom = canvas.getZoom() * (dist / startDist);
@@ -127,8 +130,8 @@ export const DressingRoomTab: React.FC = () => {
   };
   const handleDelete = (id: string) => setItems((prev) => prev.filter((it) => it.id !== id));
 
-  const handleDragEnd = (event: any) => {
-    const { active, over } = event;
+  const handleDragEnd = (_event: DragEndEvent) => {
+    const { active, over } = _event;
     if (over && active.id !== over.id) {
       const oldIndex = items.findIndex((i) => i.id === active.id);
       const newIndex = items.findIndex((i) => i.id === over.id);

@@ -15,12 +15,22 @@
   },
   "rules": {
     "indent": ["error", 2],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": false }]
   },
   "overrides": [
     {
       "files": ["test/**/*.{ts,tsx,mjs}"],
       "env": { "jest": true, "node": true }
+    },
+    {
+      "files": ["test/**/*.{ts,tsx,mjs}", "**/*.d.ts"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-require-imports": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-unused-expressions": "off"
+      }
     }
   ]
 }

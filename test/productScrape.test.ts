@@ -7,7 +7,6 @@ import { getProduct } from '../src/content/getProduct';
 (global as any).TextEncoder = TextEncoder;
 (global as any).TextDecoder = TextDecoder;
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { JSDOM } = require('jsdom');
 
 function setup(html: string, url: string) {
