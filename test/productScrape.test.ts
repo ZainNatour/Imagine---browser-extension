@@ -1,3 +1,5 @@
+/** @jest-environment node */
+
 import { readFileSync } from 'fs';
 import { TextEncoder, TextDecoder } from 'util';
 import { getProduct } from '../src/content/getProduct';
