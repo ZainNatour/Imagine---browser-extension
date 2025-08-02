@@ -22,3 +22,5 @@ Desktop.ini
 
 /.yarn
 *.gz
+.yarn/install-state.gz
+

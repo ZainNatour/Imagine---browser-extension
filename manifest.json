@@ -59,7 +59,7 @@
         "src/assets/data/stores.json",
         "src/assets/images/*",
         "src/background/modules/urlUtils.js",
-        "src/content/getProduct.js",
+        "src/content/getProduct.ts",
         "src/popup/centralized-wishlist.html",
         "src/popup/centralized-wishlist.js"
       ],
