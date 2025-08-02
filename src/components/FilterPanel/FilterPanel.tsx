@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Transition } from '@headlessui/react';
-import Slider from '@mui/material/Slider';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../../ui/accordion';
+import { Checkbox } from '../../ui/checkbox';
+import { Slider } from '../../ui/slider';
 
 export interface FilterValues {
   demographic: string[];
@@ -16,34 +17,6 @@ interface Props {
   priceLabels: string[];
   sortOptions: string[];
   onApply: (values: FilterValues) => void;
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className="mb-2">
-      <button
-        className="w-full flex justify-between items-center py-2"
-        onClick={() => setOpen(!open)}
-      >
-        <span>{title}</span>
-        <span className={`transform transition-transform ${open ? 'rotate-90' : 'rotate-0'}`}>{'>'}</span>
-      </button>
-      <Transition
-        show={open}
-        enter="transition duration-200"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div className="pl-2 space-y-2">
-          {children}
-        </div>
-      </Transition>
-    </div>
-  );
 }
 
 function toggle(value: string, list: string[], setList: (v: string[]) => void) {
@@ -70,80 +43,98 @@ export const FilterPanel: React.FC<Props> = ({
     onApply({ demographic, clothing, price, rating, sort });
   };
 
-  const marks = priceLabels.map((l, i) => ({ value: i, label: l }));
-
   return (
     <aside className="bg-white rounded-2xl shadow-md p-4 w-64 lg:sticky lg:top-4 lg:ml-auto">
-      <Section title="Demographic">
-        <div className="flex flex-wrap gap-2">
-          {demographics.map((d) => (
-            <button
-              key={d}
-              className={`px-2 py-1 rounded-2xl border text-sm ${
-                demographic.includes(d) ? 'bg-primary text-white' : ''
-              }`}
-              onClick={() => toggle(d, demographic, setDemographic)}
-            >
-              {d}
-            </button>
-          ))}
-        </div>
-      </Section>
-      <Section title="Clothing Type">
-        <div className="flex flex-wrap gap-2">
-          {clothingTypes.map((c) => (
-            <button
-              key={c}
-              className={`px-2 py-1 rounded-2xl border text-sm ${
-                clothing.includes(c) ? 'bg-primary text-white' : ''
-              }`}
-              onClick={() => toggle(c, clothing, setClothing)}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-      </Section>
-      <Section title="Price Range">
-        <Slider
-          value={price}
-          min={0}
-          max={priceLabels.length - 1}
-          step={1}
-          marks={marks}
-          onChange={(_, val) => setPrice(val as number[])}
-        />
-      </Section>
-      <Section title="Rating">
-        <div className="space-y-1">
-          {[5, 4, 3, 2, 1].map((n) => (
-            <label key={n} className="flex items-center space-x-1">
-              <input
-                type="checkbox"
-                checked={rating.includes(n)}
-                onChange={() => toggleNum(n, rating, setRating)}
-              />
-              <span>{'★'.repeat(n)}</span>
-            </label>
-          ))}
-        </div>
-      </Section>
-      <Section title="Sort">
-        <div className="space-y-1">
-          {sortOptions.map((opt) => (
-            <label key={opt} className="flex items-center space-x-1">
-              <input
-                type="radio"
-                name="sort"
-                value={opt}
-                checked={sort === opt}
-                onChange={() => setSort(opt)}
-              />
-              <span>{opt}</span>
-            </label>
-          ))}
-        </div>
-      </Section>
+      <Accordion type="multiple" defaultValue={["demographic", "clothing", "price", "rating", "sort"]}>
+        <AccordionItem value="demographic">
+          <AccordionTrigger>Demographic</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-wrap gap-2">
+              {demographics.map((d) => (
+                <button
+                  key={d}
+                  className={`px-2 py-1 rounded-2xl border text-sm ${
+                    demographic.includes(d) ? 'bg-primary text-white' : ''
+                  }`}
+                  onClick={() => toggle(d, demographic, setDemographic)}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="clothing">
+          <AccordionTrigger>Clothing Type</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-wrap gap-2">
+              {clothingTypes.map((c) => (
+                <button
+                  key={c}
+                  className={`px-2 py-1 rounded-2xl border text-sm ${
+                    clothing.includes(c) ? 'bg-primary text-white' : ''
+                  }`}
+                  onClick={() => toggle(c, clothing, setClothing)}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="price">
+          <AccordionTrigger>Price Range</AccordionTrigger>
+          <AccordionContent>
+            <Slider
+              value={price}
+              min={0}
+              max={priceLabels.length - 1}
+              step={1}
+              onValueChange={(val) => setPrice(val)}
+            />
+            <div className="flex justify-between text-xs mt-2">
+              {priceLabels.map((l, i) => (
+                <span key={i}>{l}</span>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="rating">
+          <AccordionTrigger>Rating</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-1">
+              {[5, 4, 3, 2, 1].map((n) => (
+                <label key={n} className="flex items-center space-x-1">
+                  <Checkbox
+                    checked={rating.includes(n)}
+                    onCheckedChange={() => toggleNum(n, rating, setRating)}
+                  />
+                  <span>{'★'.repeat(n)}</span>
+                </label>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="sort">
+          <AccordionTrigger>Sort</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-1">
+              {sortOptions.map((opt) => (
+                <label key={opt} className="flex items-center space-x-1">
+                  <input
+                    type="radio"
+                    name="sort"
+                    value={opt}
+                    checked={sort === opt}
+                    onChange={() => setSort(opt)}
+                  />
+                  <span>{opt}</span>
+                </label>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
       <button
         onClick={apply}
         aria-label="Apply Filters"
