@@ -112,28 +112,26 @@ export function renderPhotoGallery(container, photos, selectedId) {
 
 export function renderModelGrid(container, photos, selectedId) {
   container.innerHTML = '';
-  photos.forEach((p) => {
-    const swatch = document.createElement('div');
-    swatch.className = 'model-swatch';
-    swatch.tabIndex = 0;
-    swatch.setAttribute('role', 'button');
-    swatch.setAttribute('aria-label', 'Select model');
+  photos.forEach((p, idx) => {
+    const swatch = document.createElement('button');
+    swatch.type = 'button';
+    swatch.className =
+      'model-swatch relative w-40 h-40 overflow-hidden rounded-xl shrink-0';
+    swatch.setAttribute('aria-label', `Model ${idx + 1}`);
     if (p.id === selectedId) swatch.classList.add('selected');
+
     const img = document.createElement('img');
     img.src = p.dataUrl;
-    img.alt = 'Model photo';
+    img.alt = `Model ${idx + 1}`;
+    img.className = 'absolute inset-0 w-full h-full object-cover';
     swatch.appendChild(img);
+
     const selectModel = async () => {
       await setSelectedPhotoId(p.id);
       await loadAndRenderPhotos();
     };
     swatch.addEventListener('click', selectModel);
-    swatch.addEventListener('keydown', async (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        await selectModel();
-      }
-    });
+
     container.appendChild(swatch);
   });
 }
