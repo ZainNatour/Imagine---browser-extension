@@ -7,10 +7,9 @@ import { RangeSlider } from './RangeSlider';
 interface Props {
   demographics: string[];
   clothingTypes: string[];
-  priceRanges: string[];
 }
 
-export const FilterPanel: React.FC<Props> = ({ demographics, clothingTypes, priceRanges }) => {
+export const FilterPanel: React.FC<Props> = ({ demographics, clothingTypes }) => {
   const { targetDemographic, clothingType, priceRange, setFilter, clearAll } = useFilterStore();
   return (
     <aside className="p-4 bg-white w-64" aria-label="Store filters">
