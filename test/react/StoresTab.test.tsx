@@ -2,6 +2,12 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { StoresTab } from '../../src/popup/StoresTab';
 
+(global as any).ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 const stores = [
   {
     name: 'Alpha',

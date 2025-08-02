@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from '../ui/card';
 
 export interface PriceBlockProps {
   price: number;
@@ -10,7 +11,7 @@ export const PriceBlock: React.FC<PriceBlockProps> = ({ price, oldPrice, currenc
   const hasDiscount = typeof oldPrice === 'number' && oldPrice > price;
   const savings = hasDiscount ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
   return (
-    <div className="flex items-baseline space-x-2">
+    <Card className="p-4 flex items-center gap-3">
       <span className="text-xl font-semibold">{currency}{price.toFixed(2)}</span>
       {hasDiscount && (
         <span className="text-sm line-through text-gray-500 dark:text-gray-400">
@@ -25,6 +26,6 @@ export const PriceBlock: React.FC<PriceBlockProps> = ({ price, oldPrice, currenc
           Save {savings}%
         </span>
       )}
-    </div>
+    </Card>
   );
 };
