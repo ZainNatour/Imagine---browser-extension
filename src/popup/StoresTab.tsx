@@ -87,7 +87,12 @@ export const StoresTab: React.FC<Props> = ({ initialStores }) => {
       <div className="grid grid-cols-2 gap-4 overflow-auto">
         {filtered.map((store) => (
           <a key={store.name} href={store.url} className="text-center">
-            <img src={store.image} alt={store.name} className="w-full rounded-xl mb-1" />
+            <img
+              src={store.image}
+              alt={store.name}
+              loading="lazy"
+              className="w-full rounded-xl mb-1"
+            />
             <p>{store.name}</p>
           </a>
         ))}

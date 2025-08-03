@@ -155,6 +155,7 @@ export async function renderWishlist(container, items = null) {
       const tryBtn = document.createElement('button');
       tryBtn.className = 'try-on-btn btn btn-primary btn-rounded';
       tryBtn.textContent = 'Try On';
+      tryBtn.setAttribute('aria-label', 'Try on item');
       tryBtn.addEventListener('click', async () => {
         try {
           const photoId = await getSelectedPhotoId();

@@ -68,6 +68,7 @@ export const ProductTab: React.FC<Props> = ({ product, loading }) => {
       <img
         src={product.image}
         alt={product.name}
+        loading="lazy"
         className="w-full aspect-square object-cover rounded-xl mb-4 sm:mb-0"
       />
       <div>
