@@ -10,7 +10,8 @@
     "build": "vite build",
     "analyze": "rollup-bundle-visualizer dist/manifest.json",
     "test:e2e": "npm test -- -t 'end-to-end'",
-    "audit:lighthouse": "vite preview & lhci autorun && kill $!"
+    "audit:lighthouse": "vite preview & lhci autorun && kill $!",
+    "lhci": "vite preview --port 5173 & lhci autorun --upload.target=temporary-public-storage && pkill -f vite"
   },
   "keywords": [],
   "author": "",
@@ -29,7 +30,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.30.1",
     "@headlessui/react": "^2.2.4",
-    "@lhci/cli": "^0.15.1",
+    "@lhci/cli": "^0.13.0",
     "@mui/material": "^5.15.13",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-checkbox": "^1.3.2",
