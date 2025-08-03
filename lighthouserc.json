@@ -6,7 +6,10 @@
         "http://localhost:5173/src/popup/popup.html?theme=dark"
       ],
       "numberOfRuns": 3,
-      "settings": { "preset": "desktop" }
+      "settings": {
+        "preset": "desktop",
+        "chromeFlags": "--no-sandbox --disable-dev-shm-usage"
+      }
     },
     "assert": {
       "assertions": {
