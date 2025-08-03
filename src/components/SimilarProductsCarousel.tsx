@@ -20,6 +20,7 @@ export const SimilarProductsCarousel: React.FC<Props> = ({ items }) => (
           <img
             src={item.image}
             alt={item.name}
+            loading="lazy"
             className="rounded-lg aspect-square object-cover w-full"
           />
           <p className="text-sm mt-1">{item.name}</p>

@@ -31,7 +31,12 @@ const ItemCard: React.FC<ItemProps> = ({ item, onChangeQty, onDelete }) => {
   };
   return (
     <div ref={setNodeRef} style={style} className="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800" {...attributes} {...listeners}>
-      <img src={item.image} alt="thumbnail" className="w-16 h-16 object-cover rounded" />
+      <img
+        src={item.image}
+        alt="thumbnail"
+        loading="lazy"
+        className="w-16 h-16 object-cover rounded"
+      />
       <div className="flex-1">
         <div className="flex space-x-1 mb-1">
           {item.variants.map(v => (

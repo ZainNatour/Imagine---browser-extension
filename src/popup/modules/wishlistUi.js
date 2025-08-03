@@ -16,6 +16,7 @@ export function initWishlistUi() {
 function setupWishlistListener() {
   const wishlistBtn = document.querySelector('.wishlist-btn');
   if (!wishlistBtn) return;
+  wishlistBtn.setAttribute('aria-label', 'Add to wishlist');
 
   const url = window.location.href;
   isInWishlist(url).then((present) => {

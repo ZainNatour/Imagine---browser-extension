@@ -11,6 +11,7 @@ export function setupTryOnButton() {
   if (!btn) return;
   btn.textContent = 'Open Try-On';
   btn.title = 'Open the virtual try-on dialog';
+  btn.setAttribute('aria-label', 'Open the virtual try-on dialog');
   btn.addEventListener('click', () => {
     const img = document.querySelector('.product-image');
     const url = img?.src;
@@ -48,6 +49,7 @@ export async function showPhotoDialog(clothingUrl) {
 
     const btn = document.createElement('button');
     btn.textContent = 'Try On';
+    btn.setAttribute('aria-label', 'Try on with this photo');
     btn.addEventListener('click', async () => {
       overlay.remove();
       try {
