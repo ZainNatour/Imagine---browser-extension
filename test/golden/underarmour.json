@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "UA1",
+    "title": "UA Shirt",
+    "priceCurrent": "29.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/ua.jpg",
+    "imageGallery": [
+      "https://example.com/ua.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "ua1",
+      "price": "",
+      "thumbnail": "https://underarmour.com/ua1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "ua2",
+      "price": "",
+      "thumbnail": "https://underarmour.com/ua2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "ua3",
+      "price": "",
+      "thumbnail": "https://underarmour.com/ua3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "ua4",
+      "price": "",
+      "thumbnail": "https://underarmour.com/ua4.jpg"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "GC1",
+    "title": "Gucci Bag",
+    "priceCurrent": "1999.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/gucci.jpg",
+    "imageGallery": [
+      "https://example.com/gucci.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "gc1",
+      "price": "",
+      "thumbnail": "https://gucci.com/gc1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "gc2",
+      "price": "",
+      "thumbnail": "https://gucci.com/gc2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "gc3",
+      "price": "",
+      "thumbnail": "https://gucci.com/gc3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "gc4",
+      "price": "",
+      "thumbnail": "https://gucci.com/gc4.jpg"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "GP1",
+    "title": "Gap Hoodie",
+    "priceCurrent": "49.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/gap.jpg",
+    "imageGallery": [
+      "https://example.com/gap.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "gp1",
+      "price": "",
+      "thumbnail": "https://gap.com/gp1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "gp2",
+      "price": "",
+      "thumbnail": "https://gap.com/gp2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "gp3",
+      "price": "",
+      "thumbnail": "https://gap.com/gp3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "gp4",
+      "price": "",
+      "thumbnail": "https://gap.com/gp4.jpg"
+    }
+  ]
+}

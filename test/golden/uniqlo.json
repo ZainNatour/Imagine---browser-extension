@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "UQ1",
+    "title": "Uniqlo Pants",
+    "priceCurrent": "29.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/uniqlo.jpg",
+    "imageGallery": [
+      "https://example.com/uniqlo.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "uq1",
+      "price": "",
+      "thumbnail": "https://uniqlo.com/uq1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "uq2",
+      "price": "",
+      "thumbnail": "https://uniqlo.com/uq2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "uq3",
+      "price": "",
+      "thumbnail": "https://uniqlo.com/uq3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "uq4",
+      "price": "",
+      "thumbnail": "https://uniqlo.com/uq4.jpg"
+    }
+  ]
+}

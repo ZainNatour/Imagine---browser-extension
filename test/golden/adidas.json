@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "AD1",
+    "title": "Adidas Shoes",
+    "priceCurrent": "89.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/adidas.jpg",
+    "imageGallery": [
+      "https://example.com/adidas.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "ad1",
+      "price": "",
+      "thumbnail": "https://adidas.com/ad1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "ad2",
+      "price": "",
+      "thumbnail": "https://adidas.com/ad2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "ad3",
+      "price": "",
+      "thumbnail": "https://adidas.com/ad3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "ad4",
+      "price": "",
+      "thumbnail": "https://adidas.com/ad4.jpg"
+    }
+  ]
+}

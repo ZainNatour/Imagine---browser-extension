@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "PR1",
+    "title": "Prada Bag",
+    "priceCurrent": "1999.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/prada.jpg",
+    "imageGallery": [
+      "https://example.com/prada.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "pr1",
+      "price": "",
+      "thumbnail": "https://prada.com/pr1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "pr2",
+      "price": "",
+      "thumbnail": "https://prada.com/pr2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "pr3",
+      "price": "",
+      "thumbnail": "https://prada.com/pr3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "pr4",
+      "price": "",
+      "thumbnail": "https://prada.com/pr4.jpg"
+    }
+  ]
+}
