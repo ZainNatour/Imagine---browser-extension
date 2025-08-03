@@ -1,4 +1,5 @@
 import { requestTryOn } from './tryOnService.js';
+import { notify } from '../../ui/toast.js';
 
 export function initTryOnUi() {
   setupTryOnButton();
@@ -51,6 +52,7 @@ export async function showPhotoDialog(clothingUrl) {
       overlay.remove();
       try {
         const url = await requestTryOn(p.id, clothingUrl);
+        notify('Try-on ready!');
         if (chrome.tabs) {
           chrome.tabs.create({ url });
         } else {

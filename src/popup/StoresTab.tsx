@@ -76,7 +76,7 @@ export const StoresTab: React.FC<Props> = ({ initialStores }) => {
   const clothingTypes = Array.from(new Set(stores.map((s) => s.clothingType)));
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="p-4 grid gap-4 @lg:grid-cols-2">
       <FilterPanel
         demographics={demographics}
         clothingTypes={clothingTypes}
@@ -84,7 +84,7 @@ export const StoresTab: React.FC<Props> = ({ initialStores }) => {
         sortOptions={['Name (A-Z)', 'Name (Z-A)']}
         onApply={handleApply}
       />
-      <div className="grid grid-cols-2 gap-4 p-4 flex-1">
+      <div className="grid grid-cols-2 gap-4 overflow-auto">
         {filtered.map((store) => (
           <a key={store.name} href={store.url} className="text-center">
             <img src={store.image} alt={store.name} className="w-full rounded-xl mb-1" />

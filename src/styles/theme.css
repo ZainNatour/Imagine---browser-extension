@@ -1,0 +1,10 @@
+@import "@radix-ui/colors/indigo.css";
+@import "@radix-ui/colors/indigo-dark.css";
+
+:root {
+  --radius: 0.75rem;
+}
+
+.dark {
+  color-scheme: dark;
+}

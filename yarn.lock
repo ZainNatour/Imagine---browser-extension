@@ -1977,6 +1977,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/colors@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@radix-ui/colors@npm:3.0.0"
+  checksum: 10c0/612c6bb4efe987f2d49aaca2f785687d08150da59a248328bc2b4e187ece4ef731c1dc5c6a9430fffcac4af9e65cf2f89ceb9806f8809940c9eb238b79d2cf2f
+  languageName: node
+  linkType: hard
+
 "@radix-ui/number@npm:1.1.1":
   version: 1.1.1
   resolution: "@radix-ui/number@npm:1.1.1"
@@ -2443,6 +2450,31 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/5913aa0d760f505905779515e4b1f0f71a422350f077cc8d26d1aafe53c97f177fec0e6d7fbbb50d8b5e498aa9df9f707ca75ae3801540c283b26b0136138eef
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-switch@npm:^1.2.5":
+  version: 1.2.5
+  resolution: "@radix-ui/react-switch@npm:1.2.5"
+  dependencies:
+    "@radix-ui/primitive": "npm:1.1.2"
+    "@radix-ui/react-compose-refs": "npm:1.1.2"
+    "@radix-ui/react-context": "npm:1.1.2"
+    "@radix-ui/react-primitive": "npm:2.1.3"
+    "@radix-ui/react-use-controllable-state": "npm:1.2.2"
+    "@radix-ui/react-use-previous": "npm:1.1.1"
+    "@radix-ui/react-use-size": "npm:1.1.1"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/7149649b852adaba5a65d6ac865c0f33ba7ec8282c72eb17286df9e4b67d4bf1eaa7eb3b4ceeb64c5ecea65fe439b7ed6c9d9829d5baa2b757b8db630e7b87ff
   languageName: node
   linkType: hard
 
@@ -4119,11 +4151,13 @@ __metadata:
     "@eslint/js": "npm:^9.30.1"
     "@headlessui/react": "npm:^2.2.4"
     "@mui/material": "npm:^5.15.13"
+    "@radix-ui/colors": "npm:^3.0.0"
     "@radix-ui/react-accordion": "npm:^1.2.11"
     "@radix-ui/react-checkbox": "npm:^1.3.2"
     "@radix-ui/react-scroll-area": "npm:^1.2.9"
     "@radix-ui/react-select": "npm:^2.2.5"
     "@radix-ui/react-slider": "npm:^1.3.5"
+    "@radix-ui/react-switch": "npm:^1.2.5"
     "@radix-ui/react-tabs": "npm:^1.1.12"
     "@testing-library/jest-dom": "npm:^6.1.5"
     "@testing-library/react": "npm:^14.2.1"

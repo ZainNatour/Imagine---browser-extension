@@ -8,8 +8,7 @@ import {
 
 document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get('theme', ({ theme }) => {
-    document.body.classList.remove('theme-dark', 'theme-light');
-    document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   });
 
   const search = document.getElementById('wishlist-search');
@@ -36,10 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (area === 'sync') {
       if (changes.theme) {
         const theme = changes.theme.newValue;
-        document.body.classList.remove('theme-dark', 'theme-light');
-        document.body.classList.add(
-          theme === 'dark' ? 'theme-dark' : 'theme-light'
-        );
+        document.documentElement.classList.toggle('dark', theme === 'dark');
       }
       if (changes.wishlist) {
         updateList();

@@ -23,8 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (apiInput) {
       apiInput.value = apiEndpoint || TRY_ON_API_URL || '';
     }
-    document.body.classList.remove('theme-dark', 'theme-light');
-    document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
@@ -32,10 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (changes.theme) {
         const theme = changes.theme.newValue;
         if (themeSelect) themeSelect.value = theme;
-        document.body.classList.remove('theme-dark', 'theme-light');
-        document.body.classList.add(
-          theme === 'dark' ? 'theme-dark' : 'theme-light'
-        );
+        document.documentElement.classList.toggle('dark', theme === 'dark');
       }
       if (changes.apiEndpoint && apiInput) {
         apiInput.value = changes.apiEndpoint.newValue;
@@ -53,10 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
           showMessage('Failed to save settings. Please try again.', true);
         } else {
           showMessage('Settings saved!', false);
-          document.body.classList.remove('theme-dark', 'theme-light');
-          document.body.classList.add(
-            theme === 'dark' ? 'theme-dark' : 'theme-light'
-          );
+          document.documentElement.classList.toggle('dark', theme === 'dark');
         }
       });
     });
