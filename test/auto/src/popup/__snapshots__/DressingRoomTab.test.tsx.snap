@@ -1,0 +1,438 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DressingRoomTab reorders items on drag end 1`] = `
+<div>
+  <div
+    class="flex flex-col lg:flex-row h-full"
+  >
+    <div
+      class="lg:w-1/2 p-2"
+    >
+      <canvas
+        class="border w-full h-full"
+        id="preview-canvas"
+      />
+    </div>
+    <div
+      class="lg:w-1/2 p-2 overflow-auto"
+    >
+      <div>
+        <div>
+          <div
+            class="space-y-2"
+          >
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="2"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-2.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V2
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="3"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-3.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V3
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="4"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-4.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V4
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="5"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-5.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V5
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="6"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-6.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V6
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="7"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-7.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V7
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="8"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-8.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V8
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="border rounded p-2 flex items-start space-x-2 bg-white dark:bg-gray-800"
+              data-id="1"
+              draggable="true"
+            >
+              <img
+                alt="thumbnail"
+                class="w-16 h-16 object-cover rounded"
+                loading="lazy"
+                src="/img-1.jpg"
+              />
+              <div
+                class="flex-1"
+              >
+                <div
+                  class="flex space-x-1 mb-1"
+                >
+                  <span
+                    class="text-xs bg-gray-200 dark:bg-gray-700 px-1 rounded"
+                  >
+                    V1
+                  </span>
+                </div>
+                <div
+                  aria-label="Quantity selector"
+                  class="flex items-center space-x-1"
+                >
+                  <button
+                    aria-label="Decrease quantity"
+                    class="px-1"
+                  >
+                    -
+                  </button>
+                  <span>
+                    1
+                  </span>
+                  <button
+                    aria-label="Increase quantity"
+                    class="px-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                aria-label="Remove item"
+                class="text-red-600"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
