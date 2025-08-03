@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "ZA1",
+    "title": "Zara Top",
+    "priceCurrent": "49.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/zara.jpg",
+    "imageGallery": [
+      "https://example.com/zara.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "sz1",
+      "price": "",
+      "thumbnail": "https://zara.com/sz1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "sz2",
+      "price": "",
+      "thumbnail": "https://zara.com/sz2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "sz3",
+      "price": "",
+      "thumbnail": "https://zara.com/sz3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "sz4",
+      "price": "",
+      "thumbnail": "https://zara.com/sz4.jpg"
+    }
+  ]
+}

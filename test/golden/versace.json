@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "VE1",
+    "title": "Versace Dress",
+    "priceCurrent": "1599.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/versace.jpg",
+    "imageGallery": [
+      "https://example.com/versace.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "ve1",
+      "price": "",
+      "thumbnail": "https://versace.com/ve1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "ve2",
+      "price": "",
+      "thumbnail": "https://versace.com/ve2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "ve3",
+      "price": "",
+      "thumbnail": "https://versace.com/ve3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "ve4",
+      "price": "",
+      "thumbnail": "https://versace.com/ve4.jpg"
+    }
+  ]
+}

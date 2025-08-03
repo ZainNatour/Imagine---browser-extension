@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "LV1",
+    "title": "LV Belt",
+    "priceCurrent": "499.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/lv.jpg",
+    "imageGallery": [
+      "https://example.com/lv.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "lv1",
+      "price": "",
+      "thumbnail": "https://louisvuitton.com/lv1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "lv2",
+      "price": "",
+      "thumbnail": "https://louisvuitton.com/lv2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "lv3",
+      "price": "",
+      "thumbnail": "https://louisvuitton.com/lv3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "lv4",
+      "price": "",
+      "thumbnail": "https://louisvuitton.com/lv4.jpg"
+    }
+  ]
+}

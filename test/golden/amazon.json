@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "AMZ1",
+    "title": "Amazon Shirt",
+    "priceCurrent": "19.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/img.jpg",
+    "imageGallery": [
+      "https://example.com/img.jpg"
+    ],
+    "rating": "4.5",
+    "reviewsCount": "20",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "t1",
+      "price": "",
+      "thumbnail": "https://amazon.com/t1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "t2",
+      "price": "",
+      "thumbnail": "https://amazon.com/t2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "t3",
+      "price": "",
+      "thumbnail": "https://amazon.com/t3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "t4",
+      "price": "",
+      "thumbnail": "https://amazon.com/t4.jpg"
+    }
+  ]
+}

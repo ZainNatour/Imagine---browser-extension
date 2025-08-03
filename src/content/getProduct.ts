@@ -275,3 +275,5 @@ export async function getProduct() {
   }
   return { product, similars };
 }
+
+export default getProduct;

@@ -9,6 +9,7 @@ export default {
     }
   },
   roots: ['<rootDir>/test'],
+  setupFiles: ['<rootDir>/test/setupTextEncoder.ts'],
   setupFilesAfterEnv: ['@testing-library/jest-dom'],
   moduleNameMapper: {
     '^\.\./utils/selectors.js$': '<rootDir>/src/utils/selectors.ts'

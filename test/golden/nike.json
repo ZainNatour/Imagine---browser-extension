@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "NK1",
+    "title": "Nike Shoes",
+    "priceCurrent": "79.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/nike.jpg",
+    "imageGallery": [
+      "https://example.com/nike.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "nk1",
+      "price": "",
+      "thumbnail": "https://nike.com/nk1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "nk2",
+      "price": "",
+      "thumbnail": "https://nike.com/nk2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "nk3",
+      "price": "",
+      "thumbnail": "https://nike.com/nk3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "nk4",
+      "price": "",
+      "thumbnail": "https://nike.com/nk4.jpg"
+    }
+  ]
+}

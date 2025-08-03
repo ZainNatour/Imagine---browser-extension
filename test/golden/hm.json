@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "HM1",
+    "title": "H&M Dress",
+    "priceCurrent": "39.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/hm.jpg",
+    "imageGallery": [
+      "https://example.com/hm.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "hm1",
+      "price": "",
+      "thumbnail": "https://hm.com/hm1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "hm2",
+      "price": "",
+      "thumbnail": "https://hm.com/hm2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "hm3",
+      "price": "",
+      "thumbnail": "https://hm.com/hm3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "hm4",
+      "price": "",
+      "thumbnail": "https://hm.com/hm4.jpg"
+    }
+  ]
+}

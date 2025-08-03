@@ -4,7 +4,7 @@ import { imagetools } from 'vite-imagetools';
 import { crx } from '@crxjs/vite-plugin';
 import { execSync } from 'node:child_process';
 
-import manifest from './manifest.json' assert { type: 'json' };
+import manifest from './manifest.json' with { type: 'json' };
 
 
 export default defineConfig({

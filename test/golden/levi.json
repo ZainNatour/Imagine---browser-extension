@@ -1,0 +1,47 @@
+{
+  "product": {
+    "id": "LE1",
+    "title": "Levi Jeans",
+    "priceCurrent": "59.99",
+    "priceOld": "",
+    "currency": "USD",
+    "mainImage": "https://example.com/levi.jpg",
+    "imageGallery": [
+      "https://example.com/levi.jpg"
+    ],
+    "rating": "",
+    "reviewsCount": "",
+    "brand": "",
+    "seller": "",
+    "variants": [],
+    "breadcrumbs": [],
+    "availability": "",
+    "shippingCost": ""
+  },
+  "similars": [
+    {
+      "id": "/p1",
+      "title": "le1",
+      "price": "",
+      "thumbnail": "https://levi.com/le1.jpg"
+    },
+    {
+      "id": "/p2",
+      "title": "le2",
+      "price": "",
+      "thumbnail": "https://levi.com/le2.jpg"
+    },
+    {
+      "id": "/p3",
+      "title": "le3",
+      "price": "",
+      "thumbnail": "https://levi.com/le3.jpg"
+    },
+    {
+      "id": "/p4",
+      "title": "le4",
+      "price": "",
+      "thumbnail": "https://levi.com/le4.jpg"
+    }
+  ]
+}
