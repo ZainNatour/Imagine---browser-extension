@@ -64,7 +64,7 @@ export const ProductTab: React.FC<Props> = ({ product, loading }) => {
   }
 
   return (
-    <div className="p-4 text-gray-900 dark:text-gray-100 sm:grid sm:grid-cols-2 sm:gap-4">
+    <div className="p-4 text-gray-900 dark:text-gray-100 max-w-md mx-auto grid gap-4 sm:grid-cols-2">
       <img
         src={product.image}
         alt={product.name}

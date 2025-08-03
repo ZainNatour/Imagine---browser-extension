@@ -1,6 +1,7 @@
 import { requestTryOn } from './tryOnService.js';
 import { getSelectedPhotoId } from './photoStorage.js';
 import { showMessage } from './notification.js';
+import { notify } from '../../ui/toast.js';
 
 export async function getWishlist() {
   return new Promise((resolve, reject) => {
@@ -44,6 +45,7 @@ export async function addToWishlist(item) {
     if (!exists) {
       list.push({ ...item, dateAdded: new Date().toISOString() });
       await saveWishlist(list);
+      notify('Added to wishlist');
     }
   } catch (error) {
     console.error('Failed to add item to wishlist:', error);

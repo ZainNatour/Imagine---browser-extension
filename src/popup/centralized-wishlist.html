@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Centralized Wishlist</title>
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/general.css" />
-    <link rel="stylesheet" href="styles/wishlist.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
+      <link rel="stylesheet" href="../styles/global.css" />
+      <link rel="stylesheet" href="styles/base.css" />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
   </head>
   <body class="theme-light">
     <div class="container">
@@ -31,8 +30,8 @@
         </select>
         <button id="clear-wishlist-btn" class="clear-wishlist-btn btn btn-error btn-rounded">Clear All</button>
       </div>
-      <div id="wishlist-grid" class="wishlist-grid"></div>
-    </div>
+        <div id="wishlist-grid" class="p-4 grid gap-4 @lg:grid-cols-2"></div>
+      </div>
     <script type="module" src="centralized-wishlist.js"></script>
   </body>
 </html>
