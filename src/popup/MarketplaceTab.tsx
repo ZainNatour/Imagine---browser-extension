@@ -3,6 +3,7 @@ import { FixedSizeGrid as Grid } from 'react-window';
 import { create } from 'zustand';
 import { FilterPanel, FilterValues } from '../components/FilterPanel/FilterPanel';
 import { Button } from '../ui/button';
+import { Builder } from '../lookbook/Builder';
 
 export interface Product {
   id: string;
@@ -71,6 +72,7 @@ Outer.displayName = 'Outer';
 
 export const MarketplaceTab: React.FC = () => {
   const { products, filters, sort, setProducts, toggleStore, applyFilters } = useMarketplaceStore();
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     chrome.runtime.sendMessage('GET_ALL_PRODUCTS', (res: Product[]) => {
@@ -141,7 +143,16 @@ export const MarketplaceTab: React.FC = () => {
               {s}
             </Button>
           ))}
+          <Button size="sm" onClick={() => setOpen(true)}>
+            Outfit Builder
+          </Button>
         </div>
+        {open && (
+          <Builder
+            items={filtered.map((p, i) => ({ productId: p.id, x: 0, y: 0, z: i }))}
+            open={open}
+          />
+        )}
         {filtered.length === 0 ? (
           <div className="flex-1 flex items-center justify-center">
             <div className="p-4 border rounded">No products found</div>

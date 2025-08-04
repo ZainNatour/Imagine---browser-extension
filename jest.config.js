@@ -17,5 +17,5 @@ export default {
     '^\./reviewQueue.js$': '<rootDir>/test/helpers/reviewQueueStub.ts',
     '\\.(css)$': '<rootDir>/test/styleStub.js'
   },
-  coveragePathIgnorePatterns: ['src/background/']
+  coveragePathIgnorePatterns: ['src/background/', 'src/content/']
 };
