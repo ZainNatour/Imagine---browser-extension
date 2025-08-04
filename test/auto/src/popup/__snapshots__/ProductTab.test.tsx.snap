@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductTab selects color + size 1`] = `
+<div>
+  <div
+    class="p-4 text-gray-900 dark:text-gray-100 max-w-md mx-auto grid gap-4 sm:grid-cols-2"
+  >
+    <img
+      alt="T-Shirt"
+      class="w-full aspect-square object-cover rounded-xl mb-4 sm:mb-0"
+      loading="lazy"
+      src="/tshirt.jpg"
+    />
+    <div>
+      <h2
+        class="text-lg font-semibold mb-2"
+      >
+        T-Shirt
+      </h2>
+      <div
+        class="rounded-lg border bg-card text-card-foreground shadow-sm p-4 flex items-center gap-3"
+      >
+        <span
+          class="text-xl font-semibold"
+        >
+          $
+          19.99
+        </span>
+        <span
+          class="text-xs px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded"
+        >
+          $
+        </span>
+      </div>
+      <div
+        class="my-4 space-y-2"
+      >
+        <div
+          class="flex space-x-2"
+        >
+          <button
+            aria-label="Red"
+            class="w-6 h-6 rounded-full border border-gray-300 dark:border-gray-600 "
+            style="background-color: red;"
+          />
+          <button
+            aria-label="Blue"
+            class="w-6 h-6 rounded-full border border-gray-300 dark:border-gray-600 ring-2 ring-primary"
+            style="background-color: blue;"
+          />
+        </div>
+        <select
+          class="w-full border rounded p-1 dark:bg-gray-800 dark:border-gray-600"
+        >
+          <option
+            value="S"
+          >
+            S
+          </option>
+          <option
+            value="M"
+          >
+            M
+          </option>
+        </select>
+      </div>
+      <button
+        aria-label="Add to dressing room"
+        class="mt-2 px-4 py-2 bg-primary text-white rounded"
+        title="Add to dressing room"
+      >
+        Add to Dressing Room
+      </button>
+    </div>
+    <div
+      class="sm:col-span-2 mt-4"
+    >
+      <div
+        class="relative overflow-hidden w-full whitespace-nowrap scrollbar-none"
+        dir="ltr"
+        style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"
+      >
+        <style>
+          [data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}
+        </style>
+        <div
+          class="h-full w-full rounded-[inherit]"
+          data-radix-scroll-area-viewport=""
+          style="overflow-x: scroll; overflow-y: scroll;"
+        >
+          <div
+            style="min-width: 100%; display: table;"
+          >
+            <div
+              class="flex w-max space-x-4 pb-2"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
