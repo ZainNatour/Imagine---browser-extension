@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PriceBlock } from '../components/PriceBlock';
 import { SimilarProductsCarousel, CarouselItem } from '../components/SimilarProductsCarousel';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../ui/accordion';
 
 interface Product {
   id: string;
@@ -53,6 +54,15 @@ const VariantSelector: React.FC<{ colors: string[]; sizes: string[] }> = ({ colo
 };
 
 export const ProductTab: React.FC<Props> = ({ product, loading }) => {
+  const [summary, setSummary] = useState<string | null>(null);
+  useEffect(() => {
+    if (!product) return;
+    chrome.runtime.sendMessage(
+      { type: 'GET_REVIEW_SUMMARY', id: product.id },
+      (res: string) => setSummary(res),
+    );
+  }, [product?.id]);
+
   if (loading || !product) {
     return (
       <div className="p-4 animate-pulse space-y-4" data-testid="skeleton">
@@ -86,6 +96,25 @@ export const ProductTab: React.FC<Props> = ({ product, loading }) => {
       <div className="sm:col-span-2 mt-4">
         <SimilarProductsCarousel items={product.similar} />
       </div>
+      <Accordion type="single" collapsible className="sm:col-span-2">
+        <AccordionItem value="buzz">
+          <AccordionTrigger>Customer Buzz</AccordionTrigger>
+          <AccordionContent>
+            {summary === 'loading' || summary === null ? (
+              <div className="w-4 h-4 border-2 border-gray-300 border-t-transparent rounded-full animate-spin mx-auto" />
+            ) : (
+              <ul className="list-disc pl-4 space-y-1">
+                {summary
+                  .split(/\n|\.\s+/)
+                  .filter(Boolean)
+                  .map((line, i) => (
+                    <li key={i}>{line}</li>
+                  ))}
+              </ul>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 };

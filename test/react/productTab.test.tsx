@@ -3,6 +3,14 @@ import '@testing-library/jest-dom';
 import { ProductTab } from '../../src/popup/ProductTab';
 import { CarouselItem } from '../../src/components/SimilarProductsCarousel';
 
+beforeEach(() => {
+  (global as any).chrome = {
+    runtime: {
+      sendMessage: (_msg: any, cb: (res: any) => void) => cb('loading'),
+    },
+  };
+});
+
 test('shows skeleton when loading', () => {
   render(<ProductTab loading />);
   expect(screen.getByTestId('skeleton')).toBeInTheDocument();
