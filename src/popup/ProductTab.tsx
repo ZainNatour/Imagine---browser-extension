@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { PriceBlock } from '../components/PriceBlock';
 import { SimilarProductsCarousel, CarouselItem } from '../components/SimilarProductsCarousel';
-import { RecommendationCarousel } from '../components/RecommendationCarousel';
+import { Spinner } from '../ui/spinner';
+
+const RecommendationLazy = React.lazy(() =>
+  import('../components/RecommendationCarousel').then((m) => ({ default: m.RecommendationCarousel }))
+);
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../ui/accordion';
 
 interface Product {
@@ -117,7 +121,9 @@ export const ProductTab: React.FC<Props> = ({ product, loading }) => {
         </AccordionItem>
       </Accordion>
       <div className="sm:col-span-2">
-        <RecommendationCarousel seedIds={[product.id]} />
+        <Suspense fallback={<Spinner />}>
+          <RecommendationLazy seedIds={[product.id]} />
+        </Suspense>
       </div>
     </div>
   );

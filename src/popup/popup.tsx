@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { Home, Store, Camera } from "lucide-react";
 
@@ -9,7 +9,11 @@ import { PreferencesDialog } from "../preferences/PreferencesDialog";
 import { Toaster } from "sonner";
 import { StoresTab } from "./StoresTab";
 import { DressingRoomTab } from "./DressingRoomTab";
-import { MarketplaceTab } from "./MarketplaceTab";
+import { Spinner } from "../ui/spinner";
+
+const MarketplaceTab = React.lazy(() =>
+  import("./MarketplaceTab").then((m) => ({ default: m.MarketplaceTab }))
+);
 import "../styles/global.css";
 import "./modules/priceAlerts";
 import "./modules/sizeAlerts";
@@ -30,7 +34,9 @@ export function Popup() {
           <div className="p-4">Home</div>
         </TabsContent>
         <TabsContent value="market">
-          <MarketplaceTab />
+          <Suspense fallback={<Spinner />}>
+            <MarketplaceTab />
+          </Suspense>
         </TabsContent>
         <TabsContent value="stores">
           <StoresTab />

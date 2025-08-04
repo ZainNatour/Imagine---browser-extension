@@ -23,7 +23,7 @@ describe('ProductTab', () => {
     };
   });
 
-  it('selects color + size', () => {
+  it('selects color + size', async () => {
     const { container } = render(<ProductTab product={product} />);
 
     fireEvent.click(screen.getByLabelText('Blue'));
@@ -31,6 +31,8 @@ describe('ProductTab', () => {
 
     expect(screen.getByLabelText('Blue')).toHaveClass('ring-2');
     expect((screen.getByRole('combobox') as HTMLSelectElement).value).toBe('M');
+
+    await screen.findByText('No suggestions yet');
 
     expect(container).toMatchSnapshot();
   });
