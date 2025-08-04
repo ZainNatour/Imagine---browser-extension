@@ -46,9 +46,8 @@ test('lazy rows render on scroll', async () => {
   const trigger = screen.getByRole('tab', { name: 'Marketplace' });
   fireEvent.mouseDown(trigger);
   fireEvent.click(trigger);
-  await waitFor(() => document.querySelectorAll('[data-testid="product-card"]').length > 0);
-  const grid = document.querySelector('[data-testid="market-grid"]') as HTMLElement;
-  const initialCount = document.querySelectorAll('[data-testid="product-card"]').length;
+  const grid = await screen.findByTestId('market-grid');
+  const initialCount = (await screen.findAllByTestId('product-card')).length;
   expect(initialCount).toBeLessThan(products.length);
   act(() => {
     grid.scrollTop = 1200;

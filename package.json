@@ -11,7 +11,8 @@
     "analyze": "rollup-bundle-visualizer dist/manifest.json",
     "test:e2e": "npm test -- -t 'end-to-end'",
     "audit:lighthouse": "vite preview & lhci autorun && kill $!",
-    "lhci": "vite preview --port 5173 --host 0.0.0.0 & lhci autorun --upload.target=temporary-public-storage && pkill -f vite"
+    "lhci": "vite preview --port 5173 --host 0.0.0.0 & lhci autorun --upload.target=temporary-public-storage && pkill -f vite",
+    "size:gzip": "tar -czf - dist | wc -c"
   },
   "keywords": [],
   "author": "",

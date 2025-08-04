@@ -1,10 +1,14 @@
 /* istanbul ignore file */
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, Suspense } from 'react';
 import { FixedSizeGrid as Grid } from 'react-window';
 import { create } from 'zustand';
 import { FilterPanel, FilterValues } from '../components/FilterPanel/FilterPanel';
 import { Button } from '../ui/button';
-import { Builder } from '../lookbook/Builder';
+import { Spinner } from '../ui/spinner';
+
+const BuilderDialogLazy = React.lazy(() =>
+  import('../lookbook/Builder').then((m) => ({ default: m.Builder }))
+);
 
 export interface Product {
   id: string;
@@ -149,10 +153,12 @@ export const MarketplaceTab: React.FC = () => {
           </Button>
         </div>
         {open && (
-          <Builder
-            items={filtered.map((p, i) => ({ productId: p.id, x: 0, y: 0, z: i }))}
-            open={open}
-          />
+          <Suspense fallback={<Spinner />}>
+            <BuilderDialogLazy
+              items={filtered.map((p, i) => ({ productId: p.id, x: 0, y: 0, z: i }))}
+              open={open}
+            />
+          </Suspense>
         )}
         {filtered.length === 0 ? (
           <div className="flex-1 flex items-center justify-center">
