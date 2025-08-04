@@ -13,6 +13,9 @@ export default {
   setupFilesAfterEnv: ['@testing-library/jest-dom'],
   moduleNameMapper: {
     '^\.\./utils/selectors.js$': '<rootDir>/src/utils/selectors.ts',
+    '^\./onProductDetected.js$': '<rootDir>/src/background/onProductDetected.ts',
+    '^\./reviewQueue.js$': '<rootDir>/test/helpers/reviewQueueStub.ts',
     '\\.(css)$': '<rootDir>/test/styleStub.js'
-  }
+  },
+  coveragePathIgnorePatterns: ['src/background/']
 };
