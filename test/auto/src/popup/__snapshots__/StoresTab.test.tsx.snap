@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StoresTab sorts stores by name descending 1`] = `
+<div
+  class="grid grid-cols-2 gap-4 overflow-auto"
+>
+  <a
+    class="text-center"
+    href="#c"
+  >
+    <img
+      alt="Nike"
+      class="w-full rounded-xl mb-1"
+      loading="lazy"
+      src=""
+    />
+    <p>
+      Nike
+    </p>
+  </a>
+  <a
+    class="text-center"
+    href="#b"
+  >
+    <img
+      alt="Gucci"
+      class="w-full rounded-xl mb-1"
+      loading="lazy"
+      src=""
+    />
+    <p>
+      Gucci
+    </p>
+  </a>
+  <a
+    class="text-center"
+    href="#a"
+  >
+    <img
+      alt="Adidas"
+      class="w-full rounded-xl mb-1"
+      loading="lazy"
+      src=""
+    />
+    <p>
+      Adidas
+    </p>
+  </a>
+</div>
+`;
