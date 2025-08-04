@@ -1,0 +1,511 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterPanel applies selected filters 1`] = `
+<div>
+  <aside
+    class="bg-white rounded-2xl shadow-md p-4 w-64 lg:sticky lg:top-4 lg:ml-auto"
+  >
+    <div
+      data-orientation="vertical"
+    >
+      <div
+        class="border-b"
+        data-orientation="vertical"
+        data-state="open"
+      >
+        <h3
+          class="flex"
+          data-orientation="vertical"
+          data-state="open"
+        >
+          <button
+            aria-controls="radix-:r1:"
+            aria-expanded="true"
+            class="flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180"
+            data-orientation="vertical"
+            data-radix-collection-item=""
+            data-state="open"
+            id="radix-:r0:"
+            type="button"
+          >
+            Demographic
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m6 9 6 6 6-6"
+              />
+            </svg>
+          </button>
+        </h3>
+        <div
+          aria-labelledby="radix-:r0:"
+          class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          data-orientation="vertical"
+          data-state="open"
+          id="radix-:r1:"
+          role="region"
+          style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width); transition-duration: 0s; animation-name: none;"
+        >
+          <div
+            class="pb-4 pt-0"
+          >
+            <div
+              class="flex flex-wrap gap-2"
+            >
+              <button
+                class="px-2 py-1 rounded-2xl border text-sm "
+              >
+                Men
+              </button>
+              <button
+                class="px-2 py-1 rounded-2xl border text-sm bg-primary text-white"
+              >
+                Women
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-b"
+        data-orientation="vertical"
+        data-state="open"
+      >
+        <h3
+          class="flex"
+          data-orientation="vertical"
+          data-state="open"
+        >
+          <button
+            aria-controls="radix-:r3:"
+            aria-expanded="true"
+            class="flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180"
+            data-orientation="vertical"
+            data-radix-collection-item=""
+            data-state="open"
+            id="radix-:r2:"
+            type="button"
+          >
+            Clothing Type
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m6 9 6 6 6-6"
+              />
+            </svg>
+          </button>
+        </h3>
+        <div
+          aria-labelledby="radix-:r2:"
+          class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          data-orientation="vertical"
+          data-state="open"
+          id="radix-:r3:"
+          role="region"
+          style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width); transition-duration: 0s; animation-name: none;"
+        >
+          <div
+            class="pb-4 pt-0"
+          >
+            <div
+              class="flex flex-wrap gap-2"
+            >
+              <button
+                class="px-2 py-1 rounded-2xl border text-sm bg-primary text-white"
+              >
+                Tops
+              </button>
+              <button
+                class="px-2 py-1 rounded-2xl border text-sm "
+              >
+                Bottoms
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-b"
+        data-orientation="vertical"
+        data-state="open"
+      >
+        <h3
+          class="flex"
+          data-orientation="vertical"
+          data-state="open"
+        >
+          <button
+            aria-controls="radix-:r5:"
+            aria-expanded="true"
+            class="flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180"
+            data-orientation="vertical"
+            data-radix-collection-item=""
+            data-state="open"
+            id="radix-:r4:"
+            type="button"
+          >
+            Price Range
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m6 9 6 6 6-6"
+              />
+            </svg>
+          </button>
+        </h3>
+        <div
+          aria-labelledby="radix-:r4:"
+          class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          data-orientation="vertical"
+          data-state="open"
+          id="radix-:r5:"
+          role="region"
+          style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width); transition-duration: 0s; animation-name: none;"
+        >
+          <div
+            class="pb-4 pt-0"
+          >
+            <span
+              aria-disabled="false"
+              class="relative flex touch-none select-none items-center w-full h-5"
+              data-orientation="horizontal"
+              dir="ltr"
+              style="--radix-slider-thumb-transform: translateX(-50%);"
+            >
+              <span
+                class="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary"
+                data-orientation="horizontal"
+              >
+                <span
+                  class="absolute h-full bg-primary"
+                  data-orientation="horizontal"
+                  style="left: 0%; right: 100%;"
+                />
+              </span>
+              <span
+                style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(0% + 0px);"
+              >
+                <span
+                  aria-label="Minimum"
+                  aria-orientation="horizontal"
+                  aria-valuemax="1"
+                  aria-valuemin="0"
+                  aria-valuenow="0"
+                  class="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  data-orientation="horizontal"
+                  data-radix-collection-item=""
+                  role="slider"
+                  style=""
+                  tabindex="0"
+                />
+              </span>
+              <span
+                style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(0% + 0px);"
+              >
+                <span
+                  aria-label="Maximum"
+                  aria-orientation="horizontal"
+                  aria-valuemax="1"
+                  aria-valuemin="0"
+                  aria-valuenow="0"
+                  class="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  data-orientation="horizontal"
+                  data-radix-collection-item=""
+                  role="slider"
+                  style=""
+                  tabindex="0"
+                />
+              </span>
+            </span>
+            <div
+              class="flex justify-between text-xs mt-2"
+            >
+              <span>
+                Under $50
+              </span>
+              <span>
+                $50-$100
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-b"
+        data-orientation="vertical"
+        data-state="open"
+      >
+        <h3
+          class="flex"
+          data-orientation="vertical"
+          data-state="open"
+        >
+          <button
+            aria-controls="radix-:r7:"
+            aria-expanded="true"
+            class="flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180"
+            data-orientation="vertical"
+            data-radix-collection-item=""
+            data-state="open"
+            id="radix-:r6:"
+            type="button"
+          >
+            Rating
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m6 9 6 6 6-6"
+              />
+            </svg>
+          </button>
+        </h3>
+        <div
+          aria-labelledby="radix-:r6:"
+          class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          data-orientation="vertical"
+          data-state="open"
+          id="radix-:r7:"
+          role="region"
+          style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width); transition-duration: 0s; animation-name: none;"
+        >
+          <div
+            class="pb-4 pt-0"
+          >
+            <div
+              class="space-y-1"
+            >
+              <label
+                class="flex items-center space-x-1"
+              >
+                <button
+                  aria-checked="true"
+                  class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                  data-state="checked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                >
+                  <span
+                    class="flex items-center justify-center text-current"
+                    data-state="checked"
+                    style="pointer-events: none;"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-check h-4 w-4"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 6 9 17l-5-5"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <span>
+                  ★★★★★
+                </span>
+              </label>
+              <label
+                class="flex items-center space-x-1"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+                <span>
+                  ★★★★
+                </span>
+              </label>
+              <label
+                class="flex items-center space-x-1"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+                <span>
+                  ★★★
+                </span>
+              </label>
+              <label
+                class="flex items-center space-x-1"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+                <span>
+                  ★★
+                </span>
+              </label>
+              <label
+                class="flex items-center space-x-1"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+                <span>
+                  ★
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-b"
+        data-orientation="vertical"
+        data-state="open"
+      >
+        <h3
+          class="flex"
+          data-orientation="vertical"
+          data-state="open"
+        >
+          <button
+            aria-controls="radix-:r9:"
+            aria-expanded="true"
+            class="flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180"
+            data-orientation="vertical"
+            data-radix-collection-item=""
+            data-state="open"
+            id="radix-:r8:"
+            type="button"
+          >
+            Sort
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m6 9 6 6 6-6"
+              />
+            </svg>
+          </button>
+        </h3>
+        <div
+          aria-labelledby="radix-:r8:"
+          class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          data-orientation="vertical"
+          data-state="open"
+          id="radix-:r9:"
+          role="region"
+          style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width); transition-duration: 0s; animation-name: none;"
+        >
+          <div
+            class="pb-4 pt-0"
+          >
+            <div
+              class="space-y-1"
+            >
+              <label
+                class="flex items-center space-x-1"
+              >
+                <input
+                  checked=""
+                  name="sort"
+                  type="radio"
+                  value="Name (A-Z)"
+                />
+                <span>
+                  Name (A-Z)
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      aria-label="Apply Filters"
+      class="hidden lg:block mt-2 w-full bg-primary text-white py-2 rounded"
+    >
+      Apply
+    </button>
+    <button
+      aria-label="Apply Filters"
+      class="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 bg-primary text-white p-4 rounded-full shadow-md"
+    >
+      Apply
+    </button>
+  </aside>
+</div>
+`;
