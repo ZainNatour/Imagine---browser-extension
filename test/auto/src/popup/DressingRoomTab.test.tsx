@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import { DressingRoomTab, DressingItem } from '../../../../src/popup/DressingRoomTab';
 
 // Mock fabric.js which is used for canvas interactions inside the component.
+// eslint-disable-next-line no-var
 var fabricListeners: Record<string, any> = {};
 jest.mock('fabric', () => ({
   Canvas: jest.fn().mockImplementation((id: string) => {

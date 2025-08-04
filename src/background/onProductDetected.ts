@@ -11,6 +11,15 @@ export async function onProductDetected(product: Product | null, similars: Simil
 }
 
 /**
+ * Return all products saved in storage across stores.
+ */
+export async function getAllProducts() {
+  const { products } = await chrome.storage.local.get('products');
+  // products may be an object mapping store -> Product[]
+  return Object.values<Product[]>(products || {}).flat();
+}
+
+/**
  * Register message listener for product detection events.
  */
 export function registerProductListener() {
