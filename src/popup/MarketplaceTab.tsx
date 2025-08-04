@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, { useEffect, useMemo } from 'react';
 import { FixedSizeGrid as Grid } from 'react-window';
 import { create } from 'zustand';

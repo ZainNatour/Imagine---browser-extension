@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PriceBlock } from '../components/PriceBlock';
 import { SimilarProductsCarousel, CarouselItem } from '../components/SimilarProductsCarousel';
+import { RecommendationCarousel } from '../components/RecommendationCarousel';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../ui/accordion';
 
 interface Product {
@@ -115,6 +116,9 @@ export const ProductTab: React.FC<Props> = ({ product, loading }) => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      <div className="sm:col-span-2">
+        <RecommendationCarousel seedIds={[product.id]} />
+      </div>
     </div>
   );
 };

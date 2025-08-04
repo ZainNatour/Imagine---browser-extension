@@ -4,6 +4,7 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { useDraggable } from '@dnd-kit/core';
 import { Dialog, DialogContent } from '../ui/dialog';
 import { Button } from '../ui/button';
+import { RecommendationCarousel } from '../components/RecommendationCarousel';
 import { PlacedItem, useLookbookStore } from './store';
 
 interface BuilderProps {
@@ -34,6 +35,7 @@ const DraggableThumb: React.FC<{ item: PlacedItem }> = ({ item }) => {
 
 export const Builder: React.FC<BuilderProps> = ({ items, open = true }) => {
   const { current, createLook, addItem, moveItem } = useLookbookStore();
+  const [show, setShow] = React.useState(false);
 
   useEffect(() => {
     createLook('');
@@ -49,15 +51,32 @@ export const Builder: React.FC<BuilderProps> = ({ items, open = true }) => {
     }
   };
 
+  const ids = current?.items.map((i) => i.productId) || [];
+
   return (
     <Dialog open={open}>
       <DialogContent>
-        <div className="w-full h-96 bg-gray-50 relative overflow-hidden" data-testid="lookbook-canvas">
-          <DndContext onDragEnd={handleDragEnd}>
-            {current?.items.map((it) => (
-              <DraggableThumb key={it.productId} item={it} />
-            ))}
-          </DndContext>
+        <div className="flex space-x-4">
+          <div className="flex-1">
+            <Button size="sm" onClick={() => setShow(true)} className="mb-2">
+              Get Suggestions
+            </Button>
+            <div
+              className="w-full h-96 bg-gray-50 relative overflow-hidden"
+              data-testid="lookbook-canvas"
+            >
+              <DndContext onDragEnd={handleDragEnd}>
+                {current?.items.map((it) => (
+                  <DraggableThumb key={it.productId} item={it} />
+                ))}
+              </DndContext>
+            </div>
+          </div>
+          {show && (
+            <div className="w-64">
+              <RecommendationCarousel seedIds={ids} />
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>
