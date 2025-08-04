@@ -137,5 +137,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     getAllProducts().then(sendResponse);
     return true;
   }
+  if (msg?.type === 'GET_REVIEW_SUMMARY') {
+    chrome.storage.local.get('reviewSummaries').then(({ reviewSummaries = {} }) => {
+      sendResponse(reviewSummaries[msg.id] || 'loading');
+    });
+    return true;
+  }
 });
 

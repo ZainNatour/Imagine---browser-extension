@@ -1,4 +1,5 @@
 import type { Product, SimilarProduct } from '../content/getProduct';
+import { enqueueSummary } from './reviewQueue.js';
 
 /**
  * Persist the detected product and similar products.
@@ -29,6 +30,9 @@ export function registerProductListener() {
     }
     if (msg && msg.type === 'productDetected') {
       void onProductDetected(msg.product, msg.similars);
+      if (msg.product?.reviews?.length) {
+        enqueueSummary(msg.product.id, msg.product.reviews);
+      }
     }
   });
 }

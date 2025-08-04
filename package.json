@@ -78,6 +78,7 @@
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",
-    "@radix-ui/react-switch": "^1.2.5"
+    "@radix-ui/react-switch": "^1.2.5",
+    "openai": "^4.72.0"
   }
 }

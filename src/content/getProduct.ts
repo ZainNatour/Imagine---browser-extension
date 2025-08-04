@@ -30,6 +30,7 @@ export interface Product {
   breadcrumbs: string[];
   availability?: string;
   shippingCost?: string;
+  reviews?: Review[];
 }
 
 export interface SimilarProduct {
@@ -37,6 +38,11 @@ export interface SimilarProduct {
   title: string;
   price: string;
   thumbnail: string;
+}
+
+export interface Review {
+  text: string;
+  rating?: string;
 }
 
 /**
@@ -252,6 +258,54 @@ function findSimilars(): SimilarProduct[] {
   return unique;
 }
 
+function extractReviews(): Review[] {
+  const res: Review[] = [];
+  const scripts = Array.from(
+    document.querySelectorAll('script[type="application/ld+json"]'),
+  );
+  for (const s of scripts) {
+    try {
+      const data = JSON.parse(s.textContent || '{}');
+      const items = Array.isArray(data) ? data : [data];
+      for (const item of items) {
+        if (item.review) {
+          const arr = Array.isArray(item.review) ? item.review : [item.review];
+          for (const r of arr) {
+            const text = r.reviewBody || '';
+            const rating = r.reviewRating?.ratingValue || '';
+            if (text) {
+              res.push({ text, rating });
+              if (res.length >= 10) return res;
+            }
+          }
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }
+  if (res.length < 10) {
+    const nodes = Array.from(
+      document.querySelectorAll('[itemprop="review"], #reviews .review'),
+    );
+    for (const el of nodes) {
+      const text =
+        (el.querySelector('[itemprop="reviewBody"]')?.textContent ||
+          el.textContent ||
+          '').trim();
+      if (!text) continue;
+      const ratingEl = el.querySelector('[itemprop="ratingValue"]');
+      const rating =
+        ratingEl?.getAttribute('content') ||
+        ratingEl?.textContent?.trim() ||
+        '';
+      res.push({ text, rating });
+      if (res.length >= 10) break;
+    }
+  }
+  return res;
+}
+
 /**
  * Scrape product and similar products from the page.
  */
@@ -265,15 +319,17 @@ export async function getProduct() {
     ? merge(base, fromJsonLd() || {}, fromOpenGraph(), fromSelectors())
     : null;
   const similars = findSimilars();
+  const reviews = extractReviews();
+  const productWithReviews = product ? { ...product, reviews } : null;
   if (
-    product &&
-    !product.title &&
-    !product.priceCurrent &&
-    !product.mainImage
+    productWithReviews &&
+    !productWithReviews.title &&
+    !productWithReviews.priceCurrent &&
+    !productWithReviews.mainImage
   ) {
     return { product: null, similars };
   }
-  return { product, similars };
+  return { product: productWithReviews, similars };
 }
 
 export default getProduct;

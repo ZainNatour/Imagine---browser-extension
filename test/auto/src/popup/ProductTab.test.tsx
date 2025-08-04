@@ -15,6 +15,14 @@ describe('ProductTab', () => {
     similar: [] as any[]
   };
 
+  beforeEach(() => {
+    (global as any).chrome = {
+      runtime: {
+        sendMessage: (_msg: any, cb: (res: any) => void) => cb('loading'),
+      },
+    };
+  });
+
   it('selects color + size', () => {
     const { container } = render(<ProductTab product={product} />);
 
