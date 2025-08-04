@@ -2,6 +2,7 @@ import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
 import { addToWishlist } from "../popup/modules/wishlist.js";
 import { registerProductListener, getAllProducts } from "./onProductDetected.js";
 import { registerPriceWatcher } from "./priceWatcher.js";
+import { registerSizeWatcher } from "./sizeWatcher.js";
 
 let lastActiveTabId = null;
 
@@ -133,6 +134,7 @@ chrome.tabs.onCreated.addListener((tab) => {
 
 registerProductListener();
 registerPriceWatcher();
+registerSizeWatcher();
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg === 'GET_ALL_PRODUCTS') {
@@ -154,6 +156,26 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           info.seen = true;
           priceDrops[msg.productId] = info;
           chrome.storage.local.set({ priceDrops });
+        }
+      });
+  }
+  if (msg?.type === 'WATCH_SIZE') {
+    chrome.storage.local
+      .get('sizes')
+      .then(({ sizes = {} }) => {
+        sizes[msg.productId] = { wanted: msg.size, inStock: false };
+        chrome.storage.local.set({ sizes });
+      });
+  }
+  if (msg?.type === 'SIZE_RESTOCK_ACK') {
+    chrome.storage.local
+      .get('sizes')
+      .then(({ sizes = {} }) => {
+        const info = sizes[msg.productId];
+        if (info) {
+          info.inStock = false;
+          sizes[msg.productId] = info;
+          chrome.storage.local.set({ sizes });
         }
       });
   }

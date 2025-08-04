@@ -11,6 +11,7 @@ export function initWishlistUi() {
   initWishlistState();
   setupCentralizedWishlistNavigation();
   setupClearWishlistButton();
+  setupSizeWatcher();
 }
 
 function setupWishlistListener() {
@@ -76,6 +77,28 @@ function setupClearWishlistButton() {
       await saveWishlist([]);
       const grid = document.getElementById('wishlist-grid');
       renderWishlist(grid);
+    }
+  });
+}
+
+function setupSizeWatcher() {
+  const select = document.querySelector('select[name*=size]');
+  if (!select) return;
+  select.addEventListener('change', () => {
+    const opt = select.selectedOptions[0];
+    if (!opt) return;
+    const disabled = opt.disabled || opt.hasAttribute('disabled');
+    if (disabled) {
+      const size = opt.textContent?.trim() || opt.value;
+      const productId =
+        document.body?.getAttribute('data-product-id') || opt.value;
+      if (productId) {
+        chrome.runtime.sendMessage({
+          type: 'WATCH_SIZE',
+          productId,
+          size,
+        });
+      }
     }
   });
 }
