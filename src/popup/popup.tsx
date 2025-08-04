@@ -10,6 +10,7 @@ import { DressingRoomTab } from "./DressingRoomTab";
 import { MarketplaceTab } from "./MarketplaceTab";
 import "../styles/global.css";
 import "./modules/priceAlerts";
+import "./modules/sizeAlerts";
 
 export function Popup() {
   return (
