@@ -12,6 +12,7 @@ export default {
   setupFiles: ['<rootDir>/test/setupTextEncoder.ts'],
   setupFilesAfterEnv: ['@testing-library/jest-dom'],
   moduleNameMapper: {
-    '^\.\./utils/selectors.js$': '<rootDir>/src/utils/selectors.ts'
+    '^\.\./utils/selectors.js$': '<rootDir>/src/utils/selectors.ts',
+    '\\.(css)$': '<rootDir>/test/styleStub.js'
   }
 };

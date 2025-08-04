@@ -2,6 +2,10 @@
 
 A Chrome extension for the Imagine service.
 
+## Features
+
+- **Marketplace** – browse every detected product, filter by store, category, price & rating, with instant virtualised scrolling.
+
 ## Development
 
 Install dependencies (Node.js v18 or later is required) and run linting:

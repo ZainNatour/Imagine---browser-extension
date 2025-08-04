@@ -1,6 +1,6 @@
 import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
 import { addToWishlist } from "../popup/modules/wishlist.js";
-import { registerProductListener } from "./onProductDetected.js";
+import { registerProductListener, getAllProducts } from "./onProductDetected.js";
 
 let lastActiveTabId = null;
 
@@ -131,4 +131,11 @@ chrome.tabs.onCreated.addListener((tab) => {
 });
 
 registerProductListener();
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg === 'GET_ALL_PRODUCTS') {
+    getAllProducts().then(sendResponse);
+    return true;
+  }
+});
 
