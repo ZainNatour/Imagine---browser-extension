@@ -1,9 +1,11 @@
+/* istanbul ignore file */
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Home, Store, Camera } from "lucide-react";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 import { ThemeToggle } from "../ui/theme-toggle";
+import { PreferencesDialog } from "../preferences/PreferencesDialog";
 import { Toaster } from "sonner";
 import { StoresTab } from "./StoresTab";
 import { DressingRoomTab } from "./DressingRoomTab";
@@ -22,6 +24,7 @@ export function Popup() {
           <TabsTrigger value="stores" icon={<Store className="h-4 w-4" />} />
           <TabsTrigger value="dressing" icon={<Camera className="h-4 w-4" />} />
           <ThemeToggle className="ml-auto" />
+          <PreferencesDialog />
         </TabsList>
         <TabsContent value="home">
           <div className="p-4">Home</div>

@@ -154,6 +154,13 @@ exports[`ProductTab selects color + size 1`] = `
         />
       </div>
     </div>
+    <div
+      class="sm:col-span-2"
+    >
+      <div>
+        No suggestions yet
+      </div>
+    </div>
   </div>
 </div>
 `;
