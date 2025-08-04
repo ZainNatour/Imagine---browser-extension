@@ -9,6 +9,7 @@ import { StoresTab } from "./StoresTab";
 import { DressingRoomTab } from "./DressingRoomTab";
 import { MarketplaceTab } from "./MarketplaceTab";
 import "../styles/global.css";
+import "./modules/priceAlerts";
 
 export function Popup() {
   return (

@@ -5,6 +5,7 @@ A Chrome extension for the Imagine service.
 ## Features
 
 - **Marketplace** – browse every detected product, filter by store, category, price & rating, with instant virtualised scrolling.
+- *Price-Drop Alerts – background polling notifies you when any saved item gets cheaper.*
 
 ## Development
 

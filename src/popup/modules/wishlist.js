@@ -109,10 +109,18 @@ export async function renderWishlist(container, items = null) {
       container.textContent = 'Your wishlist is empty.';
       return;
     }
+    const { priceDrops = {} } = await chrome.storage.local.get('priceDrops');
     items = sortWishlist(items);
     items.forEach((item) => {
       const div = document.createElement('div');
       div.className = 'wishlist-item card';
+      const drop = priceDrops[item.id];
+      if (drop && !drop.seen) {
+        div.style.position = 'relative';
+        const badge = document.createElement('span');
+        badge.className = 'price-drop-badge';
+        div.appendChild(badge);
+      }
       const img = document.createElement('img');
       img.src = /^https?:\/\//.test(item.imageSrc)
         ? item.imageSrc

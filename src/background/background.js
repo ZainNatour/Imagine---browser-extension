@@ -1,6 +1,7 @@
 import { isOnlineStore, loadStoreDomains } from "./modules/urlUtils.js";
 import { addToWishlist } from "../popup/modules/wishlist.js";
 import { registerProductListener, getAllProducts } from "./onProductDetected.js";
+import { registerPriceWatcher } from "./priceWatcher.js";
 
 let lastActiveTabId = null;
 
@@ -131,6 +132,7 @@ chrome.tabs.onCreated.addListener((tab) => {
 });
 
 registerProductListener();
+registerPriceWatcher();
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg === 'GET_ALL_PRODUCTS') {
@@ -142,6 +144,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       sendResponse(reviewSummaries[msg.id] || 'loading');
     });
     return true;
+  }
+  if (msg?.type === 'PRICE_DROP_ACK') {
+    chrome.storage.local
+      .get('priceDrops')
+      .then(({ priceDrops = {} }) => {
+        const info = priceDrops[msg.productId];
+        if (info) {
+          info.seen = true;
+          priceDrops[msg.productId] = info;
+          chrome.storage.local.set({ priceDrops });
+        }
+      });
   }
 });
 
