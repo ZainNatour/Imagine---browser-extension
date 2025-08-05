@@ -20,12 +20,12 @@ async function getStoredApiUrl() {
 export async function requestTryOn(photoId, clothingUrl, options = {}) {
   const storedUrl = await getStoredApiUrl();
   const apiUrl = options.apiUrl || storedUrl || TRY_ON_API_URL;
-  const placeholder = chrome.runtime.getURL(
-    'src/assets/images/models/clothing1.jpg'
+  const fallback = chrome.runtime.getURL(
+    `src/assets/images/models/clothing${photoId}.webp`
   );
 
   if (!apiUrl) {
-    return placeholder;
+    return fallback;
   }
 
   try {
@@ -38,9 +38,14 @@ export async function requestTryOn(photoId, clothingUrl, options = {}) {
       throw new Error(`Request failed: ${response.status}`);
     }
     const data = await response.json();
-    return data.imageUrl;
+    const imageResponse = await fetch(data.imageUrl);
+    const mime = imageResponse.headers.get('Content-Type') || '';
+    const ok = imageResponse.ok && mime.startsWith('image/');
+    const url = imageResponse.url;
+    if (!ok || !url.endsWith('.webp')) return fallback;
+    return url;
   } catch (err) {
     console.warn('Try On API request failed, using placeholder image.', err);
-    return placeholder;
+    return fallback;
   }
 }
