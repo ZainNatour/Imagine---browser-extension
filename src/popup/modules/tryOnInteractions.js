@@ -1,5 +1,6 @@
 import { requestTryOn } from './tryOnService.js';
 import { notify } from '../../ui/toast.js';
+import placeholderIcon from '../../assets/icons/icon128.png';
 
 export function initTryOnUi() {
   setupTryOnButton();
@@ -111,7 +112,7 @@ function renderProductInfo(info) {
   const placeholder = document.querySelector('.product-placeholder');
   if (placeholder) placeholder.style.display = 'none';
   const imageEl = document.querySelector('.product-image');
-  if (imageEl && info.image) imageEl.src = info.image;
+  if (imageEl) imageEl.src = info.image || placeholderIcon;
   const nameEl = document.querySelector('.product-name');
   if (nameEl && info.name) nameEl.textContent = info.name;
   const priceEl = document.querySelector('.product-price');
@@ -172,7 +173,8 @@ function renderProductInfo(info) {
       if (item.url) link.href = item.url;
 
       const img = document.createElement('img');
-      img.src = item.image;
+      img.src = item.image || placeholderIcon;
+      img.alt = item.name || 'Product image';
       link.appendChild(img);
       div.appendChild(link);
 
