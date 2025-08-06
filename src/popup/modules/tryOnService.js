@@ -20,9 +20,7 @@ async function getStoredApiUrl() {
 export async function requestTryOn(photoId, clothingUrl, options = {}) {
   const storedUrl = await getStoredApiUrl();
   const apiUrl = options.apiUrl || storedUrl || TRY_ON_API_URL;
-  const fallback = chrome.runtime.getURL(
-    `src/assets/images/models/clothing${photoId}.webp`
-  );
+  const fallback = 'https://example.com/placeholder.jpg';
 
   if (!apiUrl) {
     return fallback;
