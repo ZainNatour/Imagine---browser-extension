@@ -21,7 +21,8 @@
     "type": "module"
   },
   "action": {
-    "default_title": "Open side panel"
+    "default_title": "Open side panel",
+    "default_popup": "dist/popup.html"
   },
   "side_panel": {
     "default_path": "src/popup/popup.html"
