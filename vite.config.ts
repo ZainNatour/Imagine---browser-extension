@@ -15,15 +15,16 @@ export default defineConfig({
       name: 'post-build-tasks',
       closeBundle() {
         console.log('🔧 Running post-build image optimization...');
+        const env = { ...process.env, TS_NODE_TRANSPILE_ONLY: 'true' };
         execSync(
-          'TS_NODE_TRANSPILE_ONLY=true node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
-          { stdio: 'inherit' }
+          'node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
+          { stdio: 'inherit', env }
         );
 
         console.log('📝 Copying and adjusting manifest...');
         execSync(
-          'TS_NODE_TRANSPILE_ONLY=true node --no-warnings --loader ts-node/esm scripts/update-manifest.ts',
-          { stdio: 'inherit' }
+          'node --no-warnings --loader ts-node/esm scripts/update-manifest.ts',
+          { stdio: 'inherit', env }
         );
       }
     }
