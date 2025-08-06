@@ -1,18 +1,31 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { imagetools } from 'vite-imagetools';
-import { execSync } from 'node:child_process';
 import stripBigIcons from './vite.plugins/stripBigIcons';
-
+import { execSync } from 'node:child_process';
 
 export default defineConfig({
   plugins: [
     react(),
     imagetools(),
-    stripBigIcons()
+    stripBigIcons(),
 
+    // run our script after the bundle is finished
+    {
+      name: 'optimize-images-after-build',
+      closeBundle() {
+        console.log('🔧 Running post-build image optimization...');
+        execSync(
+          'node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
+          { stdio: 'inherit' }
+        );
+      }
+    }
   ],
+
+  // copy src/assets → dist/assets
   publicDir: 'src/assets',
+
   build: {
     target: 'chrome117',
     minify: 'terser',
@@ -26,15 +39,9 @@ export default defineConfig({
         content: 'src/content/content.js',
         background: 'src/background/background.js',
       },
-      output: { manualChunks: undefined }
+      output: {
+        manualChunks: undefined
+      }
     }
   }
 });
-
-// optimise images after the bundle
-execSync(
-  // run with ts-node’s ESM loader so .ts is understood
-  'node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
-  { stdio: 'inherit' }
-);
-

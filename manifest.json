@@ -17,18 +17,18 @@
     "contextMenus"
   ],
   "background": {
-    "service_worker": "dist/background.js",
+    "service_worker": "background/background.js",
     "type": "module"
   },
   "action": {
     "default_title": "Open side panel",
-    "default_popup": "dist/popup.html"
+    "default_popup": "popup/popup.html"
   },
   "side_panel": {
-    "default_path": "dist/popup.html"
+    "default_path": "popup/popup.html"
   },
   "options_ui": {
-    "page": "dist/options.html",
+    "page": "options/options.html",
     "open_in_tab": true
   },
   "content_scripts": [

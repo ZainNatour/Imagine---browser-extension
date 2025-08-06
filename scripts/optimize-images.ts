@@ -1,12 +1,14 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 
-const assetsDir = path.resolve('src/assets');
-const threshold = 0; // always optimize
+// ESM-safe __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-interface Mapping { old: string; webp: string; }
-const mappings: Mapping[] = [];
+// Point at the built icons folder
+const assetsDir = path.resolve(__dirname, '../dist/assets/icons');
 
 async function walk(dir: string): Promise<void> {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -16,76 +18,35 @@ async function walk(dir: string): Promise<void> {
       await walk(full);
     } else {
       const ext = path.extname(entry.name).toLowerCase();
-      const iconMatch = entry.name.match(/^icon(\d+)/);
-      if ([".jpg", ".jpeg", ".png"].includes(ext)) {
-        const webpPath = full.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-        const size = iconMatch ? parseInt(iconMatch[1], 10) : 256;
+      if (['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) {
+        const match = entry.name.match(/^icon(\d+)/);
+        const size = match ? parseInt(match[1], 10) : 256;
+        const base = path.basename(entry.name, ext);
+        const outPath = path.join(dir, `${base}.webp`);
+
+        // Re-encode to webp & resize
         await sharp(full)
           .resize(size, size, { fit: 'inside' })
           .webp({ quality: 80 })
-          .toFile(webpPath);
-        await fs.unlink(full);
-        mappings.push({ old: path.basename(full), webp: path.basename(webpPath) });
-      } else if (ext === '.webp') {
-        const size = iconMatch ? parseInt(iconMatch[1], 10) : 256;
-        const tmp = full + '.tmp';
-        await sharp(full)
-          .resize(size, size, { fit: 'inside' })
-          .webp({ quality: 80 })
-          .toFile(tmp);
-        await fs.unlink(full);
-        await fs.rename(tmp, full);
+          .toFile(outPath);
+
+        // Remove the original file if different
+        if (full !== outPath) await fs.unlink(full);
       }
     }
-  }
-}
-
-async function updateReferences(): Promise<void> {
-  const textExts = ['.html', '.tsx', '.ts', '.js', '.jsx', '.mjs'];
-  async function scan(dir: string): Promise<void> {
-    const entries = await fs.readdir(dir, { withFileTypes: true });
-    for (const entry of entries) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        await scan(full);
-      } else if (textExts.includes(path.extname(entry.name))) {
-        let content = await fs.readFile(full, 'utf8');
-        let updated = content;
-        for (const { old, webp } of mappings) {
-          updated = updated.split(old).join(webp);
-        }
-        if (updated !== content) {
-          await fs.writeFile(full, updated, 'utf8');
-        }
-      }
-    }
-  }
-  await scan(path.resolve('src'));
-
-  // Update manifest.json references
-  const manifestPath = path.resolve('manifest.json');
-  try {
-    let content = await fs.readFile(manifestPath, 'utf8');
-    let updated = content;
-    for (const { old, webp } of mappings) {
-      updated = updated.split(old).join(webp);
-    }
-    if (updated !== content) {
-      await fs.writeFile(manifestPath, updated, 'utf8');
-    }
-  } catch {
-    // ignore if manifest doesn't exist
   }
 }
 
 async function main(): Promise<void> {
-  await walk(assetsDir);
-  if (mappings.length > 0) {
-    await updateReferences();
+  try {
+    // Create the folder if it doesn't exist — avoids ENOENT on Windows
+    await fs.mkdir(assetsDir, { recursive: true });
+    await walk(assetsDir);
+    console.log('✅ Images optimized in dist/assets/icons');
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
   }
 }
 
-main().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+main();
