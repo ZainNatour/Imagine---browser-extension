@@ -17,10 +17,10 @@ async function getStoredApiUrl() {
 // override the API URL by passing `options.apiUrl` or setting the value in the
 // Options page. Returns the URL of the processed image on success and throws on
 // failure. If the request fails, a placeholder image is returned.
-export async function requestTryOn(photoId, clothingUrl, options = {}) {
-  const storedUrl = await getStoredApiUrl();
-  const apiUrl = options.apiUrl || storedUrl || TRY_ON_API_URL;
-  const fallback = 'https://example.com/placeholder.jpg';
+  export async function requestTryOn(photoId, clothingUrl, options = {}) {
+    const storedUrl = await getStoredApiUrl();
+    const apiUrl = options.apiUrl || storedUrl || TRY_ON_API_URL;
+    const fallback = chrome.runtime.getURL('assets/icons/icon128.png');
 
   if (!apiUrl) {
     return fallback;

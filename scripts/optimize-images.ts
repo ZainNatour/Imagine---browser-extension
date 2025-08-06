@@ -33,6 +33,7 @@ async function walk(dir: string): Promise<void> {
           .resize(size, size, { fit: 'inside' })
           .webp({ quality: 80 })
           .toFile(tmp);
+        await fs.unlink(full);
         await fs.rename(tmp, full);
       }
     }
