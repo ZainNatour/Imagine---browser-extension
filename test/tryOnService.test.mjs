@@ -29,7 +29,7 @@ import { requestTryOn } from '../src/popup/modules/tryOnService.js';
 
 async function runTests() {
   fetchCalled = false;
-  const placeholder = chrome.runtime.getURL('src/assets/images/models/clothing1.webp');
+  const placeholder = chrome.runtime.getURL('src/assets/images/models/clothing1.jpg');
   const url = await requestTryOn('1', 'https://example.com/item');
   assert.equal(fetchCalled, false, 'fetch should not be called without api url');
   assert.equal(url, placeholder, 'returns placeholder image');
