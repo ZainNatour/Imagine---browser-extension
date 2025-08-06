@@ -1,26 +1,30 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { imagetools } from 'vite-imagetools';
-import { crx } from '@crxjs/vite-plugin';
 import { execSync } from 'node:child_process';
 import stripBigIcons from './vite.plugins/stripBigIcons';
-
-import manifest from './manifest.json' with { type: 'json' };
 
 
 export default defineConfig({
   plugins: [
     react(),
     imagetools(),
-    stripBigIcons(),
-    crx({ manifest })
+    stripBigIcons()
 
   ],
   build: {
     target: 'chrome117',
     minify: 'terser',
     sourcemap: false,
-    rollupOptions: { output: { manualChunks: undefined } }
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        popup: 'src/popup/popup.html',
+        background: 'src/background/background.js',
+      },
+      output: { manualChunks: undefined }
+    }
   }
 });
 

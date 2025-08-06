@@ -21,6 +21,12 @@ npm run lint
 
 The lint script checks the `src` and `test` directories using ESLint.
 
+### Loading in Chrome
+
+Always run `yarn build` first, then choose **dist/** as the
+"Load unpacked" folder in `chrome://extensions`. Loading the
+raw `src/` files will fail with a MIME-type error.
+
 ## Building and Packaging
 
 Compile the TypeScript sources before packaging the extension:
