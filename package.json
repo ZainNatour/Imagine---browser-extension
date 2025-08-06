@@ -19,7 +19,7 @@
   "license": "ISC",
   "description": "Imagine browser extension",
   "engines": {
-    "node": ">=18"
+    "node": ">=20.19.0"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.3",

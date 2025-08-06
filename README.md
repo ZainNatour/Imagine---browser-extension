@@ -12,7 +12,7 @@ A Chrome extension for the Imagine service.
 
 ## Development
 
-Install dependencies (Node.js v18 or later is required) and run linting:
+Install dependencies (Node.js **v20.19 or later** is required) and run linting:
 
 ```bash
 npm install
@@ -23,7 +23,7 @@ The lint script checks the `src` and `test` directories using ESLint.
 
 ### Loading in Chrome
 
-Always run `yarn build` first, then choose **dist/** as the
+Always run `npm run build` first, then choose **dist/** as the
 "Load unpacked" folder in `chrome://extensions`. Loading the
 raw `src/` files will fail with a MIME-type error.
 
