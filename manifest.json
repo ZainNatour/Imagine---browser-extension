@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "Enhance your online apparel shopping experience with Imagine.",
   "icons": {
-    "16": "src/assets/icons/icon16.webp",
-    "48": "src/assets/icons/icon48.webp",
-    "128": "src/assets/icons/icon128.webp"
+    "16": "assets/icons/icon16.webp",
+    "48": "assets/icons/icon48.webp",
+    "128": "assets/icons/icon128.webp"
   },
   "permissions": [
     "sidePanel",
@@ -17,7 +17,7 @@
     "contextMenus"
   ],
   "background": {
-    "service_worker": "src/background/background.js",
+    "service_worker": "dist/background.js",
     "type": "module"
   },
   "action": {
@@ -25,10 +25,10 @@
     "default_popup": "dist/popup.html"
   },
   "side_panel": {
-    "default_path": "src/popup/popup.html"
+    "default_path": "dist/popup.html"
   },
   "options_ui": {
-    "page": "src/options/options.html",
+    "page": "dist/options.html",
     "open_in_tab": true
   },
   "content_scripts": [
@@ -49,7 +49,7 @@
         "*://www.versace.com/*"
       ],
       "js": [
-        "src/content/content.js"
+        "dist/content.js"
       ],
       "run_at": "document_idle"
     }
@@ -57,12 +57,10 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "src/assets/data/stores.json",
-        "src/assets/images/*",
-        "src/background/modules/urlUtils.js",
-        "src/content/getProduct.ts",
-        "src/popup/centralized-wishlist.html",
-        "src/popup/centralized-wishlist.js"
+        "assets/data/stores.json",
+        "assets/images/*",
+        "popup/centralized-wishlist.html",
+        "popup/centralized-wishlist.js"
       ],
       "matches": [
         "<all_urls>"

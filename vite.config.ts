@@ -12,6 +12,7 @@ export default defineConfig({
     stripBigIcons()
 
   ],
+  publicDir: 'src/assets',
   build: {
     target: 'chrome117',
     minify: 'terser',
@@ -21,6 +22,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: 'src/popup/popup.html',
+        options: 'src/options/options.html',
+        content: 'src/content/content.js',
         background: 'src/background/background.js',
       },
       output: { manualChunks: undefined }
