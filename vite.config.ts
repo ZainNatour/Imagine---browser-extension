@@ -10,13 +10,19 @@ export default defineConfig({
     imagetools(),
     stripBigIcons(),
 
-    // run our script after the bundle is finished
+    // run our scripts after the bundle is finished
     {
-      name: 'optimize-images-after-build',
+      name: 'post-build-tasks',
       closeBundle() {
         console.log('🔧 Running post-build image optimization...');
         execSync(
-          'node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
+          'TS_NODE_TRANSPILE_ONLY=true node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
+          { stdio: 'inherit' }
+        );
+
+        console.log('📝 Copying and adjusting manifest...');
+        execSync(
+          'TS_NODE_TRANSPILE_ONLY=true node --no-warnings --loader ts-node/esm scripts/update-manifest.ts',
           { stdio: 'inherit' }
         );
       }
