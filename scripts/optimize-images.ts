@@ -2,6 +2,28 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
+// Disable Sharp's cache to avoid keeping file handles open on Windows
+sharp.cache(false);
+
+async function safeUnlink(file: string): Promise<void> {
+  for (let i = 0; i < 5; i++) {
+    try {
+      await fs.unlink(file);
+      return;
+    } catch (err: any) {
+      if (err?.code === 'ENOENT') {
+        return;
+      }
+      if (err?.code === 'EBUSY' || err?.code === 'EPERM') {
+        // wait briefly and retry to handle Windows file locking
+        await new Promise(res => setTimeout(res, 100));
+        continue;
+      }
+      throw err;
+    }
+  }
+}
+
 const assetsDir = path.resolve('src/assets');
 const threshold = 0; // always optimize
 
@@ -24,7 +46,7 @@ async function walk(dir: string): Promise<void> {
           .resize(size, size, { fit: 'inside' })
           .webp({ quality: 80 })
           .toFile(webpPath);
-        await fs.unlink(full);
+        await safeUnlink(full);
         mappings.push({ old: path.basename(full), webp: path.basename(webpPath) });
       } else if (ext === '.webp') {
         const size = iconMatch ? parseInt(iconMatch[1], 10) : 256;
@@ -33,7 +55,7 @@ async function walk(dir: string): Promise<void> {
           .resize(size, size, { fit: 'inside' })
           .webp({ quality: 80 })
           .toFile(tmp);
-        await fs.unlink(full);
+        await safeUnlink(full);
         await fs.rename(tmp, full);
       }
     }
