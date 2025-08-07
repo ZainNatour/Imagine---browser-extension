@@ -92,9 +92,14 @@ export const FilterPanel: React.FC<Props> = ({
               step={1}
               onValueChange={(val) => setPrice(val)}
             />
-            <div className="flex justify-between text-xs mt-2">
+            <div
+              className="grid mt-2 text-xs w-full"
+              style={{ gridTemplateColumns: `repeat(${priceLabels.length}, 1fr)` }}
+            >
               {priceLabels.map((l, i) => (
-                <span key={i}>{l}</span>
+                <span key={i} className="text-center">
+                  {l}
+                </span>
               ))}
             </div>
           </AccordionContent>

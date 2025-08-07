@@ -18,12 +18,8 @@ export async function loadStores(dataUrl = STORES_DATA_PATH) {
     cachedStores = await response.json();
     return cachedStores;
   } catch (error) {
-    console.error('Error loading stores:', error);
-    if (error instanceof TypeError) {
-      // Network or fetch failure, return an empty array so the UI can handle it
-      return [];
-    }
-    throw new Error(`Failed to load stores: ${error.message}`);
+    console.error("Error loading stores:", error);
+    throw error;
   }
 }
 

@@ -9,7 +9,8 @@ const __dirname = dirname(__filename);
 // Mock chrome.runtime.getURL to return file URLs
 global.chrome = {
   runtime: {
-    getURL: (p) => pathToFileURL(join(__dirname, '..', p)).href,
+    // Map extension asset URLs to the source directory in tests.
+    getURL: (p) => pathToFileURL(join(__dirname, '..', 'src/assets', p)).href,
   },
 };
 

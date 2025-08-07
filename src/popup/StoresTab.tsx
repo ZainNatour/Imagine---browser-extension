@@ -44,17 +44,26 @@ function filterStores(
 export const StoresTab: React.FC<Props> = ({ initialStores }) => {
   const [stores, setStores] = useState<Store[]>([]);
   const [filtered, setFiltered] = useState<Store[]>([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     (async () => {
-      if (!initialStores) {
-        const mod = await import('./modules/storeService.js');
-        loadStores = mod.loadStores;
+      try {
+        if (!initialStores) {
+          const mod = await import('./modules/storeService.js');
+          loadStores = mod.loadStores;
+        }
+        const data = initialStores || (await loadStores());
+        const withRatings = data.map((s) => ({
+          ...s,
+          rating: Math.floor(Math.random() * 5) + 1,
+        }));
+        setStores(withRatings);
+        setFiltered(withRatings);
+      } catch (e) {
+        console.error(e);
+        setError(true);
       }
-      const data = initialStores || (await loadStores());
-      const withRatings = data.map((s) => ({ ...s, rating: Math.floor(Math.random() * 5) + 1 }));
-      setStores(withRatings);
-      setFiltered(withRatings);
     })();
   }, [initialStores]);
 
@@ -76,6 +85,10 @@ export const StoresTab: React.FC<Props> = ({ initialStores }) => {
   const demographics = Array.from(new Set(stores.flatMap((s) => s.targetDemographic)));
   const clothingTypes = Array.from(new Set(stores.map((s) => s.clothingType)));
 
+  if (error) {
+    return <div className="p-4">Could not load stores.</div>;
+  }
+
   return (
     <div className="p-4 grid gap-4 @lg:grid-cols-2">
       <FilterPanel
@@ -89,7 +102,7 @@ export const StoresTab: React.FC<Props> = ({ initialStores }) => {
         {filtered.map((store) => (
           <a key={store.name} href={store.url} className="text-center">
             <img
-              src={store.image}
+              src={chrome.runtime.getURL(store.image)}
               alt={store.name}
               loading="lazy"
               className="w-full rounded-xl mb-1"

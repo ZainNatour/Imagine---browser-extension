@@ -1,4 +1,7 @@
-export const STORES_DATA_PATH = 'src/assets/data/stores.json';
+// Path to the store metadata JSON bundled with the extension.  The build copies
+// everything from `src/assets` into the extension root, so the JSON lives under
+// `/data/stores.json` in the packaged extension.
+export const STORES_DATA_PATH = 'data/stores.json';
 
 // Base URL for the backend that processes "try on" requests.  Consumers can
 // override this via chrome.storage or by passing a different URL to the

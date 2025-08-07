@@ -251,12 +251,17 @@ exports[`FilterPanel applies selected filters 1`] = `
               </span>
             </span>
             <div
-              class="flex justify-between text-xs mt-2"
+              class="grid mt-2 text-xs w-full"
+              style="grid-template-columns: repeat(2, 1fr);"
             >
-              <span>
+              <span
+                class="text-center"
+              >
                 Under $50
               </span>
-              <span>
+              <span
+                class="text-center"
+              >
                 $50-$100
               </span>
             </div>

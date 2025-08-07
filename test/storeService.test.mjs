@@ -10,7 +10,8 @@ let fetchCount = 0;
 
 global.chrome = {
   runtime: {
-    getURL: (p) => pathToFileURL(join(__dirname, '..', p)).href,
+    // In tests, map extension URLs to files under `src/assets`.
+    getURL: (p) => pathToFileURL(join(__dirname, '..', 'src/assets', p)).href,
   },
 };
 
@@ -28,16 +29,16 @@ import { loadStores, clearStoreCache } from '../src/popup/modules/storeService.j
 async function runTests() {
   clearStoreCache();
   fetchCount = 0;
-  const stores1 = await loadStores('src/assets/data/stores.json');
+  const stores1 = await loadStores('data/stores.json');
   assert.ok(Array.isArray(stores1) && stores1.length > 0, 'loaded stores');
   assert.equal(fetchCount, 1, 'fetch called first time');
 
-  const stores2 = await loadStores('src/assets/data/stores.json');
+  const stores2 = await loadStores('data/stores.json');
   assert.equal(fetchCount, 1, 'cache used on second call');
   assert.strictEqual(stores1, stores2, 'same cached array');
 
   clearStoreCache();
-  const stores3 = await loadStores('src/assets/data/stores.json');
+  const stores3 = await loadStores('data/stores.json');
   assert.equal(fetchCount, 2, 'fetch called after clearing cache');
   assert.ok(Array.isArray(stores3), 'stores loaded again');
 
