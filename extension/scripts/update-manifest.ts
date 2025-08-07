@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const distDir = path.resolve(__dirname, '../dist');
+const distDir = path.resolve(__dirname, '../dist/extension');
 const assetsDir = path.join(distDir, 'assets');
 
 function findHashedFile(prefix: string, ext: string): string {
