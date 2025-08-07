@@ -23,6 +23,7 @@ interface Product {
 interface Props {
   product?: Product;
   loading?: boolean;
+  onTryOn?: () => void;
 }
 
 const VariantSelector: React.FC<{ colors: string[]; sizes: string[] }> = ({ colors, sizes }) => {
@@ -91,11 +92,32 @@ export const ProductTab: React.FC<Props> = ({ product, loading }) => {
         <PriceBlock price={product.price} oldPrice={product.oldPrice} currency={product.currency} />
         <VariantSelector colors={product.colors} sizes={product.sizes} />
         <button
-          aria-label="Add to dressing room"
-          title="Add to dressing room"
-          className="mt-2 px-4 py-2 bg-primary text-white rounded"
+          aria-label="Add to cart"
+          className="mt-2 px-4 py-2 bg-primary text-white rounded w-full"
         >
-          Add to Dressing Room
+          Add to Cart
+        </button>
+        <button
+          aria-label="Add to wishlist"
+          className="mt-2 px-4 py-2 bg-secondary text-white rounded w-full"
+          onClick={async () => {
+            const mod = await import('./modules/wishlist.js');
+            mod.addToWishlist({
+              id: product.id,
+              name: product.name,
+              imageSrc: product.image,
+              price: product.price.toString(),
+            } as any);
+          }}
+        >
+          Add to Wishlist
+        </button>
+        <button
+          aria-label="Try on"
+          className="mt-2 px-4 py-2 bg-secondary text-white rounded w-full"
+          onClick={onTryOn}
+        >
+          Try On
         </button>
       </div>
       <div className="sm:col-span-2 mt-4">

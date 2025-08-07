@@ -30,5 +30,7 @@ test('renders product info', () => {
   };
   render(<ProductTab product={product} />);
   expect(screen.getByText('Shirt')).toBeInTheDocument();
-  expect(screen.getByLabelText('Add to dressing room')).toBeInTheDocument();
+  expect(screen.getByLabelText('Add to cart')).toBeInTheDocument();
+  expect(screen.getByLabelText('Add to wishlist')).toBeInTheDocument();
+  expect(screen.getByLabelText('Try on')).toBeInTheDocument();
 });
