@@ -1,7 +1,7 @@
 [
   {
     "name": "Zara",
-    "image": "src/assets/images/stores/zara.jpg",
+    "image": "images/stores/zara.jpg",
     "clothingType": "Shirts",
     "targetDemographic": ["Men", "Women"],
     "priceRange": "Mid",
@@ -9,7 +9,7 @@
   },
   {
     "name": "H&M",
-    "image": "src/assets/images/stores/hm.jpg",
+    "image": "images/stores/hm.jpg",
     "clothingType": "Dresses",
     "targetDemographic": ["Women"],
     "priceRange": "Low",
@@ -17,7 +17,7 @@
   },
   {
     "name": "Uniqlo",
-    "image": "src/assets/images/stores/uniqlo.jpg",
+    "image": "images/stores/uniqlo.jpg",
     "clothingType": "Pants",
     "targetDemographic": ["Kids", "Men", "Women"],
     "priceRange": "Mid",
@@ -25,7 +25,7 @@
   },
   {
     "name": "Nike",
-    "image": "src/assets/images/stores/nike.jpg",
+    "image": "images/stores/nike.jpg",
     "clothingType": "Activewear",
     "targetDemographic": ["Men", "Women"],
     "priceRange": "High",
@@ -33,7 +33,7 @@
   },
   {
     "name": "Adidas",
-    "image": "src/assets/images/stores/adidas.jpg",
+    "image": "images/stores/adidas.jpg",
     "clothingType": "Shoes",
     "targetDemographic": ["Women", "Men"],
     "priceRange": "High",
@@ -41,7 +41,7 @@
   },
   {
     "name": "Gucci",
-    "image": "src/assets/images/stores/gucci.jpg",
+    "image": "images/stores/gucci.jpg",
     "clothingType": "Dresses",
     "targetDemographic": ["Women"],
     "priceRange": "Luxury",
@@ -49,7 +49,7 @@
   },
   {
     "name": "Levi's",
-    "image": "src/assets/images/stores/levis.jpg",
+    "image": "images/stores/levis.jpg",
     "clothingType": "Jeans",
     "targetDemographic": ["Men", "Women"],
     "priceRange": "Mid",
@@ -57,7 +57,7 @@
   },
   {
     "name": "Gap",
-    "image": "src/assets/images/stores/gap.jpg",
+    "image": "images/stores/gap.jpg",
     "clothingType": "Casual",
     "targetDemographic": ["Kids", "Men", "Women"],
     "priceRange": "Low",
@@ -65,7 +65,7 @@
   },
   {
     "name": "Louis Vuitton",
-    "image": "src/assets/images/stores/louisvuitton.jpg",
+    "image": "images/stores/louisvuitton.jpg",
     "clothingType": "Accessories",
     "targetDemographic": ["Women", "Men"],
     "priceRange": "Luxury",
@@ -73,7 +73,7 @@
   },
   {
     "name": "Under Armour",
-    "image": "src/assets/images/stores/underarmour.jpg",
+    "image": "images/stores/underarmour.jpg",
     "clothingType": "Activewear",
     "targetDemographic": ["Men", "Women", "Kids"],
     "priceRange": "Mid",
@@ -81,7 +81,7 @@
   },
   {
     "name": "Amazon",
-    "image": "src/assets/images/stores/amazon.jpg",
+    "image": "images/stores/amazon.jpg",
     "clothingType": "Activewear",
     "targetDemographic": ["Men", "Women", "Kids"],
     "priceRange": "Mid",
@@ -89,7 +89,7 @@
   },
   {
     "name": "Prada",
-    "image": "src/assets/images/stores/prada.jpg",
+    "image": "images/stores/prada.jpg",
     "clothingType": "Accessories",
     "targetDemographic": ["Women", "Men"],
     "priceRange": "Luxury",
@@ -97,7 +97,7 @@
   },
   {
     "name": "Versace",
-    "image": "src/assets/images/stores/versace.jpg",
+    "image": "images/stores/versace.jpg",
     "clothingType": "Dresses",
     "targetDemographic": ["Women"],
     "priceRange": "Luxury",
