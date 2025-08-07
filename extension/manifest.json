@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "Enhance your online apparel shopping experience with Imagine.",
   "icons": {
-    "16": "assets/icons/icon16.webp",
-    "48": "assets/icons/icon48.webp",
-    "128": "assets/icons/icon128.webp"
+    "16": "dist/extension/assets/icons/icon16.webp",
+    "48": "dist/extension/assets/icons/icon48.webp",
+    "128": "dist/extension/assets/icons/icon128.webp"
   },
   "permissions": [
     "sidePanel",
@@ -17,18 +17,18 @@
     "contextMenus"
   ],
   "background": {
-    "service_worker": "background/background.js",
+    "service_worker": "dist/extension/background.js",
     "type": "module"
   },
   "action": {
     "default_title": "Open side panel",
-    "default_popup": "popup/popup.html"
+    "default_popup": "dist/extension/popup.html"
   },
   "side_panel": {
-    "default_path": "popup/popup.html"
+    "default_path": "dist/extension/popup.html"
   },
   "options_ui": {
-    "page": "options/options.html",
+    "page": "dist/extension/options.html",
     "open_in_tab": true
   },
   "content_scripts": [
@@ -48,20 +48,20 @@
         "*://www.prada.com/*",
         "*://www.versace.com/*"
       ],
-      "js": [
-        "dist/content.js"
-      ],
+        "js": [
+          "dist/extension/content.js"
+        ],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": [
-        "assets/data/stores.json",
-        "assets/images/*",
-        "popup/centralized-wishlist.html",
-        "popup/centralized-wishlist.js"
-      ],
+        "resources": [
+          "dist/extension/assets/data/stores.json",
+          "dist/extension/assets/images/*",
+          "dist/extension/popup/centralized-wishlist.html",
+          "dist/extension/popup/centralized-wishlist.js"
+        ],
       "matches": [
         "<all_urls>"
       ]

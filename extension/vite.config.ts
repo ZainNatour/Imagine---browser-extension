@@ -2,32 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { imagetools } from 'vite-imagetools';
 import stripBigIcons from './vite.plugins/stripBigIcons';
-import { execSync } from 'node:child_process';
 
 export default defineConfig({
   plugins: [
     react(),
     imagetools(),
-    stripBigIcons(),
-
-    // run our scripts after the bundle is finished
-    {
-      name: 'post-build-tasks',
-      closeBundle() {
-        console.log('🔧 Running post-build image optimization...');
-        const env = { ...process.env, TS_NODE_TRANSPILE_ONLY: 'true' };
-        execSync(
-          'node --no-warnings --loader ts-node/esm scripts/optimize-images.ts',
-          { stdio: 'inherit', env }
-        );
-
-        console.log('📝 Copying and adjusting manifest...');
-        execSync(
-          'node --no-warnings --loader ts-node/esm scripts/update-manifest.ts',
-          { stdio: 'inherit', env }
-        );
-      }
-    }
+    stripBigIcons()
   ],
 
   // copy src/assets → dist/assets
@@ -37,7 +17,7 @@ export default defineConfig({
     target: 'chrome117',
     minify: 'terser',
     sourcemap: false,
-    outDir: 'dist',
+    outDir: 'dist/extension',
     emptyOutDir: true,
     rollupOptions: {
       input: {
@@ -47,6 +27,7 @@ export default defineConfig({
         background: 'src/background/background.js',
       },
       output: {
+        format: 'es',
         manualChunks: undefined
       }
     }
