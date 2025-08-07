@@ -9,9 +9,9 @@ const __dirname = path.dirname(__filename);
 const distDir = path.resolve(__dirname, '../dist');
 const assetsDir = path.join(distDir, 'assets');
 
-function findHashedFile(prefix: string): string {
+function findHashedFile(prefix: string, ext: string): string {
   const files = fs.readdirSync(assetsDir);
-  const match = files.find((f) => f.startsWith(prefix) && f.endsWith('.js'));
+  const match = files.find((f) => f.startsWith(prefix) && f.endsWith(ext));
   if (!match) {
     throw new Error(`Unable to locate built file for ${prefix}`);
   }
@@ -23,11 +23,11 @@ function copyManifest() {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
   // Update file paths to match built output
-  manifest.background.service_worker = findHashedFile('background');
+  manifest.background.service_worker = findHashedFile('background', '.js');
   manifest.action.default_popup = 'src/popup/popup.html';
   manifest.side_panel.default_path = 'src/popup/popup.html';
   manifest.options_ui.page = 'src/options/options.html';
-  manifest.content_scripts[0].js = [findHashedFile('content')];
+  manifest.content_scripts[0].js = [findHashedFile('content', '.js')];
 
   // Icons and web accessible resources live at the top level after build
   manifest.icons = {
@@ -42,7 +42,8 @@ function copyManifest() {
         'data/stores.json',
         'images/*',
         'src/popup/centralized-wishlist.html',
-        'src/popup/centralized-wishlist.js'
+        'src/popup/centralized-wishlist.js',
+        'src/popup/styles/base.css'
       ],
       matches: ['<all_urls>']
     }
@@ -53,14 +54,26 @@ function copyManifest() {
   // Ensure additional popup files are available in dist
   const popupOutDir = path.join(distDir, 'src/popup');
   fs.mkdirSync(popupOutDir, { recursive: true });
-  fs.copyFileSync(
-    path.resolve(__dirname, '../src/popup/centralized-wishlist.html'),
-    path.join(popupOutDir, 'centralized-wishlist.html')
-  );
+  const cwSrcHtml = path.resolve(__dirname, '../src/popup/centralized-wishlist.html');
+  const cwOutHtml = path.join(popupOutDir, 'centralized-wishlist.html');
+  fs.copyFileSync(cwSrcHtml, cwOutHtml);
   fs.copyFileSync(
     path.resolve(__dirname, '../src/popup/centralized-wishlist.js'),
     path.join(popupOutDir, 'centralized-wishlist.js')
   );
+
+  // copy base stylesheet and rewrite global CSS reference with hashed file
+  const stylesOutDir = path.join(popupOutDir, 'styles');
+  fs.mkdirSync(stylesOutDir, { recursive: true });
+  fs.copyFileSync(
+    path.resolve(__dirname, '../src/popup/styles/base.css'),
+    path.join(stylesOutDir, 'base.css')
+  );
+
+  const globalCss = findHashedFile('global', '.css');
+  let htmlContent = fs.readFileSync(cwOutHtml, 'utf8');
+  htmlContent = htmlContent.replace('../styles/global.css', `/${globalCss}`);
+  fs.writeFileSync(cwOutHtml, htmlContent);
 }
 
 try {
