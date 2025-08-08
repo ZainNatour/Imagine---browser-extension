@@ -2,11 +2,19 @@
   "private": true,
   "workspaces": ["extension", "frontend", "backend"],
   "scripts": {
+    "build": "npm run build:frontend",
+    "dev": "npm run dev:frontend",
+    "start": "npm --workspace frontend run start",
     "build:extension": "npm --workspace extension run build",
     "build:frontend": "npm --workspace frontend run build",
     "build:backend": "npm --workspace backend run build",
     "serve:extension": "npm --workspace extension run dev",
     "dev:frontend": "npm --workspace frontend run dev",
     "start:backend": "npm --workspace backend run start"
+  },
+  "overrides": {
+    "next": "14.2.15",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }
